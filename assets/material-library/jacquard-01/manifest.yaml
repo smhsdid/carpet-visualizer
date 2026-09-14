@@ -1,0 +1,65 @@
+material_id: jacquard-01
+display_name: "Jacquard 01 — low-profile woven"
+construction: jacquard
+default_for_design_only: true
+status: construction_calibrated
+reference_strength_default: library_grounded
+source_rights: user_supplied_for_skill_testing
+
+construction_references:
+  macro_detail:
+    original: construction/macro-detail.jpg
+    generation_input: derived/macro-detail-neutral.jpg
+    pixel_size: [1022, 1025]
+    sha256_generation_input: c4bb786c7a5baa0a70d646be45c6c26cd5e3c08602d00c1623b6314c388dc850
+    controls: [yarn_geometry, interlacing, local_relief]
+    must_not_control: [current_artwork, current_colours]
+  product_scale_crop:
+    original: construction/product-scale-crop.jpg
+    generation_input: derived/product-scale-crop-neutral.jpg
+    pixel_size: [492, 656]
+    sha256_generation_input: f711fe842a4d138ddc00c04988c3091b1e7fd1dd497759cabc7c47b9ffc1b5a5
+    controls: [texture_density, spacing, hierarchy, grain_direction]
+    must_not_control: [current_artwork, current_colours]
+  overall_product:
+    original: construction/overall-material-product.jpg
+    generation_input: derived/overall-material-product-neutral.jpg
+    pixel_size: [1350, 1800]
+    sha256_generation_input: 47f13998518067c558c0034f8862e59c11d69ad9b5118577431388cd289186b0
+    controls: [product_scale, approximate_thickness, edge_geometry]
+    must_not_control: [current_artwork, current_colours, photography_style]
+
+paired_examples: []
+scene_style_reference: null
+quality_anchor: null
+
+construction_lock:
+  surface_structure: "One coherent low-profile integral woven jacquard surface."
+  yarn_geometry: "Staggered rows of irregular horizontally elongated, softly twisted, slightly fuzzy yarn bundles."
+  interlacing: "Fine pale vertical binder or interstitial threads remain visible between larger bundles."
+  grain_direction: "A coherent horizontal grain is visible across the surface."
+  surface_relief: "Shallow restrained relief; prominent bundles remain part of the same woven plane."
+  edge_geometry: "Narrow rounded continuous serged binding with tidy corners."
+  finish: "Soft low lustre with visible fibre texture; fibre composition is unspecified."
+
+colour_policy:
+  authority_order: [explicit_colour_card, design_source]
+  material_assets_have_colour_authority: false
+
+render_defaults:
+  backend: built_in_preview
+  sequence: detail_first_preview
+  detail_region: representative_boundary
+  edge_finish: serged_overlock
+  overview_view: gently_oblique_product_photo
+
+confidence:
+  level: reference_based
+  notes: "Three real views cover local construction, product-scale texture, and bound edge. No exact design-to-product paired example is currently present."
+
+known_failure_modes:
+  - reference_palette_leakage
+  - chunky_knit_or_braid_substitution
+  - square_or_pixel_block_texture
+  - printed_surface_substitution
+  - oversized_texture_in_overview
