@@ -1,9 +1,9 @@
 ---
-name: carpet-sample-render
+name: carpet-visualizer
 description: Generate a realistic carpet product overview and material close-up from supplied artwork, using selectable bundled or task-specific material references. Use for rug concept review and material screening, not manufacturing approval.
 ---
 
-# Carpet Sample Render
+# Carpet Visualizer
 
 Turn one carpet design into two coordinated visual samples: a material close-up and a full-product overview. Preserve the design topology while applying a selected physical construction.
 

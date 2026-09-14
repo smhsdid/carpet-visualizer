@@ -1,4 +1,4 @@
-# Carpet Material Visualizer
+# Carpet Visualizer
 
 一个用于将地毯设计稿转换为实物效果图的 Codex skill。
 
