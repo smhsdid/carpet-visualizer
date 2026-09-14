@@ -47,7 +47,7 @@ construction_lock:
   scale_behavior: "The three yarn systems are distinguishable in macro views; at product distance they become a fine tactile jacquard grain without smoothing into print or enlarging into rope."
   surface_relief: "Clearly pronounced but compact micro-relief created by believable over-under interlacing and yarn compression: soft irregular coarse crowns rise about one yarn thickness above the finer horizontal cross yarns and recessed vertical ground threads while the rug body remains thin."
   yarn_exposure_balance: "Coarse vertical crowns remain visually dominant while occupying about 55–65% of the visible woven surface. Fine horizontal cross yarns remain clearly readable across about 25–35%, including motif edges; recessed vertical ground or anchoring threads appear in the remaining channels."
-  boundary_behavior: "One jacquard construction continues across colour changes. Motifs form through colour, yarn exposure, coverage and local relief while coarse-yarn calibre, fine-yarn spacing and the three-direction interlacing logic remain coherent across pattern and ground."
+  boundary_behavior: "One jacquard construction continues across colour changes. Motifs form through colour, yarn exposure, coverage and local relief while coarse-yarn calibre, fine-yarn spacing and the three-direction interlacing logic remain coherent across pattern and ground. Diagonal or stepped motif lines may have locally stronger crown exposure, but they remain transitions inside the same weave: coarse crown axes stay vertical, horizontal fine yarns cross the line, and no smooth contour tube or independent piping, embroidery, or motif-following rope is introduced."
   yarn_colour_behavior: "Every visible yarn system follows the local design-source colour region. Fine cross and ground yarns may read as tone-on-tone variations from light and depth, but are never forced to pale, white or a global binder colour."
   edge_geometry: "Narrow rounded continuous serged binding with tidy corners."
   finish: "Warm, clean soft-satin strand highlights with moderate lustre, visible fibre softness and no hard plastic gloss or dull grey cast; fibre composition is unspecified."
@@ -69,6 +69,8 @@ anti_substitutions:
   - fixed white or pale binder grid independent of artwork colours
   - isolated identical capsule beads or padded embroidery
   - uniformly inflated CGI bumps without visible interlacing or compression
+  - motif-following twisted cords or raised contour piping
+  - diagonal raised ropes that rotate with artwork lines
   - long fur or shag
 
 colour_policy:
@@ -85,9 +87,10 @@ render_defaults:
   detail_orientation: upright_design_source
   detail_context: [corner_junction, two_bound_edges, adjacent_border_motif, colour_boundary]
   edge_finish: serged_overlock
-  detail_view: ultra_close_grazing_oblique_macro_8_15_degrees_above_plane
-  detail_frame_coverage: "94–98% rug surface, complete near corner junction and very short segments of both bound edges visible"
-  detail_camera_evidence: "Near binding face is visible and larger than distant yarns; the rug plane clearly recedes through foreshortening and gentle focus falloff."
+  detail_target: ../../references/jacquard-detail-target.md
+  detail_view: ultra_close_grazing_oblique_macro_8_12_degrees_above_plane
+  detail_frame_coverage: "96–98% rug surface, complete near corner junction and short segments of both bound edges visible"
+  detail_camera_evidence: "Near binding side face is prominent and larger than distant crowns; the rug plane clearly recedes through foreshortening, with near and central interlacing sharp and gentle far-field focus falloff."
   overview_view: direct_overhead_level_full_frame
   overview_frame_coverage: "90–95%, complete bound outline visible"
   photography_style: bright_crisp_commercial_product

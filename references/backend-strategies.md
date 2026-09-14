@@ -62,7 +62,7 @@ For fast material screening, `detail_first` remains valid. Anchor it to the sele
 | `material_substitution` | Replace or strengthen only the material reference and physical prompt axes. |
 | `construction_orientation_error` | Use the stored upright generation-input axes directly, then reapply coarse-raised vertical, fine-cross horizontal and fine-ground/anchor vertical. |
 | `pattern_material_mismatch` | Separate structure and material controls; verify stable coarse-bundle calibre, fine-yarn spacing and three-system interlacing in matched pattern/field crops while retaining reference-supported jacquard exposure and relief variation. |
-| `detail_camera_error` | Move the lens nearly level with the near binding to 8–15 degrees above the rug plane; require a prominent binding side face, strong depth recession and near-to-far scale compression. |
+| `detail_camera_error` | Move the lens nearly level with the near binding to 8–12 degrees above the rug plane; require a prominent binding side face, strong depth recession, near-to-far scale compression, and gentle far-field focus falloff while near and central interlacing stays sharp. |
 | `synthetic_relief` | Rebuild only the textile surface so soft twisted coarse floats bend over horizontal yarns, compress at ties and return into the recessed ground with subtle non-repeating variation. |
 | `yarn_balance_error` | Reduce coarse-crown packing, interleave larger and smaller vertical crowns, and keep horizontal fine yarns continuously exposed through plain fields, motifs and boundaries. |
 | `cross_scale_inconsistency` | Reuse the accepted anchor and reduce overview texture scale, or derive detail from the accepted overview. |

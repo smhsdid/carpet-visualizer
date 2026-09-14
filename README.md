@@ -19,7 +19,7 @@ skill 会将当前设计稿作为图案与颜色的权威来源，将真实肌�
 - `CAPABILITIES.md`：图像生成与编辑后端的能力约定和降级方式
 - `agents/openai.yaml`：Codex skill 元数据
 - `adapters/`：Codex 和其他智能体的运行适配说明
-- `references/`：肌理档案、提示词模板、质量标准和研究笔记
+- `references/`：肌理档案、提花细节目标、提示词模板、质量标准和研究笔记
 - `assets/material-library/`：可复用的真实肌理参考及中性派生图
 
 ## 研究笔记

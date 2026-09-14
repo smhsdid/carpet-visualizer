@@ -161,8 +161,8 @@ Input: upright artwork with no corner or camera instruction.
 
 Expected:
 
-- the detail anchors to `lower_left` and uses an ultra-close grazing macro view roughly 8–15 degrees above the rug plane;
-- the rug surface fills about 94–98% of the detail while the complete near corner junction and very short segments of both bindings remain visible;
+- the detail anchors to `lower_left` and uses an ultra-close grazing diagonal macro view roughly 8–12 degrees above the rug plane;
+- the rug surface fills about 96–98% of the detail while the complete near corner junction and short segments of both bindings remain visible;
 - the prominent near binding side face, strong depth recession, near-to-far scale compression and gentle focus falloff prove the camera is nearly level with the rug surface;
 - grazing light makes yarn organisation, interlacing, pronounced local relief and boundary construction readable across the near and central focus area;
 - the overview uses a directly overhead level view with no converging edges or visible near side;
@@ -178,6 +178,19 @@ Expected:
 - whites or light neutrals remain luminous, colours remain clear, and tonal separation is medium-high contrast;
 - weave recesses remain visible without turning the whole image grey or underexposed;
 - fibre highlights retain detail without clipping or becoming hard plastic gloss.
+
+## Case 19: self-contained jacquard detail target
+
+Input: design-only artwork with bundled `jacquard-01`, no task-specific scene image.
+
+Expected:
+
+- the agent reads `references/jacquard-detail-target.md` before generating the detail;
+- the default reference packet uses the current artwork and neutral construction inputs, with no implicit image carried from an earlier conversation turn;
+- the detail reproduces the low diagonal 8–12 degree camera, 96–98% surface coverage, prominent near binding side face, strong recession, and gentle far-field focus falloff;
+- the visible surface retains two-scale vertical crowns, continuous horizontal fine-yarn exposure, recessed vertical ground threads, and compact interlaced relief;
+- diagonal or stepped artwork lines may show stronger local crown exposure but remain integrated into the same weave, with vertical crown axes and crossing horizontal fine yarns rather than a separate smooth contour tube;
+- the result remains bright and crisp without requiring a scene-style reference.
 
 ## Case 16: stored upright orientation reference
 

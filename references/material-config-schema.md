@@ -60,9 +60,10 @@ render_defaults:
   detail_orientation: upright_design_source
   detail_context: [corner_junction, two_bound_edges, adjacent_border_motif, colour_boundary]
   edge_finish: serged_overlock
-  detail_view: ultra_close_grazing_oblique_macro_8_15_degrees_above_plane
-  detail_frame_coverage: "94–98% rug surface, complete near corner junction and very short segments of both bound edges visible"
-  detail_camera_evidence: "Near binding face, depth recession, near-to-far scale compression, and gentle focus falloff are visible."
+  detail_target: references/jacquard-detail-target.md
+  detail_view: ultra_close_grazing_oblique_macro_8_12_degrees_above_plane
+  detail_frame_coverage: "96–98% rug surface, complete near corner junction and short segments of both bound edges visible"
+  detail_camera_evidence: "Near binding side face is prominent; depth recession and near-to-far scale compression are visible; near and central interlacing stays sharp with gentle far-field focus falloff."
   overview_view: direct_overhead_level_full_frame
   overview_frame_coverage: "90–95%, complete bound outline visible"
   photography_style: bright_crisp_commercial_product
@@ -110,7 +111,7 @@ detail_anchor_mode: corner_context
 detail_corner: lower_left
 detail_orientation: upright_design_source
 detail_context: [corner_junction, two_bound_edges, adjacent_border_motif, colour_boundary]
-detail_camera_lock: "ultra-close grazing macro, camera 8–15 degrees above rug plane, 94–98% surface coverage, prominent near binding side face, strong depth recession, complete near corner junction, central interlacing sharp"
+detail_camera_lock: "ultra-close grazing diagonal macro, camera 8–12 degrees above rug plane, 96–98% surface coverage, prominent near binding side face, strong depth recession, complete near corner junction, near and central interlacing sharp, gentle far-field focus falloff"
 overview_camera_lock: "direct overhead level view, rug plane parallel to image plane, no perspective tilt, 90–95% frame coverage, complete outline visible"
 render_backend: runtime_default
 backend_strategy: preview_only
