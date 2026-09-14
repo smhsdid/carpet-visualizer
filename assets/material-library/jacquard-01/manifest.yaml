@@ -16,17 +16,17 @@ construction_references:
     must_not_control: [current_artwork, current_colours]
   product_scale_crop:
     original: construction/product-scale-crop.jpg
-    generation_input: derived/product-scale-crop-neutral.jpg
-    pixel_size: [656, 492]
-    sha256_generation_input: 276b8d211c0d91492ed752b160c6aefa4e38cb5d98d37a4f32adc89bb28ac4af
+    generation_input: derived/jacquard-standard-macro-neutral-v1.png
+    pixel_size: [1254, 1254]
+    sha256_generation_input: b84e8dec6d3fec35a0e6af5d5b1177da22ed9da46e1ba8d52af9c0d7d3dc874b
     stored_orientation: upright_finished_rug_pixels
     controls: [texture_density, spacing, hierarchy, grain_direction]
     must_not_control: [current_artwork, current_colours]
   overall_product:
     original: construction/overall-material-product.jpg
-    generation_input: derived/overall-material-product-neutral.jpg
-    pixel_size: [1800, 1350]
-    sha256_generation_input: 617aab4ebf36d071bbe3cddf8d4b521dfe3cc008af1e0ba7cae1979979dd6f10
+    generation_input: derived/jacquard-standard-overview-neutral-v2-vertical.png
+    pixel_size: [1024, 1536]
+    sha256_generation_input: 6e5df24df70326b1b61dda640bf4f1b400eea2b4248553bd6d921afb956a7e13
     stored_orientation: upright_finished_rug_pixels
     controls: [product_scale, approximate_thickness, edge_geometry]
     must_not_control: [current_artwork, current_colours, photography_style]
@@ -53,7 +53,7 @@ construction_lock:
   finish: "Warm, clean soft-satin strand highlights with moderate lustre, visible fibre softness and no hard plastic gloss or dull grey cast; fibre composition is unspecified."
 
 reference_orientation_notes:
-  generation_inputs: "The product-scale and overall neutral generation inputs are stored with physically rotated pixels and no EXIF orientation dependency. Their coarse raised yarn direction is already vertical in the displayed upright product frame."
+  generation_inputs: "The product-scale and overall neutral generation inputs have no EXIF orientation dependency. The product-scale input exposes coarse raised yarns vertically and fine cross yarns horizontally; the overall input is stored in upright finished-rug orientation with coarse raised yarns vertical."
   normalisation: "Use the stored generation-input orientation directly: coarse raised yarns vertical, fine cross yarns horizontal, and fine recessed ground or anchoring yarns vertical in upright design-source coordinates. Do not rotate these inputs again."
 
 anti_substitutions:
