@@ -37,8 +37,8 @@ colour_policy:
   material_assets_have_colour_authority: false
 
 render_defaults:
-  backend: built_in_preview
-  sequence: detail_first_preview
+  backend: runtime_default
+  sequence: detail_first
   detail_region: representative_boundary
   edge_finish: serged_overlock
   overview_view: gently_oblique_product_photo
@@ -72,13 +72,14 @@ colour_mapping: []
 photography_style: default_neutral_product
 edge_finish: serged_overlock
 camera_lock: "20–30 degree downward view, natural perspective, near edge visible"
-render_backend: built_in_preview
-render_sequence: detail_first_preview
+render_backend: runtime_default
+backend_capabilities_used: [image_generation, reference_image_input]
+render_sequence: detail_first
 deliverables: [material_detail, product_overview]
 consistency_contract: visual_consistency
 ```
 
-Allowed future `render_backend` values are `api_high_resolution` and `blender_local`. Their presence is an extension point, not evidence that the runtime supports them.
+`render_backend` is the actual runtime or provider name. `runtime_default` is valid only before a backend is selected. See [rendering capabilities](../CAPABILITIES.md) for capability recording and fallback behaviour.
 
 ## Reference strength and confidence
 

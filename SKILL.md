@@ -44,15 +44,23 @@ Create a compact render lock before generation. Copy only supported observations
 
 Lock the current design topology: retain the rug outline, motif count, principal boundaries, containment and adjacency relationships, symmetry, and negative space. Permit only local fibre-scale softening or slight irregularity. Large redraws, merged motifs, crossed or broken lines, invented regions, and historical paired-example motifs fail the lock.
 
+## Choose the rendering backend
+
+Read [capabilities](CAPABILITIES.md) before choosing a rendering backend. Prefer an image-editing backend that accepts the current design and construction references. When the runtime supports only image generation, attach the design source and state its authority in the prompt. Record the backend name and the capabilities actually used in the render lock.
+
+When no image-generation backend is available, prepare the complete prompt packet, render lock, reference-role list, and delivery checklist for external execution. Label this result `external_execution_required`; do not claim images were generated.
+
+For runtime-specific setup, read [Codex adapter](adapters/codex.md) in Codex or [generic-agent adapter](adapters/generic-agent.md) in another agent environment.
+
 ## Generate both outputs
 
-Read [prompt templates](references/prompt-templates.md), then use the available image-generation tool in edit/reference mode. Generate both outputs without waiting for user approval:
+Read [prompt templates](references/prompt-templates.md), then use the selected backend in edit/reference mode. Generate both outputs without waiting for user approval:
 
 1. Generate a close material detail around a representative artwork boundary, preferably where two colour regions meet.
 2. Inspect the detail. If construction is usable, treat it as `material_detail_anchor`. If it contradicts the lock, omit it from overview references and continue from the lock and real construction references; report the failure.
 3. Generate the overview from the current design, render lock, usable detail anchor, and only the scale, binding, paired-mapping, or style references needed.
 
-The detail and overview must express the same construction, yarn hierarchy, relief distribution, colour mapping, edge treatment, and light direction. In `built_in_preview`, this means visual consistency rather than literal pixel continuity. Reserve `api_high_resolution` and `blender_local` as future backend values; do not claim they were used unless available and selected.
+The detail and overview must express the same construction, yarn hierarchy, relief distribution, colour mapping, edge treatment, and light direction. When the backend creates separate images, require visual consistency rather than literal pixel continuity.
 
 ## Lightweight quality gate
 
@@ -60,13 +68,15 @@ Read [quality rubric](references/quality-rubric.md) and inspect both outputs onc
 
 ## Deliver
 
-Return:
+When images are generated, return:
 
 - one `material_detail` image;
 - one `product_overview` image;
 - material ID, construction, reference strength, mapping mode, colour authority, edge finish, and render lock;
 - the final prompts;
 - visible fidelity caveats.
+
+For `external_execution_required`, return the same render metadata, the final prompts, the ordered reference attachments, and a checklist for inspecting the two required outputs after they are generated.
 
 End with: “Visual sample only — confirm colour, yarn, pile, density, and construction with physical sampling.”
 

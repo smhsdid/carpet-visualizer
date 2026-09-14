@@ -47,8 +47,8 @@ colour_policy:
   material_assets_have_colour_authority: false
 
 render_defaults:
-  backend: built_in_preview
-  sequence: detail_first_preview
+  backend: runtime_default
+  sequence: detail_first
   detail_region: representative_boundary
   edge_finish: serged_overlock
   overview_view: gently_oblique_product_photo

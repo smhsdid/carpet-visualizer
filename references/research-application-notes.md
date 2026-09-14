@@ -142,13 +142,13 @@ local defect mask
 
 不要把 Canny、IP-Adapter、材质照片、历史实物图和风格图的权重一次调高。先固定设计结构，再逐个增加材质证据；每轮只比较一个变量，并保存输入、提示词、参数、seed、输出和失败标签。至少独立记录 `pattern_control_scale`、`material_ip_scale`、`denoise_strength`、mask blur/dilate、`control_guidance_start/end` 和 aspect padding，不要用一个笼统的 `reference_strength` 代替所有参数。
 
-生成顺序取决于目标：如果目标是快速筛选“这张材质参考是否适合”，当前的 `detail_first_preview` 很合理；如果目标是严格的跨尺度一致性，建议先生成通过结构检查的 overview，再从同一结果裁剪并局部 inpaint 出 material detail。这样 detail 和 overview 共享同一产品、颜色和纹理层级，代价是前期需要先解决全景中的结构问题。
+生成顺序取决于目标：如果目标是快速筛选“这张材质参考是否适合”，`detail_first` 很合理；如果目标是严格的跨尺度一致性，建议先生成通过结构检查的 overview，再从同一结果裁剪并局部 inpaint 出 material detail。这样 detail 和 overview 共享同一产品、颜色和纹理层级，代价是前期需要先解决全景中的结构问题。
 
 在输出端增加轻量回比：重新提取 region/edge 条件，检查 motif 数量、区域 IoU、边界 F-score、邻接关系；颜色区域可在对应 mask 内比较 LAB 或 ΔE。它们是诊断信号，不应被包装成制造精度。
 
 ### C. 什么时候考虑 Blender
 
-如果目标变成“同一地毯要生成几十个稳定角度/颜色/场景”，或需要准确控制透视、厚度、包边和光照，建议把地毯作为平面/薄体模型，使用 UV 设计图和材质贴图，再用程序化织物纹理或真实扫描材质渲染。Blender 的 [Principled BSDF 文档](https://docs.blender.org/manual/en/5.2/render/shader_nodes/shader/principled.html)说明了 sheen 可模拟表面微小纤维的柔和边缘反射；[Normal Map 文档](https://docs.blender.org/manual/en/4.3/render/shader_nodes/vector/normal_map.html)说明法线图应与 UV 对齐并作为 Non-Color 数据处理。这里的 Blender 是未来的稳定渲染后端，不应在当前 built-in preview 中假称已经使用。
+如果目标变成“同一地毯要生成几十个稳定角度/颜色/场景”，或需要准确控制透视、厚度、包边和光照，建议把地毯作为平面/薄体模型，使用 UV 设计图和材质贴图，再用程序化织物纹理或真实扫描材质渲染。Blender 的 [Principled BSDF 文档](https://docs.blender.org/manual/en/5.2/render/shader_nodes/shader/principled.html)说明了 sheen 可模拟表面微小纤维的柔和边缘反射；[Normal Map 文档](https://docs.blender.org/manual/en/4.3/render/shader_nodes/vector/normal_map.html)说明法线图应与 UV 对齐并作为 Non-Color 数据处理。这里的 Blender 是未来的稳定渲染后端，不应在当前预览型后端中假称已经使用。
 
 ## 建议补充到 skill 的最小字段
 
@@ -156,7 +156,7 @@ local defect mask
 
 ```yaml
 backend_strategy:
-  built_in_preview:
+  preview_only:
     reference_budget: 3
     preferred_sequence: [material_detail, product_overview, targeted_retry]
   controllable_local:

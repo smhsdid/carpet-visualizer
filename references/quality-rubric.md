@@ -36,7 +36,7 @@ Classify each category as `pass`, `caveat`, or `fail`.
 - `caveat`: deliver both images and name the visible limitation.
 - `fail`: deliver only if useful for diagnosis, identify the failed category, and offer one targeted retry. Do not claim the failed image is representative.
 
-Built-in preview outputs provide visual consistency, not literal pixel continuity. Material recognisability belongs primarily to the detail; topology and overall product read belong primarily to the overview.
+Separate-image outputs provide visual consistency, not literal pixel continuity. Material recognisability belongs primarily to the detail; topology and overall product read belong primarily to the overview.
 
 ## Targeted retry language
 

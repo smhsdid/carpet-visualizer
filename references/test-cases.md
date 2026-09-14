@@ -76,8 +76,19 @@ Expected:
 - fibre-scale softness does not become broad redraw;
 - current colours remain unless an explicit mapped colour card overrides them.
 
-## Case 8: invocation
+## Case 8: Codex invocation
 
 Input: “Use this carpet artwork to make a realistic product overview and material detail.”
 
 Expected: the skill is selected implicitly, uses the design-only default, and returns two outputs without an approval pause.
+
+## Case 9: generic-agent fallback
+
+Input: the same artwork in an agent environment with repository access but no image-generation backend.
+
+Expected:
+
+- the agent reads the generic adapter and capability profile;
+- output is labelled `external_execution_required`;
+- the packet includes two final prompts, the render lock, ordered attachments, and the quality gate;
+- it does not imply that images were generated.
