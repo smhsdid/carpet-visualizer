@@ -1,5 +1,5 @@
 material_id: jacquard-01
-display_name: "Jacquard 01 — low-profile woven"
+display_name: "Jacquard 01 — relief-rich woven"
 construction: jacquard
 default_for_design_only: true
 status: construction_calibrated
@@ -17,15 +17,17 @@ construction_references:
   product_scale_crop:
     original: construction/product-scale-crop.jpg
     generation_input: derived/product-scale-crop-neutral.jpg
-    pixel_size: [492, 656]
-    sha256_generation_input: f711fe842a4d138ddc00c04988c3091b1e7fd1dd497759cabc7c47b9ffc1b5a5
+    pixel_size: [656, 492]
+    sha256_generation_input: 276b8d211c0d91492ed752b160c6aefa4e38cb5d98d37a4f32adc89bb28ac4af
+    stored_orientation: upright_finished_rug_pixels
     controls: [texture_density, spacing, hierarchy, grain_direction]
     must_not_control: [current_artwork, current_colours]
   overall_product:
     original: construction/overall-material-product.jpg
     generation_input: derived/overall-material-product-neutral.jpg
-    pixel_size: [1350, 1800]
-    sha256_generation_input: 47f13998518067c558c0034f8862e59c11d69ad9b5118577431388cd289186b0
+    pixel_size: [1800, 1350]
+    sha256_generation_input: 617aab4ebf36d071bbe3cddf8d4b521dfe3cc008af1e0ba7cae1979979dd6f10
+    stored_orientation: upright_finished_rug_pixels
     controls: [product_scale, approximate_thickness, edge_geometry]
     must_not_control: [current_artwork, current_colours, photography_style]
 
@@ -34,13 +36,40 @@ scene_style_reference: null
 quality_anchor: null
 
 construction_lock:
-  surface_structure: "One coherent low-profile integral woven jacquard surface."
-  yarn_geometry: "Staggered rows of irregular horizontally elongated, softly twisted, slightly fuzzy yarn bundles."
-  interlacing: "Fine pale vertical binder or interstitial threads remain visible between larger bundles."
-  grain_direction: "A coherent horizontal grain is visible across the surface."
-  surface_relief: "Shallow restrained relief; prominent bundles remain part of the same woven plane."
+  orientation_frame: "Upright design-source and finished-rug coordinates, independent of how reference photos are rotated or folded."
+  coarse_raised_yarn_axis: "Vertical along the upright rug."
+  fine_cross_yarn_axis: "Horizontal across the upright rug."
+  fine_ground_anchor_axis: "Vertical along the upright rug, recessed beneath the raised yarn crowns."
+  surface_structure: "A thin-bodied integral woven jacquard built from three coordinated visible yarn systems: compact coarse raised vertical yarns, finer horizontal cross yarns, and fine recessed vertical ground or anchoring yarns."
+  yarn_geometry: "Short soft multi-filament folded floats form tapered, slightly irregular raised crowns with visible strand twist and fine fibre fuzz. The vertical crowns use two related scales: larger dominant crowns and smaller secondary crowns about 1.3–1.6 times narrower, naturally interleaved within the same yarn family."
+  interlacing: "Each coarse vertical float bends over the finer horizontal cross yarns, compresses where it is tied, and sinks back into the weave between crowns. Fine horizontal yarns remain continuously exposed between vertical crowns across both plain and patterned regions; fine vertical ground or anchoring threads remain recessed beneath them."
+  grain_direction: "The dominant coarse-yarn long axis and end-to-end chain rhythm run vertically in upright rug coordinates. Finer cross yarns run horizontally; fine vertical anchoring threads appear mainly in recessed channels."
+  scale_behavior: "The three yarn systems are distinguishable in macro views; at product distance they become a fine tactile jacquard grain without smoothing into print or enlarging into rope."
+  surface_relief: "Clearly pronounced but compact micro-relief created by believable over-under interlacing and yarn compression: soft irregular coarse crowns rise about one yarn thickness above the finer horizontal cross yarns and recessed vertical ground threads while the rug body remains thin."
+  yarn_exposure_balance: "Coarse vertical crowns remain visually dominant while occupying about 55–65% of the visible woven surface. Fine horizontal cross yarns remain clearly readable across about 25–35%, including motif edges; recessed vertical ground or anchoring threads appear in the remaining channels."
+  boundary_behavior: "One jacquard construction continues across colour changes. Motifs form through colour, yarn exposure, coverage and local relief while coarse-yarn calibre, fine-yarn spacing and the three-direction interlacing logic remain coherent across pattern and ground."
+  yarn_colour_behavior: "Every visible yarn system follows the local design-source colour region. Fine cross and ground yarns may read as tone-on-tone variations from light and depth, but are never forced to pale, white or a global binder colour."
   edge_geometry: "Narrow rounded continuous serged binding with tidy corners."
-  finish: "Soft low lustre with visible fibre texture; fibre composition is unspecified."
+  finish: "Warm, clean soft-satin strand highlights with moderate lustre, visible fibre softness and no hard plastic gloss or dull grey cast; fibre composition is unspecified."
+
+reference_orientation_notes:
+  generation_inputs: "The product-scale and overall neutral generation inputs are stored with physically rotated pixels and no EXIF orientation dependency. Their coarse raised yarn direction is already vertical in the displayed upright product frame."
+  normalisation: "Use the stored generation-input orientation directly: coarse raised yarns vertical, fine cross yarns horizontal, and fine recessed ground or anchoring yarns vertical in upright design-source coordinates. Do not rotate these inputs again."
+
+anti_substitutions:
+  - printed smooth surface
+  - chunky knit
+  - crochet
+  - freestanding braided rope or cord
+  - long open loops or oversized tubular stitches
+  - basket weave
+  - square or pixel blocks
+  - uniform tufted loop-pile carpet with independent upright loops
+  - flat plain weave with no raised jacquard bundles
+  - fixed white or pale binder grid independent of artwork colours
+  - isolated identical capsule beads or padded embroidery
+  - uniformly inflated CGI bumps without visible interlacing or compression
+  - long fur or shag
 
 colour_policy:
   authority_order: [explicit_colour_card, design_source]
@@ -48,18 +77,36 @@ colour_policy:
 
 render_defaults:
   backend: runtime_default
+  backend_strategy: preview_only
+  reference_budget: 3
   sequence: detail_first
-  detail_region: representative_boundary
+  detail_anchor_mode: corner_context
+  detail_corner: lower_left
+  detail_orientation: upright_design_source
+  detail_context: [corner_junction, two_bound_edges, adjacent_border_motif, colour_boundary]
   edge_finish: serged_overlock
-  overview_view: gently_oblique_product_photo
+  detail_view: ultra_close_grazing_oblique_macro_8_15_degrees_above_plane
+  detail_frame_coverage: "94–98% rug surface, complete near corner junction and very short segments of both bound edges visible"
+  detail_camera_evidence: "Near binding face is visible and larger than distant yarns; the rug plane clearly recedes through foreshortening and gentle focus falloff."
+  overview_view: direct_overhead_level_full_frame
+  overview_frame_coverage: "90–95%, complete bound outline visible"
+  photography_style: bright_crisp_commercial_product
+  presentation_tone: "high-key clean exposure, luminous whites, clear colours, medium-high contrast"
 
 confidence:
   level: reference_based
   notes: "Three real views cover local construction, product-scale texture, and bound edge. No exact design-to-product paired example is currently present."
 
 known_failure_modes:
-  - reference_palette_leakage
-  - chunky_knit_or_braid_substitution
-  - square_or_pixel_block_texture
-  - printed_surface_substitution
-  - oversized_texture_in_overview
+  - pattern_drift
+  - colour_leakage
+  - material_substitution
+  - construction_orientation_error
+  - pattern_material_mismatch
+  - detail_camera_error
+  - synthetic_relief
+  - yarn_balance_error
+  - cross_scale_inconsistency
+  - edge_error
+  - corner_mismatch
+  - authority_leakage

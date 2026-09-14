@@ -24,13 +24,27 @@ scene_style_reference: null
 quality_anchor: null
 
 construction_lock:
+  orientation_frame: "Describe the upright finished-product coordinate frame."
+  coarse_raised_yarn_axis: "Describe the coarse raised-yarn direction after reference-orientation normalisation."
+  fine_cross_yarn_axis: "Describe the finer crossing-yarn direction after reference-orientation normalisation."
+  fine_ground_anchor_axis: "Describe the recessed fine ground or anchoring-yarn direction."
   surface_structure: "Describe observed construction."
   yarn_geometry: "Describe observed yarn geometry."
   interlacing: "Describe observed interlacing."
   grain_direction: "Describe observed grain."
+  scale_behavior: "Describe what is visible in macro and how it compresses at product distance."
   surface_relief: "Describe observed relief hierarchy."
+  yarn_exposure_balance: "Describe the visible share of dominant and supporting yarn systems across plain and patterned regions."
+  boundary_behavior: "Describe how the same construction continues across colour changes."
+  yarn_colour_behavior: "Describe how every yarn system inherits local design-source colours."
   edge_geometry: "Describe observed edge or use default."
-  finish: "Describe only observed matte, sheen, fuzz, or directional effects."
+  finish: "Describe only observed roughness, matte or sheen, fuzz, and directional light response."
+
+anti_substitutions: []
+
+reference_orientation_notes:
+  overall_product: "Declare folding, mirroring or sideways photography that changes apparent image axes."
+  normalisation: "Describe how reference directions map into upright finished-product coordinates."
 
 colour_policy:
   authority_order: [explicit_colour_card, design_source]
@@ -38,10 +52,21 @@ colour_policy:
 
 render_defaults:
   backend: runtime_default
+  backend_strategy: preview_only
+  reference_budget: 3
   sequence: detail_first
-  detail_region: representative_boundary
+  detail_anchor_mode: corner_context
+  detail_corner: lower_left
+  detail_orientation: upright_design_source
+  detail_context: [corner_junction, two_bound_edges, adjacent_border_motif, colour_boundary]
   edge_finish: serged_overlock
-  overview_view: gently_oblique_product_photo
+  detail_view: ultra_close_grazing_oblique_macro_8_15_degrees_above_plane
+  detail_frame_coverage: "94–98% rug surface, complete near corner junction and very short segments of both bound edges visible"
+  detail_camera_evidence: "Near binding face, depth recession, near-to-far scale compression, and gentle focus falloff are visible."
+  overview_view: direct_overhead_level_full_frame
+  overview_frame_coverage: "90–95%, complete bound outline visible"
+  photography_style: bright_crisp_commercial_product
+  presentation_tone: "high-key clean exposure, luminous whites, clear colours, medium-high contrast"
 
 confidence:
   level: reference_based
@@ -60,23 +85,57 @@ reference_strength: library_grounded
 material_reference_mode: bundled_neutral_construction_references
 mapping_reference_mode: none
 construction_lock:
+  orientation_frame: upright_design_source
+  coarse_raised_yarn_axis: "..."
+  fine_cross_yarn_axis: "..."
+  fine_ground_anchor_axis: "..."
   surface_structure: "..."
   yarn_geometry: "..."
   interlacing: "..."
   grain_direction: "..."
+  scale_behavior: "..."
   surface_relief: "..."
+  yarn_exposure_balance: "..."
+  boundary_behavior: "..."
+  yarn_colour_behavior: "..."
   edge_geometry: "..."
   finish: "..."
+anti_substitutions: []
 colour_authority: design_source
 colour_mapping: []
-photography_style: default_neutral_product
+photography_style: bright_crisp_commercial_product
+presentation_tone: "high-key clean exposure, luminous whites, clear colours, medium-high contrast; no grey veil or subdued grading"
 edge_finish: serged_overlock
-camera_lock: "20–30 degree downward view, natural perspective, near edge visible"
+detail_anchor_mode: corner_context
+detail_corner: lower_left
+detail_orientation: upright_design_source
+detail_context: [corner_junction, two_bound_edges, adjacent_border_motif, colour_boundary]
+detail_camera_lock: "ultra-close grazing macro, camera 8–15 degrees above rug plane, 94–98% surface coverage, prominent near binding side face, strong depth recession, complete near corner junction, central interlacing sharp"
+overview_camera_lock: "direct overhead level view, rug plane parallel to image plane, no perspective tilt, 90–95% frame coverage, complete outline visible"
 render_backend: runtime_default
+backend_strategy: preview_only
 backend_capabilities_used: [image_generation, reference_image_input]
+reference_budget: 3
+independent_controls: {}
 render_sequence: detail_first
 deliverables: [material_detail, product_overview]
 consistency_contract: visual_consistency
+evaluation_record:
+  topology: pass|caveat|fail
+  material: pass|caveat|fail
+  construction_orientation: pass|caveat|fail
+  pattern_ground_parity: pass|caveat|fail
+  detail_localisation: pass|caveat|fail
+  detail_texture_view: pass|caveat|fail
+  overview_framing: pass|caveat|fail
+  presentation_tone: pass|caveat|fail
+  cross_scale_consistency: pass|caveat|fail
+  colour_authority: pass|caveat|fail
+  edge_finish: pass|caveat|fail
+  region_iou: null
+  boundary_f_score: null
+  colour_delta_e: null
+  failure_tags: []
 ```
 
 `render_backend` is the actual runtime or provider name. `runtime_default` is valid only before a backend is selected. See [rendering capabilities](../CAPABILITIES.md) for capability recording and fallback behaviour.

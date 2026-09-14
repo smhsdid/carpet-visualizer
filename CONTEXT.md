@@ -8,9 +8,12 @@
 - **Quality anchor**: An approved generated sample used only as a secondary target for visual polish.
 - **Material profile**: An editable generic description of one carpet construction family.
 - **Material library entry**: A packaged material definition, manifest, and durable real or derived reference assets.
-- **Construction lock**: The supported surface structure, yarn geometry, interlacing, direction, relief, finish, and edge geometry applied consistently to both outputs.
+- **Construction lock**: The supported construction, yarn geometry, organisation, scale behaviour, relief, finish/light response, boundary behaviour, and edge geometry applied consistently to both outputs.
+- **Backend strategy**: The capability-matched generation path: semantic `preview_only` rendering or a `controllable_local` workflow with separate structure, material, and repair controls.
+- **Anti-substitution**: A material-identity rejection condition used to catch a visually different construction such as print, fur, chunky knit, or block texture.
 - **Render lock**: The complete per-run record containing material, construction lock, colour authority, mapping mode, camera, edge treatment, backend, and deliverables.
-- **Material detail**: A close view used to judge yarn, weave or pile, relief, and transitions at a current artwork boundary.
-- **Product overview**: A full-rug product view used to judge outline, motif layout, colour relationships, edge treatment, and overall material read.
+- **Detail corner**: One of `upper_left`, `upper_right`, `lower_left`, or `lower_right`, named in the upright design-source coordinate frame and shared by both outputs; defaults to `lower_left`.
+- **Material detail**: A close contextual view of the selected corner showing the binding junction, both adjacent edges, recognisable border artwork, yarn or pile, relief, and colour transitions.
+- **Product overview**: A directly overhead, level full-rug view used to judge outline, motif layout, colour relationships, edge treatment, and overall material read; the complete rug should fill about 90–95% of the frame.
 - **Visual consistency**: Both outputs express one construction system at different camera distances without claiming identical pixels.
 - **Visual sample**: A screening artifact for product review, distinct from a manufacturing approval or physical standard.

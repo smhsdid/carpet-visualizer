@@ -19,7 +19,7 @@ The packaged library lets a later conversation generate from artwork alone. Each
 
 `jacquard-01` is the default design-only material. Read its [manifest](../assets/material-library/jacquard-01/manifest.yaml) and inspect the neutral generation inputs before rendering.
 
-The original photographs are retained for audit and manual inspection. Their deterministic neutral derivatives preserve structure while reducing accidental palette transfer. Neutralisation does not make an image construction-neutral: use every image only for its declared role.
+The original photographs are retained for audit and manual inspection. Their deterministic neutral derivatives preserve structure while reducing accidental palette transfer. Neutralisation does not make an image construction-neutral and does not define the final exposure, saturation, contrast or scene grading: use every image only for its declared role.
 
 ## Adding a paired mapping example
 
