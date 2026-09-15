@@ -64,9 +64,9 @@ render_defaults:
   backend: runtime_default
   backend_strategy: preview_only
   reference_budget: 2
-  sequence: overview_first_then_detail_from_overview_anchor
-  detail_anchor_mode: overview_derived_corner_context
-  pattern_anchor_mode: design_crop_plus_overview_anchor
+  sequence: detail_first_then_overview_from_detail_anchor
+  detail_anchor_mode: design_crop_plus_standard_construction
+  pattern_anchor_mode: design_source_primary_detail_texture_only
   detail_corner: lower_left
   detail_orientation: upright_design_source
   detail_context: [corner_junction, two_bound_edges, adjacent_border_motif, colour_boundary]
@@ -121,8 +121,8 @@ colour_mapping: []
 photography_style: bright_crisp_commercial_product
 presentation_tone: "high-key clean exposure, luminous whites, clear colours, medium-high contrast; no grey veil or subdued grading"
 edge_finish: serged_overlock
-detail_anchor_mode: overview_derived_corner_context
-pattern_anchor_mode: design_crop_plus_overview_anchor
+detail_anchor_mode: design_crop_plus_standard_construction
+pattern_anchor_mode: design_source_primary_detail_texture_only
 detail_corner: lower_left
 detail_orientation: upright_design_source
 detail_context: [corner_junction, two_bound_edges, adjacent_border_motif, colour_boundary]
@@ -133,7 +133,7 @@ backend_strategy: preview_only
 backend_capabilities_used: [image_generation, reference_image_input]
 reference_budget: 3
 independent_controls: {}
-render_sequence: overview_first_then_detail_from_overview_anchor
+render_sequence: detail_first_then_overview_from_detail_anchor
 deliverables: [material_detail, product_overview]
 consistency_contract: visual_consistency
 evaluation_record:

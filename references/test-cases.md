@@ -15,7 +15,8 @@ Expected:
 - `jacquard-01` is selected without asking a construction question;
 - its manifest and two standard texture references are inspected;
 - `reference_strength` is `library_grounded`;
-- one detail and one overview are generated without an approval pause;
+- the material detail is generated and inspected first, then the product overview is generated without an approval pause;
+- the accepted material detail is used as the overview's texture-only anchor, never as its motif or colour authority;
 - the unspecified detail corner defaults to `lower_left`;
 - the detail uses an attractive three-quarter macro view to reveal texture layers, while the overview is a near-overhead squared rug-sample photograph;
 - the complete rug fills about 92–96% of the overview frame without cropping its binding or corners;
@@ -168,6 +169,7 @@ Expected:
 - grazing light makes yarn organisation, interlacing, pronounced local relief and boundary construction readable across the near and central focus area;
 - the overview uses a standing-observer downward view with a restrained near-overhead angle, mild top-to-bottom perspective and the rug squared to the frame, with at most 0–2 degrees residual rotation;
 - the rug remains upright, centred, fully visible and fills about 92–96% of the frame with narrow quiet floor margins.
+- the overview is generated only after the detail passes, and inherits its physical肌理 identity without inheriting or redrawing its local motif authority.
 
 ## Case 15: bright commercial presentation
 
@@ -236,8 +238,23 @@ Expected:
 - the selected standard images are the primary visible-texture authority, while the current design remains the only motif, region and final-colour authority;
 - the original construction photos, scene references and quality anchors are not attached unless the user explicitly adds them;
 - the branch does not apply the legacy fixed yarn-ratio recipe or durable legacy detail target;
+- the branch generates and validates `material_detail` before `product_overview`;
 - the detail uses the branch's three-quarter tactile macro keywords and the overview uses its complete-outline keywords;
 - the macro retains continuous side-by-side tie-to-tie filaments, elongated lozenge crowns, longitudinal sheen, half-repeat stagger, and recessed horizontal tracks;
+- the accepted detail is the overview's texture-only anchor, while the current design remains the sole authority for all overview motifs and colours;
 - the overview retains a subtle horizontal woven cadence without copying fixed bands or reference motifs;
 - the overview has only a quiet pale floor or porcelain-tile support plane with a restrained natural contact shadow;
 - detail and overview remain recognisably one surface family at their respective scales.
+
+## Case 21: detail-first texture authority
+
+Input: artwork with a legible selected corner and a construction whose macro detail is more informative than its product-scale reference.
+
+Expected:
+
+- the deterministic `design_detail_crop` is prepared before either output is generated;
+- `material_detail` is generated first and must preserve the crop's local motif, boundaries, adjacency and colours;
+- a passing detail becomes `material_detail_anchor` and controls only the overview's肌理, yarn hierarchy, relief, interlacing and finish;
+- `product_overview` is generated second from the current artwork plus the accepted detail anchor;
+- the overview never becomes the source for regenerating or refining the detail in the default workflow;
+- if the detail fails its local topology or construction gate, it is not used as the overview's texture anchor.

@@ -65,6 +65,9 @@ Use only these failure tags: `pattern_drift`, `colour_leakage`, `material_substi
 
 ## Delivery decision
 
+- Detail-first gate: generate and inspect `material_detail` before `product_overview`. Only an accepted
+  `material_detail_anchor` may supply the overview's physical肌理; the current design source remains the sole
+  authority for every motif, boundary, region relationship and final colour in both outputs.
 - `pass`: deliver normally.
 - `caveat`: deliver both images and name the visible limitation.
 - `fail`: deliver only if useful for diagnosis, identify the failed category, and offer one targeted retry. Do not claim the failed image is representative.
@@ -86,4 +89,4 @@ When the user requests a retry, repeat the unchanged render lock and alter only 
 - Colour drift: restate colour authority and use neutral construction inputs.
 - Authority leakage: omit the leaking paired, style, or quality reference.
 - Edge failure: keep artwork unchanged and edit only perimeter finish.
-- Corner mismatch: regenerate or crop only the detail from the declared corner in the upright overview; retain both adjoining bound edges and recognisable border artwork.
+- Corner mismatch: regenerate or crop only the detail from the declared corner in the upright design source and deterministic crop; retain both adjoining bound edges and recognisable border artwork.

@@ -9,7 +9,7 @@ Use this for built-in semantic image generation and small-step edits.
 ```yaml
 backend_strategy: preview_only
 reference_budget: 3 # supporting references, excluding the design source
-preferred_sequence: [product_overview, material_detail, targeted_retry]
+preferred_sequence: [material_detail, product_overview, targeted_retry]
 ```
 
 Attach references in this order until the budget is full:
@@ -20,7 +20,8 @@ Attach references in this order until the budget is full:
 
 When exact local motif matching matters, prepare `design_detail_crop` from the current design. It is a pattern
 reference rather than a construction reference and should occupy a pattern-control slot when the backend allows
-one. The accepted overview is the preferred geometry anchor for the later detail.
+one. The deterministic design crop and current artwork control the local detail pattern; the accepted detail is the
+preferred physical-texture anchor for the later overview.
 
 Give every attachment one role. Preserve a non-square reference with neutral padding or a role-specific crop so automatic centre-cropping cannot remove its useful edge. Never stretch it.
 
@@ -55,10 +56,11 @@ workflow_record: null
 - Use white mask areas for edits and black areas for preservation. Edge and corner defects use a perimeter-only mask.
 - Save inputs, prompts, control values, seed, output, and failure tags for every comparison. Change one independent control per experiment.
 
-For fast material screening without a local crop or exact topology requirement, `detail_first` remains valid.
-For pattern-sensitive work, use `overview_first`, then derive the selected overview corner into a detail with the
-deterministic `design_detail_crop` as pattern authority so both views share location, product identity, edge
-construction and texture hierarchy.
+Use `detail_first` as the default for both fast material screening and pattern-sensitive work. Generate the selected
+corner from the current artwork plus `design_detail_crop`, inspect it, and retain it as `material_detail_anchor` only
+when its local topology and construction pass. Then generate the overview from the current artwork plus that accepted
+detail anchor. The detail anchor controls texture identity, relief, interlacing and finish only; the current artwork
+continues to control all overview motifs and colours. Do not use an overview to create or define the detail.
 
 ## Repair routing
 
@@ -72,7 +74,7 @@ construction and texture hierarchy.
 | `detail_camera_error` | Use a professional three-quarter macro at 25–35 degrees above the rug plane, with a diagonal leading edge, complete corner and both bound edges, shallow side raking light, and gentle far-field focus falloff while near and central interlacing stays sharp. |
 | `synthetic_relief` | Rebuild only the textile surface so soft twisted coarse floats bend over horizontal yarns, compress at ties and return into the recessed ground with subtle non-repeating variation. |
 | `yarn_balance_error` | Reduce coarse-crown packing, interleave larger and smaller vertical crowns, and keep horizontal fine yarns continuously exposed through plain fields, motifs and boundaries. |
-| `cross_scale_inconsistency` | Reuse the accepted anchor and reduce overview texture scale, or derive detail from the accepted overview. |
+| `cross_scale_inconsistency` | Reuse the accepted material-detail anchor on the overview and reduce overview texture scale while preserving the design source. |
 | `edge_error` | Inpaint only the perimeter while preserving design, camera, colour, and surface. |
 | `corner_mismatch` | Recreate only the detail from the declared upright-design corner, retaining its complete binding junction and adjacent motif. |
 | `authority_leakage` | Remove the leaking paired, style, or quality reference. |

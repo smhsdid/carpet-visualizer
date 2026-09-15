@@ -88,9 +88,9 @@ render_defaults:
   backend: runtime_default
   backend_strategy: preview_only
   reference_budget: 2
-  sequence: overview_first_then_detail_from_overview_anchor
-  detail_anchor_mode: overview_derived_corner_context
-  pattern_anchor_mode: design_crop_plus_overview_anchor
+  sequence: detail_first_then_overview_from_detail_anchor
+  detail_anchor_mode: design_crop_plus_standard_construction
+  pattern_anchor_mode: design_source_primary_detail_texture_only
   detail_corner: lower_left
   detail_orientation: upright_design_source
   detail_context: [tactile_surface, standard_reference]

@@ -18,7 +18,8 @@ construction photos remain audit evidence only; do not attach them to a render i
 a scene-style or quality reference unless the user explicitly adds one.
 
 Keep the two standard images separate. Do not make a composite board, add labels, or place a detail inset
-inside the overview reference. Preserve their stored orientation and aspect ratio.
+inside the overview reference. Preserve their stored orientation and aspect ratio. The standard detail image
+is the preferred macro-quality construction anchor; the generated detail must be established before the overview.
 
 ## Branch override
 
@@ -45,26 +46,29 @@ Use the current design source plus the two standard texture references. Also pre
 `design_detail_crop` from the current source for the selected corner; it is a pattern-only derivative, not a
 third construction reference. If the backend has a reference budget, allocate the two supporting slots to the
 standard assets and use the crop in the pattern-control slot when available. Keep all reference roles explicit
-in the prompt: the current source/crop own motifs and colours, standard images own construction, and the
-accepted overview owns detail geometry and cross-scale consistency.
+in the prompt: the current source/crop own motifs and colours, standard images own construction, the accepted
+generated detail owns texture identity and cross-scale material consistency, and the overview owns only complete
+product presentation. Never use a generated overview as the source for macro texture.
 
-Generate the pair in this order when exact motif matching is important:
+Generate the pair in this order for every standard-reference run:
 
-1. `product_overview`: produce the complete design from the design source first. Inspect its topology and
-   camera, then retain it as `overview_anchor` only when the current outline, motif count, corners, adjacency,
-   symmetry, negative space and colours pass.
-2. `material_detail`: derive the close surface reading from the accepted `overview_anchor` plus a deterministic
-   `design_detail_crop` made from the current source. The crop is the local motif authority; the overview is the
-   geometry and cross-scale anchor; standard images control construction only. Never ask the model to infer the
-   selected corner from the full artwork alone.
+1. `material_detail`: generate the selected corner directly from the current design source, deterministic
+   `design_detail_crop`, and standard construction references. Inspect the local motif, complete corner,
+   camera, yarn hierarchy, relief, colour placement and edge finish. Retain it as `material_detail_anchor` only
+   when these checks pass. The crop is the local motif authority; the standard images control construction only.
+2. `product_overview`: generate the complete design from the current design source plus the accepted
+   `material_detail_anchor`. The design source remains the sole authority for all full-rug motifs, boundaries,
+   negative space and final colours. The accepted detail controls only texture identity, yarn hierarchy, relief,
+   interlacing, boundary behaviour and light response; the standard overview image may support product-scale
+   density and edge evidence. Never use the overview to regenerate or define the detail.
 
-When a controllable edit backend can derive a detail from an accepted overview, it may crop and locally
-refine the selected corner after the overview passes. Preserve the standard-anchor texture identity during
-that refinement.
+When a controllable edit backend can reuse an accepted detail on the overview, keep topology and material on
+separate branches: design structure controls the complete rug and the detail reference controls physical
+texture. A later overview edit may repair framing or edge presentation, but it must not become a detail anchor.
 
 ## Detail presentation keywords
 
-Use these presentation constraints alongside the detail anchor:
+Use these presentation constraints when generating the detail anchor:
 
 ```text
 professional three-quarter tactile macro, camera 25–35 degrees above the rug plane and diagonally across the
@@ -79,7 +83,7 @@ own the physical surface appearance.
 
 ## Overview presentation keywords
 
-Use these concise presentation constraints alongside the overview anchor:
+Use these concise presentation constraints alongside the accepted `material_detail_anchor`:
 
 ```text
 complete upright rug, unrolled and flat, standing-observer restrained near-overhead sample shot; mild near-to-far
@@ -99,11 +103,16 @@ Use this compact structure and fill only the current run's design and camera fie
 ```text
 Use the current design source as the sole authority for rug outline, motif topology, region placement and final colours.
 Use the deterministic design_detail_crop as the sole local pattern authority for the selected detail corner.
-Use the attached standard detail and standard overview images as the primary and only construction references.
-Match their scale-appropriate jacquard construction and edge family.
-[detail or overview scale-specific construction fingerprint]
-Keep one integral weave.
-[detail or overview presentation keywords]
+For the first output, `material_detail`, use the attached standard detail and standard overview images as the primary
+and only construction references; match their scale-appropriate jacquard construction and edge family.
+Keep one integral weave and generate the macro detail first.
+[detail scale-specific construction fingerprint]
+[detail presentation keywords]
+After the detail passes, use that accepted `material_detail_anchor` as a texture-only reference for `product_overview`.
+Keep the current design source in control of all overview motifs and colours, use the standard overview image only for
+product-scale evidence, and never use the overview to define the detail.
+[overview scale-specific construction fingerprint]
+[overview presentation keywords]
 No text, labels or watermarks.
 ```
 
