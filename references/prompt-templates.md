@@ -1,6 +1,6 @@
 # Prompt templates
 
-Use concise English prompts for the image model. Replace bracketed fields with the render lock and omit absent optional blocks. The current design source is always the edit target. For `jacquard-01`, read [the durable jacquard detail target](jacquard-detail-target.md) before filling the corner-detail template; its camera, light, and surface-read decisions are the default even when no scene image is attached.
+Use concise English prompts for the image model. Replace bracketed fields with the render lock and omit absent optional blocks. The current design source is always the edit target. These are legacy templates; when a material manifest declares a rendering branch, use that branch instead. For unbranched `jacquard-01`, read [the durable jacquard detail target](jacquard-detail-target.md) before filling the corner-detail template.
 
 ## Shared authority block
 

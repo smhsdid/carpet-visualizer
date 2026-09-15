@@ -24,7 +24,6 @@ standard_texture_references:
 construction_references:
   macro_detail:
     original: construction/macro-detail.jpg
-    generation_input: derived/macro-detail-neutral.jpg
     controls: [yarn_geometry, interlacing, local_relief]
     must_not_control: [current_artwork, current_colours]
   product_scale_crop: null
@@ -98,7 +97,7 @@ construction: jacquard
 render_branch: standard_reference_jacquard
 reference_strength: library_grounded
 standard_texture_references: [detail, overview]
-material_reference_mode: bundled_neutral_construction_references
+material_reference_mode: standard_texture_references
 mapping_reference_mode: none
 construction_lock:
   orientation_frame: upright_design_source

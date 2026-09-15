@@ -10,7 +10,7 @@ render_branch: standard_reference_jacquard
 standard_texture_references:
   detail:
     file: derived/jacquard-standard-detail-neutral.png
-    source: selected_generated_reference_exec-cc62429a-1c4d-473e-b786-a8d0a2f19c86
+    source: selected_generated_reference_exec-97ecccf7-43f2-434f-890f-092734796fca
     controls: [fine_surface, interlacing, local_relief, fibre_character]
     must_not_control: [current_artwork, current_colours, scene]
   overview:
@@ -22,24 +22,18 @@ standard_texture_references:
 construction_references:
   macro_detail:
     original: construction/macro-detail.jpg
-    generation_input: derived/macro-detail-neutral.jpg
     pixel_size: [1022, 1025]
-    sha256_generation_input: c4bb786c7a5baa0a70d646be45c6c26cd5e3c08602d00c1623b6314c388dc850
     controls: [yarn_geometry, interlacing, local_relief]
     must_not_control: [current_artwork, current_colours]
   product_scale_crop:
     original: construction/product-scale-crop.jpg
-    generation_input: derived/product-scale-crop-neutral.jpg
     pixel_size: [656, 492]
-    sha256_generation_input: 276b8d211c0d91492ed752b160c6aefa4e38cb5d98d37a4f32adc89bb28ac4af
     stored_orientation: upright_finished_rug_pixels
     controls: [texture_density, spacing, hierarchy, grain_direction]
     must_not_control: [current_artwork, current_colours]
   overall_product:
     original: construction/overall-material-product.jpg
-    generation_input: derived/overall-material-product-neutral.jpg
     pixel_size: [1800, 1350]
-    sha256_generation_input: 617aab4ebf36d071bbe3cddf8d4b521dfe3cc008af1e0ba7cae1979979dd6f10
     stored_orientation: upright_finished_rug_pixels
     controls: [product_scale, approximate_thickness, edge_geometry]
     must_not_control: [current_artwork, current_colours, photography_style]
@@ -54,20 +48,20 @@ construction_lock:
   fine_cross_yarn_axis: "Horizontal across the upright rug."
   fine_ground_anchor_axis: "Vertical along the upright rug, recessed beneath the raised yarn crowns."
   surface_structure: "A thin-bodied integral woven jacquard built from three coordinated visible yarn systems: compact coarse raised vertical yarns, finer horizontal cross yarns, and fine recessed vertical ground or anchoring yarns."
-  yarn_geometry: "Short soft multi-filament folded floats form tapered, slightly irregular raised crowns with visible strand twist and fine fibre fuzz. The vertical crowns use two related scales: larger dominant crowns and smaller secondary crowns about 1.3–1.6 times narrower, naturally interleaved within the same yarn family."
-  interlacing: "Each coarse vertical float bends over the finer horizontal cross yarns, compresses where it is tied, and sinks back into the weave between crowns. Fine horizontal yarns remain continuously exposed between vertical crowns across both plain and patterned regions; fine vertical ground or anchoring threads remain recessed beneath them."
-  grain_direction: "The dominant coarse-yarn long axis and end-to-end chain rhythm run vertically in upright rug coordinates. Finer cross yarns run horizontally; fine vertical anchoring threads appear mainly in recessed channels."
-  scale_behavior: "The three yarn systems are distinguishable in macro views; at product distance they become a fine tactile jacquard grain without smoothing into print or enlarging into rope."
+  yarn_geometry: "Each short raised float is a laid bundle of continuous aligned filaments. Every visible filament spans the crown from one tie-down to the other and stays beside its neighbours, while the bundle fans wider at mid-span and reconverges at both tapered ties to form an elongated lozenge or long-oval crown. The uninterrupted parallel filaments create fine lengthwise striations and satin highlights. Larger and smaller crowns remain related members of one yarn family."
+  interlacing: "Each coarse vertical float bends over the finer horizontal cross yarns, compresses at its tapered ties, and returns into the weave. Adjacent vertical crown chains are offset by about half a repeat rather than aligned as a rigid grid. The lower horizontal yarns remain continuous across field and motif, reading with their micro-shadows as recessed horizontal tracks; fine vertical ground or anchoring threads stay deeper still."
+  grain_direction: "Elongated crown axes, continuous filament striations, end-to-end chain rhythm, and satin highlights run vertically in upright rug coordinates. Lower cross-yarn tracks run horizontally; fine vertical anchoring threads appear mainly in the deepest channels."
+  scale_behavior: "In macro views, the continuous tie-to-tie filament paths, lozenge envelope, stagger, and recessed cross-yarn tracks are legible. At product distance, individual crowns compress into fine vertical texture crossed by a subtle horizontal woven cadence; this cadence follows the construction and must not become fixed dark stripes or a borrowed motif."
   surface_relief: "Clearly pronounced but compact micro-relief created by believable over-under interlacing and yarn compression: soft irregular coarse crowns rise about one yarn thickness above the finer horizontal cross yarns and recessed vertical ground threads while the rug body remains thin."
-  yarn_exposure_balance: "Coarse vertical crowns remain visually dominant while occupying about 55–65% of the visible woven surface. Fine horizontal cross yarns remain clearly readable across about 25–35%, including motif edges; recessed vertical ground or anchoring threads appear in the remaining channels."
+  yarn_exposure_balance: "Coarse vertical crowns dominate without closing the weave. Lower horizontal yarns and their shadowed tracks remain continuously readable through fields, motifs, and colour boundaries; recessed vertical ground or anchoring threads appear in the deepest channels."
   boundary_behavior: "One jacquard construction continues across colour changes. Motifs form through colour, yarn exposure, coverage and local relief while coarse-yarn calibre, fine-yarn spacing and the three-direction interlacing logic remain coherent across pattern and ground. Diagonal or stepped motif lines may have locally stronger crown exposure, but they remain transitions inside the same weave: coarse crown axes stay vertical, horizontal fine yarns cross the line, and no smooth contour tube or independent piping, embroidery, or motif-following rope is introduced."
   yarn_colour_behavior: "Every visible yarn system follows the local design-source colour region. Fine cross and ground yarns may read as tone-on-tone variations from light and depth, but are never forced to pale, white or a global binder colour."
   edge_geometry: "Narrow rounded continuous serged binding with tidy corners."
   finish: "Warm, clean soft-satin strand highlights with moderate lustre, visible fibre softness and no hard plastic gloss or dull grey cast; fibre composition is unspecified."
 
 reference_orientation_notes:
-  generation_inputs: "The product-scale and overall neutral generation inputs are stored with physically rotated pixels and no EXIF orientation dependency. Their coarse raised yarn direction is already vertical in the displayed upright product frame."
-  normalisation: "Use the stored generation-input orientation directly: coarse raised yarns vertical, fine cross yarns horizontal, and fine recessed ground or anchoring yarns vertical in upright design-source coordinates. Do not rotate these inputs again."
+  standard_texture_references: "Both standard texture assets are stored upright with no EXIF orientation dependency. Their coarse raised yarn direction is vertical in the displayed product frame."
+  normalisation: "Use the standard assets in their stored orientation: coarse raised yarns vertical, fine cross yarns horizontal, and fine recessed ground or anchoring yarns vertical in upright design-source coordinates."
 
 anti_substitutions:
   - printed smooth surface

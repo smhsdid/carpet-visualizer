@@ -17,9 +17,9 @@ The packaged library lets a later conversation generate from artwork alone. Each
 
 ## Current library
 
-`jacquard-01` is the default design-only material. Read its [manifest](../assets/material-library/jacquard-01/manifest.yaml), inspect the neutral generation inputs, and read the [durable jacquard detail target](jacquard-detail-target.md) before rendering a corner detail.
+`jacquard-01` is the default design-only material. Read its [manifest](../assets/material-library/jacquard-01/manifest.yaml) and follow the declared rendering branch. For `standard_reference_jacquard`, inspect only its two standard texture assets and read the [standard-reference branch](jacquard-standard-reference-branch.md). Read the [durable jacquard detail target](jacquard-detail-target.md) only when no branch replaces it.
 
-The original photographs are retained for audit and manual inspection. Their deterministic neutral derivatives preserve structure while reducing accidental palette transfer. Neutralisation does not make an image construction-neutral and does not define the final exposure, saturation, contrast or scene grading: use every image only for its declared role.
+The two standard texture assets are the generation packet for `jacquard-01`. The original construction photographs remain available for audit and manual inspection only. Standard assets control construction, never the current artwork or final colours.
 
 ## Adding a paired mapping example
 

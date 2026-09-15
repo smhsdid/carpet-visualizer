@@ -24,13 +24,13 @@ Read this target whenever a jacquard material detail is generated without an exp
 
 Render one thin-bodied integral jacquard system with three coordinated yarn systems:
 
-1. Short soft multi-filament folded or twisted floats form raised vertical crowns. They are the dominant visible layer, but leave open channels between crowns.
-2. Finer cross yarns run horizontally and remain continuously readable through plain fields, motif interiors, colour changes, and border edges.
+1. Each short raised float is a laid bundle of continuous aligned filaments. Every visible filament spans from one tie-down to the other and stays beside its neighbours. The bundle fans wider at mid-span and reconverges at both ties, creating an elongated lozenge or long-oval vertical crown with uninterrupted lengthwise striations and satin highlights.
+2. Finer cross yarns run horizontally below the crowns. They and their micro-shadows read as continuous recessed horizontal tracks through plain fields, motif interiors, colour changes, and border edges.
 3. Fine vertical ground or anchoring threads sit below the crowns in recessed channels.
 
-Keep the visual exposure near 55–65% coarse vertical crowns, 25–35% clearly exposed horizontal fine yarns, and the remaining recessed channels. Use two related crown sizes in one yarn family: larger dominant crowns interleaved with smaller secondary crowns roughly 1.3–1.6 times narrower. Vary size, spacing, twist, and compression slightly so the field has an organic woven rhythm rather than a repeated grid.
+Arrange adjacent crown chains with an approximately half-repeat vertical offset, producing a staggered woven cadence rather than a rigid aligned grid. Use related larger and smaller crowns within one yarn family, with slight variation in size, spacing, spread, and compression. Crowns dominate without closing the weave; the recessed horizontal tracks remain continuously legible.
 
-Each coarse float bends over the horizontal yarns, compresses at ties, and returns into the ground. The relief is created by this over-under path and soft compression: raised crowns have rounded, slightly irregular shoulders, visible strand twist, fine fibre fuzz, and short tapered ends. Keep the local relief clearly tactile but compact, with the overall rug remaining thin.
+Each coarse float bends over the horizontal yarns, compresses at its tapered ties, and returns into the ground. This over-under path creates compact tactile relief. Preserve the smooth longitudinal continuity of the laid filaments while the overall rug remains thin.
 
 All three yarn systems inherit the colour of the current design region. Allow only tone-on-tone changes caused by orientation, depth, and grazing light. Keep the same yarn family and interlacing logic across plain ground, narrow motif lines, and colour boundaries; only exposure and local relief may vary with the design.
 

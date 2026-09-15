@@ -13,7 +13,7 @@ Input: only the test artwork.
 Expected:
 
 - `jacquard-01` is selected without asking a construction question;
-- its manifest and neutral generation inputs are inspected;
+- its manifest and two standard texture references are inspected;
 - `reference_strength` is `library_grounded`;
 - one detail and one overview are generated without an approval pause;
 - the unspecified detail corner defaults to `lower_left`;
@@ -127,9 +127,10 @@ Input: the stress artwork with `jacquard-01`.
 
 Expected:
 
-- tapered, slightly irregular soft multi-filament crowns repeat end-to-end in vertical chains, with naturally interleaved larger and smaller crown scales;
+- elongated lozenge or long-oval crowns repeat end-to-end in vertical chains; within each crown, visible aligned filaments stay side by side and run continuously from one tapered tie-down to the other, creating uninterrupted longitudinal striations and highlights;
 - in upright rug coordinates, coarse raised yarns run vertically, finer cross yarns run horizontally, and fine recessed ground or anchoring yarns also run vertically beneath the crowns;
-- coarse vertical crowns remain dominant at about 55–65% visible exposure while horizontal fine yarns remain continuously readable at about 25–35% through plain, patterned and boundary regions;
+- adjacent crown chains are staggered by about half a repeat instead of forming a rigid aligned grid;
+- vertical crowns dominate without closing the surface while lower horizontal yarns and their shadowed recessed tracks remain continuous through plain, patterned and boundary regions;
 - all three yarn systems follow the local design-region colour, without a fixed pale or white binder grid;
 - clearly pronounced but compact local relief is visibly produced by over-under interlacing, compression at ties and return into the recessed ground while the overall rug body remains thin;
 - those bundles reduce in apparent size but remain tactile and woven in the overview;
@@ -139,7 +140,7 @@ Expected:
 - the surface remains integral relief-rich jacquard rather than print, uniform tufted loop pile, fur, loose chunky knit, crochet, freestanding rope, basket weave, or blocks;
 - a failure is recorded under one standard failure tag and routes to one targeted repair.
 
-The bundled product-scale and overall generation inputs are stored with upright pixels and no EXIF orientation dependency. Use their displayed axes directly without another rotation.
+The bundled standard texture references are stored with upright pixels and no EXIF orientation dependency. Use their displayed axes directly without another rotation.
 
 If two preview-only single-variable trials alternate between printed and unrelated applied or pile-like pattern failures, expected behaviour is to stop prompt-only retries, record `pattern_material_mismatch`, and route to `controllable_local`.
 
@@ -179,14 +180,14 @@ Expected:
 - weave recesses remain visible without turning the whole image grey or underexposed;
 - fibre highlights retain detail without clipping or becoming hard plastic gloss.
 
-## Case 19: self-contained jacquard detail target
+## Case 19: legacy self-contained jacquard detail target
 
-Input: design-only artwork with bundled `jacquard-01`, no task-specific scene image.
+Input: design-only artwork with an unbranched jacquard configuration, no task-specific scene image.
 
 Expected:
 
 - the agent reads `references/jacquard-detail-target.md` before generating the detail;
-- the default reference packet uses the current artwork and neutral construction inputs, with no implicit image carried from an earlier conversation turn;
+- the reference packet uses the current artwork and neutral construction inputs, with no implicit image carried from an earlier conversation turn;
 - the detail reproduces the three-quarter 25–35 degree camera, 96–98% surface coverage, diagonal leading edge, prominent near binding side face, strong recession, and gentle far-field focus falloff;
 - the visible surface retains two-scale vertical crowns, continuous horizontal fine-yarn exposure, recessed vertical ground threads, and compact interlaced relief;
 - diagonal or stepped artwork lines may show stronger local crown exposure but remain integrated into the same weave, with vertical crown axes and crossing horizontal fine yarns rather than a separate smooth contour tube;
@@ -194,11 +195,11 @@ Expected:
 
 ## Case 16: stored upright orientation reference
 
-Input: upright artwork and the bundled `jacquard-01` product-scale and overall generation inputs, whose pixels are already stored in upright finished-rug orientation.
+Input: upright artwork and the two bundled `jacquard-01` standard texture references, whose pixels are already stored in upright finished-rug orientation.
 
 Expected:
 
-- the stored upright generation-input axes are used directly without an additional rotation;
+- the stored upright standard-reference axes are used directly without an additional rotation;
 - the generated upright rug shows compact coarse raised yarns running vertically, fine cross yarns running horizontally, and fine recessed ground/anchoring yarns running vertically;
 - cross and ground yarn colours follow each local design region instead of becoming a global pale grid;
 - the same product-relative construction direction appears in the lower-left detail and standing-observer overview;
@@ -233,8 +234,10 @@ Expected:
 
 - the manifest resolves exactly two standard texture references: one detail anchor and one overview anchor;
 - the selected standard images are the primary visible-texture authority, while the current design remains the only motif, region and final-colour authority;
-- the original construction photos, older neutral derivatives, scene references and quality anchors are not attached unless the user explicitly adds them;
+- the original construction photos, scene references and quality anchors are not attached unless the user explicitly adds them;
 - the branch does not apply the legacy fixed yarn-ratio recipe or durable legacy detail target;
-- the detail uses the branch's low-grazing tactile macro keywords and the overview uses its complete-outline keywords;
+- the detail uses the branch's three-quarter tactile macro keywords and the overview uses its complete-outline keywords;
+- the macro retains continuous side-by-side tie-to-tie filaments, elongated lozenge crowns, longitudinal sheen, half-repeat stagger, and recessed horizontal tracks;
+- the overview retains a subtle horizontal woven cadence without copying fixed bands or reference motifs;
 - the overview has only a quiet pale floor or porcelain-tile support plane with a restrained natural contact shadow;
 - detail and overview remain recognisably one surface family at their respective scales.
