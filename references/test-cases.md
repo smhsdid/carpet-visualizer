@@ -224,3 +224,17 @@ Expected:
 - vertical crowns dominate without closing the woven surface;
 - fine horizontal yarns remain continuously readable through the plain field, motif interior and colour boundary;
 - a result whose patterned area becomes nearly all coarse vertical crowns fails `yarn_exposure_hierarchy` with `yarn_balance_error`.
+
+## Case 20: standard-reference jacquard branch
+
+Input: test artwork with `jacquard-01` whose manifest declares `render_branch: standard_reference_jacquard`.
+
+Expected:
+
+- the manifest resolves exactly two standard texture references: one detail anchor and one overview anchor;
+- the selected standard images are the primary visible-texture authority, while the current design remains the only motif, region and final-colour authority;
+- the original construction photos, older neutral derivatives, scene references and quality anchors are not attached unless the user explicitly adds them;
+- the branch does not apply the legacy fixed yarn-ratio recipe or durable legacy detail target;
+- the detail uses the branch's low-grazing tactile macro keywords and the overview uses its complete-outline keywords;
+- the overview has only a quiet pale floor or porcelain-tile support plane with a restrained natural contact shadow;
+- detail and overview remain recognisably one surface family at their respective scales.

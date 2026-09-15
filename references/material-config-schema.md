@@ -9,6 +9,17 @@ construction: jacquard
 default_for_design_only: false
 status: construction_calibrated
 reference_strength_default: library_grounded
+render_branch: standard_reference_jacquard
+
+standard_texture_references:
+  detail:
+    file: derived/jacquard-standard-detail-neutral.png
+    controls: [fine_surface, interlacing, local_relief]
+    must_not_control: [current_artwork, current_colours, scene]
+  overview:
+    file: derived/jacquard-standard-overview-neutral.png
+    controls: [product_scale, density, direction, edge_family]
+    must_not_control: [current_artwork, current_colours, scene]
 
 construction_references:
   macro_detail:
@@ -53,14 +64,14 @@ colour_policy:
 render_defaults:
   backend: runtime_default
   backend_strategy: preview_only
-  reference_budget: 3
+  reference_budget: 2
   sequence: detail_first
-  detail_anchor_mode: corner_context
+  detail_anchor_mode: standard_reference
   detail_corner: lower_left
   detail_orientation: upright_design_source
   detail_context: [corner_junction, two_bound_edges, adjacent_border_motif, colour_boundary]
   edge_finish: serged_overlock
-  detail_target: references/jacquard-detail-target.md
+  detail_target: null
   detail_view: ultra_close_grazing_oblique_macro_8_12_degrees_above_plane
   detail_frame_coverage: "96–98% rug surface, complete near corner junction and short segments of both bound edges visible"
   detail_camera_evidence: "Near binding side face is prominent; depth recession and near-to-far scale compression are visible; near and central interlacing stays sharp with gentle far-field focus falloff."
@@ -68,6 +79,7 @@ render_defaults:
   overview_frame_coverage: "90–95%, complete bound outline visible"
   photography_style: bright_crisp_commercial_product
   presentation_tone: "high-key clean exposure, luminous whites, clear colours, medium-high contrast"
+  overview_background: subtle_pale_floor_or_porcelain_tile_with_soft_contact_shadow
 
 confidence:
   level: reference_based
@@ -82,7 +94,9 @@ known_failure_modes: []
 design_source: "current attached artwork"
 material_id: jacquard-01
 construction: jacquard
+render_branch: standard_reference_jacquard
 reference_strength: library_grounded
+standard_texture_references: [detail, overview]
 material_reference_mode: bundled_neutral_construction_references
 mapping_reference_mode: none
 construction_lock:

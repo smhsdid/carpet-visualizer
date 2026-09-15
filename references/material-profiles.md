@@ -33,6 +33,8 @@ Normalise every directional observation into upright finished-product coordinate
 
 When only a design is uploaded, use bundled `jacquard-01`. Open its manifest and inspect its neutral generation inputs. Use the originals for audit or closer human inspection, not as the default palette-bearing generation inputs. For the default corner detail, read [the durable jacquard detail target](jacquard-detail-target.md); it records the accepted low-grazing camera, bright presentation, and tactile surface-read target without requiring a scene image.
 
+When the manifest declares `render_branch: standard_reference_jacquard`, follow [the standard-reference branch](jacquard-standard-reference-branch.md). In that branch, the two declared standard texture references replace the neutral generation inputs as the only construction packet, and the branch presentation keywords replace the durable detail target.
+
 For any calibrated pack, use each scale separately:
 
 - `macro_detail`: yarn shape, twist, fuzz, interlacing, and local transition.
