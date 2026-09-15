@@ -21,6 +21,8 @@ skill 会将当前设计稿作为图案与颜色的权威来源，将真实肌�
 - `adapters/`：Codex 和其他智能体的运行适配说明
 - `references/`：肌理档案、提花细节目标、提示词模板、质量标准和研究笔记
 - `assets/material-library/`：可复用的真实肌理参考及中性派生图
+- `scripts/`：D 盘本地 PyTorch/ComfyUI 安装、诊断与一键推理入口
+- `config/runtime-lock.json`：可复现的 ComfyUI、PyTorch 和模型版本锁
 
 ## 研究笔记
 
@@ -52,6 +54,18 @@ skill 会将当前设计稿作为图案与颜色的权威来源，将真实肌�
 > 阅读此仓库的 `SKILL.md` 与 `adapters/generic-agent.md`，使用 Carpet Visualizer 处理我提供的地毯设计稿。先确认可用的图像能力；若当前环境不能生成图片，请输出完整的外部执行包，而不要声称已经生成。
 
 `agents/openai.yaml` 和 `adapters/codex.md` 只为 Codex 服务；肌理规则、提示词模板和质量标准以根目录 `SKILL.md` 与 `references/` 为唯一来源。
+
+## 本地 GPU 后端（Windows/NVIDIA）
+
+默认把 ComfyUI、PyTorch、下载缓存和模型安装到 `D:\AI\carpet-visualizer-runtime`：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\install-local-backend.ps1
+powershell -ExecutionPolicy Bypass -File scripts\run-local-render.ps1 "D:\path\to\artwork.jpg"
+powershell -ExecutionPolicy Bypass -File scripts\run-hybrid-postprocess.ps1 "D:\path\to\accepted-semantic-master.png"
+```
+
+可用 `-RuntimeRoot` 改到其他数据盘。不要在同事电脑间复制虚拟环境；每台机器运行安装脚本，并让脚本根据锁文件重建。当前 SDXL 工作流用于验证本地 GPU 全链路；生产向全貌图优先使用语义母版、真实织纹注入与本地 GPU 超分组成的混合流程。最终提花品质仍以 skill 的质量门槛为准。完整约束见 [`references/local-comfyui.md`](references/local-comfyui.md)。
 
 ## 许可与素材
 

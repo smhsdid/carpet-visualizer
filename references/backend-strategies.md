@@ -24,6 +24,17 @@ Use the current design as the edit target. If a result fails, keep the accepted 
 
 For overview material QA, compare an equal-scale plain-field crop with a patterned-boundary crop. The plain field alone cannot pass material inspection. For `jacquard-01`, preserve coarse raised vertical yarns, fine horizontal cross yarns, fine recessed vertical ground/anchoring yarns, stable yarn calibre and one interlacing logic while allowing reference-supported changes in yarn exposure, coverage and relief distribution. Every yarn system follows the local artwork colour rather than a fixed pale binder colour. If two single-variable trials alternate between a smooth printed motif and enlarged rope-like, long-looped, applied, embroidered, corded or unrelated pile-like motifs while the field remains acceptable, record `pattern_material_mismatch` and stop prompt-only retries. The preview backend has reached its control ceiling for that design; route to `controllable_local` or deliver the failed preview only for diagnosis.
 
+## Hybrid semantic and local workflow
+
+Use `hybrid_semantic_local` after two controlled local img2img trials demonstrate the local model's control ceiling: one remains flat and the other introduces motif drift, material substitution, or unrelated ornament.
+
+1. Generate a semantic overview master using the current design as strict topology and colour authority plus the selected real macro, product-scale, and overall construction references. Do not use an AI sample as construction evidence.
+2. Reject the master before local processing if motif count, adjacency, outline, orientation, or colour-region ownership changed.
+3. Run `scripts/run-hybrid-postprocess.ps1` on the accepted master. It injects only grayscale high-frequency relief extracted from the bundled real construction photos, then uses the pinned local super-resolution model on the GPU.
+4. Inspect the final result at full frame and at 100% crops from the centre field and a patterned boundary. Reject obvious mirrored tiling, haloed edges, synthetic bead noise, background texture, or a different weave family between regions.
+
+Record the semantic backend, its exact reference roles and prompt separately from the local model hashes, weave parameters, scale factor, and ComfyUI prompt ID. Local enhancement cannot repair a structurally incorrect semantic master.
+
 ## Controllable local workflow
 
 Use this when the backend exposes structure controls, independent image-reference conditioning, masks, seeds, or replayable workflow files.

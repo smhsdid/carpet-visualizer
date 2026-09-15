@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "comfyui": {
+    "repository": "https://github.com/Comfy-Org/ComfyUI.git",
+    "commit": "b00584967778871f329c2d31190a5e9b767b8366"
+  },
+  "custom_nodes": [
+    {
+      "id": "comfyui-ipadapter-plus",
+      "repository": "https://github.com/cubiq/ComfyUI_IPAdapter_plus.git",
+      "directory": "ComfyUI_IPAdapter_plus",
+      "commit": "a0f451a5113cf9becb0847b92884cb10cbdec0ef"
+    }
+  ],
+  "python": {
+    "minimum": "3.12",
+    "recommended": "3.13"
+  },
+  "pytorch": {
+    "packages": [
+      "torch==2.14.0+cu130",
+      "torchvision==0.29.0+cu130",
+      "torchaudio==2.11.0+cu130"
+    ],
+    "index_url": "https://download.pytorch.org/whl/cu130"
+  },
+  "models": [
+    {
+      "id": "sdxl-base-1.0",
+      "filename": "sd_xl_base_1.0.safetensors",
+      "relative_path": "models/checkpoints/sd_xl_base_1.0.safetensors",
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors",
+      "size_bytes": 6938078334,
+      "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b",
+      "role": "local_img2img_baseline",
+      "license_review_required": true
+    },
+    {
+      "id": "realesrgan-x4plus",
+      "filename": "RealESRGAN_x4plus.pth",
+      "relative_path": "models/upscale_models/RealESRGAN_x4plus.pth",
+      "url": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth",
+      "size_bytes": 67040989,
+      "sha256": "4fa0d38905f75ac06eb49a7951b426670021be3018265fd191d2125df9d682f1",
+      "role": "hybrid_local_super_resolution",
+      "license_review_required": true
+    },
+    {
+      "id": "clip-vit-h-14-ipadapter",
+      "filename": "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors",
+      "relative_path": "models/clip_vision/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors",
+      "url": "https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors",
+      "size_bytes": 2528373448,
+      "sha256": "6ca9667da1ca9e0b0f75e46bb030f7e011f44f86cbfb8d5a36590fcd7507b030",
+      "role": "material_reference_encoder",
+      "license_review_required": true
+    },
+    {
+      "id": "ip-adapter-plus-sdxl-vit-h",
+      "filename": "ip-adapter-plus_sdxl_vit-h.safetensors",
+      "relative_path": "models/ipadapter/ip-adapter-plus_sdxl_vit-h.safetensors",
+      "url": "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors",
+      "size_bytes": 847517512,
+      "sha256": "3f5062b8400c94b7159665b21ba5c62acdcd7682262743d7f2aefedef00e6581",
+      "role": "material_reference_conditioning",
+      "license_review_required": true
+    }
+  ]
+}

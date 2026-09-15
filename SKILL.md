@@ -58,6 +58,10 @@ When no image-generation backend is available, prepare the complete prompt packe
 
 For runtime-specific setup, read [Codex adapter](adapters/codex.md) in Codex or [generic-agent adapter](adapters/generic-agent.md) in another agent environment.
 
+When a replayable local render is requested or a local GPU backend is available, run `scripts/doctor.py` using that runtime's Python. If it passes, read [local ComfyUI backend](references/local-comfyui.md) and use the versioned ComfyUI API path. Treat the bundled SDXL image-to-image workflow as an integration baseline only; apply the ordinary quality gate and disclose that final jacquard controls are pending when the output does not meet them.
+
+When both semantic image generation and the verified local backend are available, prefer `hybrid_semantic_local` for the overview. Generate a physical overview master from the current artwork plus real construction evidence, reject it if topology or colour ownership drifts, then run `scripts/run-hybrid-postprocess.ps1` to inject real-reference weave relief and perform GPU super-resolution. Do not use an AI-generated sample as material evidence, and do not ask the local baseline SDXL workflow to rediscover the product from flat artwork after it has demonstrated the flatness-versus-drift failure mode.
+
 ## Generate both outputs
 
 Read [prompt templates](references/prompt-templates.md), then use the selected backend in edit/reference mode. Generate both outputs without waiting for user approval.
