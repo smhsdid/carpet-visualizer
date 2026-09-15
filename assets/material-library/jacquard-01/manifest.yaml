@@ -94,18 +94,19 @@ render_defaults:
   backend: runtime_default
   backend_strategy: preview_only
   reference_budget: 2
-  sequence: detail_first
-  detail_anchor_mode: standard_reference
+  sequence: overview_first_then_detail_from_overview_anchor
+  detail_anchor_mode: overview_derived_corner_context
+  pattern_anchor_mode: design_crop_plus_overview_anchor
   detail_corner: lower_left
   detail_orientation: upright_design_source
   detail_context: [tactile_surface, standard_reference]
   edge_finish: serged_overlock
   detail_target: null
-  detail_view: ultra_close_grazing_oblique_macro_8_12_degrees_above_plane
+  detail_view: professional_three_quarter_macro_25_35_degrees_above_plane
   detail_frame_coverage: "96–98% rug surface, complete near corner junction and short segments of both bound edges visible"
   detail_camera_evidence: "Near binding side face is prominent and larger than distant crowns; the rug plane clearly recedes through foreshortening, with near and central interlacing sharp and gentle far-field focus falloff."
-  overview_view: direct_overhead_level_full_frame
-  overview_frame_coverage: "90–95%, complete bound outline visible"
+  overview_view: standing_observer_restrained_near_overhead_sample_shot
+  overview_frame_coverage: "92–96%, complete bound outline visible with narrow quiet floor margins"
   photography_style: bright_crisp_commercial_product
   presentation_tone: "high-key clean exposure, luminous whites, clear colours, medium-high contrast"
   overview_background: subtle_pale_floor_or_porcelain_tile_with_soft_contact_shadow

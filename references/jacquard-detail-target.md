@@ -7,16 +7,16 @@ Read this target whenever a jacquard material detail is generated without an exp
 ## Camera and composition
 
 - Use the lower-left corner in upright finished-rug coordinates.
-- Photograph from an ultra-close, low grazing macro position: lens nearly level with and just above the near binding, about 8–12 degrees above the rug plane.
-- Aim diagonally from the near lower-left binding into the rug so the surface recedes visibly across the frame. The near binding side face is a prominent foreground plane, not a thin outline.
+- Photograph from an ultra-close, professional three-quarter macro position, about 25–35 degrees above the rug plane and 20–35 degrees across the two adjoining edges.
+- Aim diagonally from the near lower-left binding into the rug so the corner and one bound edge create a strong leading line. The near binding side face is a prominent foreground plane, not a thin outline.
 - Fill about 96–98% of the frame with rug surface. Keep the complete near corner junction, short readable segments of both adjoining bindings, and only enough adjacent border artwork to identify the location.
 - Make the nearest crowns visibly larger than central and distant crowns. Keep the near and central interlacing sharp; let only the far field soften gently.
-- Keep the camera low and the rug body thin. The view is a product macro photograph, not a flat top-down diagram, a high-angle inspection, or a dramatic wide scene.
+- Keep the rug body thin and the composition close. The view is an attractive product macro photograph, not a flat top-down diagram, an extreme near-zero skim, a high-angle inspection, or a dramatic wide scene.
 
 ## Light and presentation
 
 - Use bright high-key commercial-product exposure with warm-neutral daylight.
-- Use soft grazing light that creates small self-shadows between yarn systems and clear strand highlights on crown ridges.
+- Use a shallow side raking key light with soft fill. It must create small self-shadows between yarn systems, visible separation between raised and recessed layers, and controlled warm soft-satin strand highlights on crown ridges.
 - Keep colours clean, luminous, and separated with medium-high contrast. Preserve detail in both highlights and weave recesses.
 - The image should feel tactile and photographic while remaining bright; preserve a clean neutral background only in the small visible gaps outside the rug.
 
@@ -40,4 +40,4 @@ The artwork is a colour-region map laid into one continuous jacquard field. A di
 
 ## Detail acceptance check
 
-Use the generated detail as the material anchor only when all of these are visible at once: low diagonal camera, prominent near binding side face, strong near-to-far recession, complete lower-left corner junction, two adjoining edges, two-scale vertical crowns, continuous horizontal fine-yarn rhythm, recessed vertical ground threads, and relief tied to believable interlacing. If one is missing, record the failed category and keep the image out of the overview anchor path.
+Use the generated detail as the material anchor only when all of these are visible at once: attractive three-quarter camera, diagonal leading edge, prominent near binding side face, strong near-to-far recession, complete lower-left corner junction, two adjoining edges, two-scale vertical crowns, continuous horizontal fine-yarn rhythm, recessed vertical ground threads, visible micro-shadow, controlled warm highlights, and relief tied to believable interlacing. If one is missing, record the failed category and keep the image out of the overview anchor path.

@@ -9,7 +9,7 @@ Use this for built-in semantic image generation and small-step edits.
 ```yaml
 backend_strategy: preview_only
 reference_budget: 3 # supporting references, excluding the design source
-preferred_sequence: [material_detail, product_overview, targeted_retry]
+preferred_sequence: [product_overview, material_detail, targeted_retry]
 ```
 
 Attach references in this order until the budget is full:
@@ -17,6 +17,10 @@ Attach references in this order until the budget is full:
 1. neutral macro construction reference;
 2. neutral product-scale construction reference;
 3. overall edge reference, exact paired mapping example, or scene reference only when the task needs that role.
+
+When exact local motif matching matters, prepare `design_detail_crop` from the current design. It is a pattern
+reference rather than a construction reference and should occupy a pattern-control slot when the backend allows
+one. The accepted overview is the preferred geometry anchor for the later detail.
 
 Give every attachment one role. Preserve a non-square reference with neutral padding or a role-specific crop so automatic centre-cropping cannot remove its useful edge. Never stretch it.
 
@@ -51,7 +55,10 @@ workflow_record: null
 - Use white mask areas for edits and black areas for preservation. Edge and corner defects use a perimeter-only mask.
 - Save inputs, prompts, control values, seed, output, and failure tags for every comparison. Change one independent control per experiment.
 
-For fast material screening, `detail_first` remains valid. Anchor it to the selected corner in the upright design coordinate frame. For strict cross-scale consistency, use `overview_first`, then crop the selected overview corner and locally inpaint that crop into a detail so both views share location, product identity, edge construction, and texture hierarchy.
+For fast material screening without a local crop or exact topology requirement, `detail_first` remains valid.
+For pattern-sensitive work, use `overview_first`, then derive the selected overview corner into a detail with the
+deterministic `design_detail_crop` as pattern authority so both views share location, product identity, edge
+construction and texture hierarchy.
 
 ## Repair routing
 
@@ -62,7 +69,7 @@ For fast material screening, `detail_first` remains valid. Anchor it to the sele
 | `material_substitution` | Replace or strengthen only the material reference and physical prompt axes. |
 | `construction_orientation_error` | Use the stored upright generation-input axes directly, then reapply coarse-raised vertical, fine-cross horizontal and fine-ground/anchor vertical. |
 | `pattern_material_mismatch` | Separate structure and material controls; verify stable coarse-bundle calibre, fine-yarn spacing and three-system interlacing in matched pattern/field crops while retaining reference-supported jacquard exposure and relief variation. |
-| `detail_camera_error` | Move the lens nearly level with the near binding to 8–12 degrees above the rug plane; require a prominent binding side face, strong depth recession, near-to-far scale compression, and gentle far-field focus falloff while near and central interlacing stays sharp. |
+| `detail_camera_error` | Use a professional three-quarter macro at 25–35 degrees above the rug plane, with a diagonal leading edge, complete corner and both bound edges, shallow side raking light, and gentle far-field focus falloff while near and central interlacing stays sharp. |
 | `synthetic_relief` | Rebuild only the textile surface so soft twisted coarse floats bend over horizontal yarns, compress at ties and return into the recessed ground with subtle non-repeating variation. |
 | `yarn_balance_error` | Reduce coarse-crown packing, interleave larger and smaller vertical crowns, and keep horizontal fine yarns continuously exposed through plain fields, motifs and boundaries. |
 | `cross_scale_inconsistency` | Reuse the accepted anchor and reduce overview texture scale, or derive detail from the accepted overview. |

@@ -65,18 +65,19 @@ render_defaults:
   backend: runtime_default
   backend_strategy: preview_only
   reference_budget: 2
-  sequence: detail_first
-  detail_anchor_mode: standard_reference
+  sequence: overview_first_then_detail_from_overview_anchor
+  detail_anchor_mode: overview_derived_corner_context
+  pattern_anchor_mode: design_crop_plus_overview_anchor
   detail_corner: lower_left
   detail_orientation: upright_design_source
   detail_context: [corner_junction, two_bound_edges, adjacent_border_motif, colour_boundary]
   edge_finish: serged_overlock
   detail_target: null
-  detail_view: ultra_close_grazing_oblique_macro_8_12_degrees_above_plane
+  detail_view: professional_three_quarter_macro_25_35_degrees_above_plane
   detail_frame_coverage: "96–98% rug surface, complete near corner junction and short segments of both bound edges visible"
   detail_camera_evidence: "Near binding side face is prominent; depth recession and near-to-far scale compression are visible; near and central interlacing stays sharp with gentle far-field focus falloff."
-  overview_view: direct_overhead_level_full_frame
-  overview_frame_coverage: "90–95%, complete bound outline visible"
+  overview_view: standing_observer_restrained_near_overhead_sample_shot
+  overview_frame_coverage: "92–96%, complete bound outline visible with narrow quiet floor margins"
   photography_style: bright_crisp_commercial_product
   presentation_tone: "high-key clean exposure, luminous whites, clear colours, medium-high contrast"
   overview_background: subtle_pale_floor_or_porcelain_tile_with_soft_contact_shadow
@@ -121,18 +122,19 @@ colour_mapping: []
 photography_style: bright_crisp_commercial_product
 presentation_tone: "high-key clean exposure, luminous whites, clear colours, medium-high contrast; no grey veil or subdued grading"
 edge_finish: serged_overlock
-detail_anchor_mode: corner_context
+detail_anchor_mode: overview_derived_corner_context
+pattern_anchor_mode: design_crop_plus_overview_anchor
 detail_corner: lower_left
 detail_orientation: upright_design_source
 detail_context: [corner_junction, two_bound_edges, adjacent_border_motif, colour_boundary]
-detail_camera_lock: "ultra-close grazing diagonal macro, camera 8–12 degrees above rug plane, 96–98% surface coverage, prominent near binding side face, strong depth recession, complete near corner junction, near and central interlacing sharp, gentle far-field focus falloff"
-overview_camera_lock: "direct overhead level view, rug plane parallel to image plane, no perspective tilt, 90–95% frame coverage, complete outline visible"
+detail_camera_lock: "professional three-quarter macro, camera 25–35 degrees above rug plane, diagonal leading edge, complete corner and both bound edges, near and central interlacing sharp, gentle far-field focus falloff"
+overview_camera_lock: "standing-observer downward sample shot with restrained near-overhead angle, slightly closer framing, mild near-to-far perspective with the near lower edge only slightly larger than the far upper edge, rug square to frame with long axis vertical and 0–2 degrees residual rotation, 92–96% frame coverage, complete outline visible"
 render_backend: runtime_default
 backend_strategy: preview_only
 backend_capabilities_used: [image_generation, reference_image_input]
 reference_budget: 3
 independent_controls: {}
-render_sequence: detail_first
+render_sequence: overview_first_then_detail_from_overview_anchor
 deliverables: [material_detail, product_overview]
 consistency_contract: visual_consistency
 evaluation_record:
@@ -144,6 +146,7 @@ evaluation_record:
   detail_texture_view: pass|caveat|fail
   overview_framing: pass|caveat|fail
   presentation_tone: pass|caveat|fail
+  relief_lustre: pass|caveat|fail
   cross_scale_consistency: pass|caveat|fail
   colour_authority: pass|caveat|fail
   edge_finish: pass|caveat|fail

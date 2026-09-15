@@ -14,6 +14,6 @@
 - **Render lock**: The complete per-run record containing material, construction lock, colour authority, mapping mode, camera, edge treatment, backend, and deliverables.
 - **Detail corner**: One of `upper_left`, `upper_right`, `lower_left`, or `lower_right`, named in the upright design-source coordinate frame and shared by both outputs; defaults to `lower_left`.
 - **Material detail**: A close contextual view of the selected corner showing the binding junction, both adjacent edges, recognisable border artwork, yarn or pile, relief, and colour transitions.
-- **Product overview**: A directly overhead, level full-rug view used to judge outline, motif layout, colour relationships, edge treatment, and overall material read; the complete rug should fill about 90–95% of the frame.
+- **Product overview**: A standing-observer downward full-rug view with a restrained near-overhead angle and mild near-to-far perspective, used to judge outline, motif layout, colour relationships, edge treatment, and overall material read; the complete rug should fill about 92–96% of the frame with all four corners and the bound outline visible.
 - **Visual consistency**: Both outputs express one construction system at different camera distances without claiming identical pixels.
 - **Visual sample**: A screening artifact for product review, distinct from a manufacturing approval or physical standard.

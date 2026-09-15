@@ -29,16 +29,22 @@ interlacing, relief, fuzz, and finish. Text is a camera and presentation lock, n
 
 ## Generation packet
 
-Use the current design source plus the two standard texture references. If the backend has a reference
-budget, allocate two supporting slots to these assets. Attach the detail anchor first for `material_detail`
-and the overview anchor first for `product_overview`; use the other standard image as the second supporting
-reference when the backend accepts two images. Keep the reference roles explicit in the prompt.
+Use the current design source plus the two standard texture references. Also prepare a deterministic
+`design_detail_crop` from the current source for the selected corner; it is a pattern-only derivative, not a
+third construction reference. If the backend has a reference budget, allocate the two supporting slots to the
+standard assets and use the crop in the pattern-control slot when available. Keep all reference roles explicit
+in the prompt: the current source/crop own motifs and colours, standard images own construction, and the
+accepted overview owns detail geometry and cross-scale consistency.
 
-Generate the pair in this order:
+Generate the pair in this order when exact motif matching is important:
 
-1. `material_detail`: produce the close surface reading from the detail anchor.
-2. `product_overview`: produce the complete design from the design source, with the overview anchor owning
-   product-scale texture and the detail anchor supporting the same surface family.
+1. `product_overview`: produce the complete design from the design source first. Inspect its topology and
+   camera, then retain it as `overview_anchor` only when the current outline, motif count, corners, adjacency,
+   symmetry, negative space and colours pass.
+2. `material_detail`: derive the close surface reading from the accepted `overview_anchor` plus a deterministic
+   `design_detail_crop` made from the current source. The crop is the local motif authority; the overview is the
+   geometry and cross-scale anchor; standard images control construction only. Never ask the model to infer the
+   selected corner from the full artwork alone.
 
 When a controllable edit backend can derive a detail from an accepted overview, it may crop and locally
 refine the selected corner after the overview passes. Preserve the standard-anchor texture identity during
@@ -49,10 +55,11 @@ that refinement.
 Use these concise presentation constraints alongside the detail anchor:
 
 ```text
-ultra-close tactile macro, low grazing diagonal camera, lens nearly level with the near rug surface,
-approximately 8–12 degrees above the rug plane, surface fills 96–98% of the frame, bright clean high-key
-exposure, controlled grazing light, crisp near and central fibre detail, gentle far-field softening, neutral
-background only where unavoidable
+professional three-quarter tactile macro, camera approximately 25–35 degrees above the rug plane,
+azimuth 20–35 degrees across the two adjoining edges, the corner and one bound edge form a diagonal leading
+line into depth, complete near corner junction and both binding segments visible, bright clean high-key exposure,
+shallow side raking light plus soft fill, crisp near and central fibre detail, gentle far-field softening, neutral
+background only where unavoidable; avoid flat straight-down and extreme near-zero grazing views
 ```
 
 Keep the detail focused on the selected design corner when a corner is requested. Preserve the binding
@@ -64,10 +71,13 @@ own the physical surface appearance.
 Use these concise presentation constraints alongside the overview anchor:
 
 ```text
-complete upright rug, fully unrolled and flat, direct overhead or barely elevated level product camera,
-complete bound outline and four corners visible, long edges aligned with the frame, bright clean exposure,
-soft natural contact shadow, simple pale matte floor or porcelain-tile background, very subtle tile or floor
-context, restrained ambient environment, no furniture or props, no staged lifestyle scene
+complete upright rug, fully unrolled and flat on the floor, professional standing-observer downward sample-shot,
+restrained near-overhead angle with slightly closer framing and only mild natural near-to-far perspective; the near
+lower edge is just slightly larger than the far upper edge, rug square to the frame with at most 0–2 degrees residual
+rotation; keep the long axis vertical and the short edges horizontal, complete bound outline and four corners visible,
+fill about 92–96% of the frame with narrow quiet floor margins, calm perspective without dramatic foreshortening or
+keystone distortion, bright clean exposure, soft natural contact shadow, simple pale matte floor or porcelain-tile
+background, restrained ambient environment, no furniture or props, no staged lifestyle scene
 ```
 
 The floor or tile must remain a quiet support plane: lightly visible, low contrast, and subordinate to the
@@ -80,6 +90,7 @@ Use this compact structure and fill only the current run's design and camera fie
 
 ```text
 Use the current design source as the sole authority for rug outline, motif topology, region placement and final colours.
+Use the deterministic design_detail_crop as the sole local pattern authority for the selected detail corner.
 Use the attached standard detail and standard overview images as the primary and only construction references.
 Match their visible jacquard surface, texture scale, density, direction, relief, fibre character and edge family.
 Do not invent a second material system and do not borrow motifs or colours from the references.
@@ -97,7 +108,10 @@ Pass only when:
 - the output's visible surface is recognisably the same construction family as the selected standard anchors;
 - detail and overview share one texture identity and compatible scale behaviour;
 - the design source still owns all motifs, boundaries, colours, and negative space;
-- the detail has the requested close tactile camera and the overview shows the complete outline;
+- the detail uses an attractive three-quarter macro angle with a diagonal leading edge and complete corner;
+- the overview reads like a standing-observer downward sample photograph with a restrained near-overhead angle, mild
+  top-to-bottom perspective, 92–96% frame coverage, only 0–2 degrees residual rotation and complete outline;
+- raised and recessed weave layers have visible micro-shadow and controlled warm yarn highlights;
 - the overview has only the requested quiet floor/tile context and a restrained contact shadow.
 
 If the surface drifts, change the reference attachment or crop before adding more material prose. If the

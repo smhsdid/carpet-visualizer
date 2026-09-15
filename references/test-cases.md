@@ -17,8 +17,8 @@ Expected:
 - `reference_strength` is `library_grounded`;
 - one detail and one overview are generated without an approval pause;
 - the unspecified detail corner defaults to `lower_left`;
-- the detail uses a close low-oblique macro view to reveal texture layers, while the overview is directly overhead and level;
-- the complete rug fills about 90–95% of the overview frame without cropping its binding or corners;
+- the detail uses an attractive three-quarter macro view to reveal texture layers, while the overview is a near-overhead squared rug-sample photograph;
+- the complete rug fills about 92–96% of the overview frame without cropping its binding or corners;
 - both outputs use clean high-key exposure, clear colours and crisp medium-high contrast without a grey veil or muddy desaturation;
 - bundled reference colours and patterns do not leak.
 
@@ -161,12 +161,12 @@ Input: upright artwork with no corner or camera instruction.
 
 Expected:
 
-- the detail anchors to `lower_left` and uses an ultra-close grazing diagonal macro view roughly 8–12 degrees above the rug plane;
+- the detail anchors to `lower_left` and uses a professional three-quarter macro view roughly 25–35 degrees above the rug plane;
 - the rug surface fills about 96–98% of the detail while the complete near corner junction and short segments of both bindings remain visible;
-- the prominent near binding side face, strong depth recession, near-to-far scale compression and gentle focus falloff prove the camera is nearly level with the rug surface;
+- the diagonal leading edge, visible binding side face, depth recession, near-to-far scale compression and gentle focus falloff prove the camera is a professional oblique macro view;
 - grazing light makes yarn organisation, interlacing, pronounced local relief and boundary construction readable across the near and central focus area;
-- the overview uses a directly overhead level view with no converging edges or visible near side;
-- the rug remains upright, centred, fully visible and fills about 90–95% of the frame with a narrow even margin.
+- the overview uses a standing-observer downward view with a restrained near-overhead angle, mild top-to-bottom perspective and the rug squared to the frame, with at most 0–2 degrees residual rotation;
+- the rug remains upright, centred, fully visible and fills about 92–96% of the frame with narrow quiet floor margins.
 
 ## Case 15: bright commercial presentation
 
@@ -187,7 +187,7 @@ Expected:
 
 - the agent reads `references/jacquard-detail-target.md` before generating the detail;
 - the default reference packet uses the current artwork and neutral construction inputs, with no implicit image carried from an earlier conversation turn;
-- the detail reproduces the low diagonal 8–12 degree camera, 96–98% surface coverage, prominent near binding side face, strong recession, and gentle far-field focus falloff;
+- the detail reproduces the three-quarter 25–35 degree camera, 96–98% surface coverage, diagonal leading edge, prominent near binding side face, strong recession, and gentle far-field focus falloff;
 - the visible surface retains two-scale vertical crowns, continuous horizontal fine-yarn exposure, recessed vertical ground threads, and compact interlaced relief;
 - diagonal or stepped artwork lines may show stronger local crown exposure but remain integrated into the same weave, with vertical crown axes and crossing horizontal fine yarns rather than a separate smooth contour tube;
 - the result remains bright and crisp without requiring a scene-style reference.
@@ -201,7 +201,7 @@ Expected:
 - the stored upright generation-input axes are used directly without an additional rotation;
 - the generated upright rug shows compact coarse raised yarns running vertically, fine cross yarns running horizontally, and fine recessed ground/anchoring yarns running vertically;
 - cross and ground yarn colours follow each local design region instead of becoming a global pale grid;
-- the same product-relative construction direction appears in the lower-left detail and directly overhead overview;
+- the same product-relative construction direction appears in the lower-left detail and standing-observer overview;
 - an output with horizontal raised floats is tagged `construction_orientation_error`.
 
 ## Case 17: reject high-angle synthetic detail
