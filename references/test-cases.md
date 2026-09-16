@@ -2,56 +2,62 @@
 
 Run the smallest case exercising the changed behaviour.
 
-## Case 1: design-only default
+## Case 1: design-only unified flow
 
 Input: one legible upright artwork.
 
-Expected: `wilton-flatweave-01` is selected; exact mode prepares controls and proof; an unmatched detail uses complete current design first, declared real detail-camera anchor second, and multi-unit micro construction anchor third; overview waits for all detail gates.
+Expected: `wilton-flatweave-01` is selected; the fixed lower-left controls are prepared; the complete design is attached first, followed by the declared camera/construction and micro construction references; a detail is generated, lightly checked, and the overview is generated automatically without asking for confirmation.
 
 ## Case 2: reference inventory
 
 Input: bundled manifest.
 
-Expected: all ten real source images resolve; its detail and overview references resolve; no AI artwork appears in `audit_references`; the Wilton flatweave classification is explicitly user-confirmed; no fibre, density, loom setting, or pile-specification claim exists.
+Expected: all ten real source images resolve; its detail and overview references resolve; no AI artwork appears in `audit_references`; no fibre, density, loom setting, or pile-specification claim exists; the default run strength is `library_grounded`.
 
 ## Case 3: surface identity
 
 Input: equal-scale pattern and ground crops.
 
-Expected: both contain product-directional lanes of visibly short and longer multi-filament bundles, offset ends across adjacent lanes, open shadowed longitudinal channels exposing finer interlacing, low crowns, shallow gaps, and the same restrained finish. Smooth fill, bead grid, closed equal-pitch lattice, basket weave, rope, deep pile, or an independently raised motif fails.
+Expected: both contain product-directional lanes of visibly short and longer multi-filament bundles, offset ends across adjacent lanes, open shadowed longitudinal channels exposing finer interlacing, low crowns, shallow gaps, and the same restrained finish. Smooth fill, bead grid, closed equal-pitch lattice, basket weave, rope, deep pile, or an independently raised motif fails the check.
 
-## Case 4: edge and orientation
+## Case 4: fixed lower-left edge and orientation
 
-Input: a lower-left detail crop.
+Input: a complete design source.
 
-Expected: rounded wrapped binding, inner locking line, complete foreground corner, both edges, roughly 30-degree raking plane recession, visibly larger near bundles, and construction-wide row direction survive. The perspective control keeps outline, binding, lock line, and interior artwork registered on one continuous plane; the upper frame remains carpet surface rather than a false far edge. Texture may not turn along the motif.
+Expected: the generated detail shows the lower-left corner, both adjacent bound edges, roughly raking plane recession, visibly larger near bundles, construction-wide row direction, and continuous rug surface through the upper frame. No corner parameter is required or accepted.
 
-## Case 5: exact topology and overlay regression
+## Case 5: surface overlay regression
 
-Input: artwork, an aligned source proof, and an RGB-plus-texture detail.
+Input: artwork and an RGB-plus-texture detail.
 
-Expected: source proof validates; RGB-plus-texture detail is `overlay`, fails the surface gate, and stops the overview. A preview-only exact backend returns `external_execution_required` rather than claiming a pass.
+Expected: the detail is recorded as `surface_build_mode: overlay`, receives a material caveat or failure tag, and the overview still follows the unified flow unless the output is technically invalid. The final record retains the prompt and parameters that produced the output.
 
 ## Case 6: paired mapping calibration
 
 Input: `wilton-flatweave-01/paired-mappings.json`.
 
-Expected: each of the three pairs has an existing `design`, `overview`, and `detail` whose SHA-256 matches its manifest record. Excluding one pair reports the remaining two as the calibration set. The current design remains the sole authority for a new render's pattern and colours.
+Expected: each of the three pairs has an existing `design`, `overview`, and `detail` whose SHA-256 matches its manifest record. The current design remains the sole authority for a new render's pattern and colours.
 
-## Case 7: proof renderer cannot deliver final texture
+## Case 7: diagnostic helper cannot deliver the final pair
 
 Input: `scripts/render_wilton_calibrated.py` with an artwork and a temporary output directory.
 
-Expected: it writes only `structure_proof.png`, controls, and a proof-only render lock. The lock has `reference_strength: none`, `material_detail: null`, and `product_overview: null`. A user-facing unmatched Wilton visual instead requires a recorded design reference, real camera anchor, and the declared multi-unit micro construction anchor.
+Expected: it writes only diagnostic structure evidence and a diagnostic record. It never presents those files as `material_detail` or `product_overview`.
 
 ## Case 8: paired-reference leakage regression
 
-Input: `wilton-flatweave-01/manifest.yaml` and the sample-02 design.
+Input: each paired design in turn.
 
-Expected: a SHA-256 match does not change the generic packet. The detail packet orders complete current design, sample-01 generic camera-and-construction anchor, then generic micro construction anchor. The sample-02 overview and material detail are forbidden generation inputs.
+Expected: the attachment selector checks the current design SHA-256 and never selects the matching pair's overview or detail. A non-matching generic camera anchor and the micro construction anchor are selected instead.
 
-## Case 9: camera-anchor framing and spacing regression
+## Case 9: prompt and parameter persistence
 
-Input: a complete design source and the declared lower-left detail camera anchor.
+Input: one complete design source and a successful generation.
 
-Expected: the complete source remains the only geometry authority while the real anchor sets low-raking corner framing. The upper frame continues through rug surface, the left bound edge recedes as in the anchor, and outline-to-pattern spacing remains unchanged. A generated detail with expanded perimeter gap, pattern drift, or a false top edge fails `camera_pattern_registration_mismatch` and stops overview generation.
+Expected: the run record contains the final detail prompt, final overview prompt, effective parameters, seed or replay data when available, source hash, ordered reference paths and hashes, output paths, and lightweight check results.
+
+## Case 10: automatic sequence
+
+Input: a generated detail that contains visual caveats but opens successfully.
+
+Expected: the caveats are recorded and the overview is generated automatically. A missing, unreadable, or technically invalid detail is the only condition that stops the sequence.

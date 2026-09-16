@@ -2,20 +2,20 @@ material_id: wilton-flatweave-01
 display_name: "Wilton Flatweave 01"
 construction: wilton-flatweave
 default_for_design_only: true
-status: task_reference_grounded_user_confirmed_visual_profile
-reference_strength_default: task_reference_grounded
+status: library_calibrated_visual_profile
+reference_strength_default: library_grounded
 render_branch: wilton_flatweave
 
 generation_references:
-  detail: construction/sample-01-detail-a.jpg
+  detail: quality/accepted-detail-camera-anchor-v1.jpg
   overview: construction/sample-03-overall.jpg
-  note: "Use the complete current design, a generic real camera-and-construction anchor from a different paired design, and the generic micro construction anchor. Paired mappings are calibration evidence only and must never be attached when their design hash matches the current source."
+  note: "Use the complete current design, the generic camera-and-construction anchor, and the generic micro construction anchor. Paired mappings are calibration evidence only and must never be attached when their design hash matches the current source."
 
 derived_construction_anchors:
   unit_micro_anchor:
     path: derived/wilton-unit-micro-anchor-v1.jpg
     sha256: 939bc3f2303c31c6380aa0017532951f5eddde4fb373d57d5e51b75048807b56
-    role: exact_local_yarn_unit_geometry_and_spacing
+    role: local_yarn_unit_geometry_and_spacing
     controls: [bundle_midsection_fullness, tapered_bundle_ends, multi_filament_definition, unit_width, unit_length, exposed_cross_yarn, inter_unit_gap]
     does_not_control: [current_motifs, current_colours, current_layout, product_camera, manufacturing_specification]
   grammar_tile:
@@ -50,8 +50,8 @@ quality_anchor:
   controls: [exposure, white_balance, product_photography]
   does_not_control: [current_motifs, current_colours, current_layout, yarn_geometry, bundle_scale, bundle_length, cross_yarn_visibility, edge_geometry, camera_geometry, manufacturing_specification]
 detail_camera_anchor:
-  path: construction/sample-01-detail-a.jpg
-  sha256: 829d7f76d773cc0bd6f2970088fd1a6200c35251e178b36f350e7b8868bee43e
+  path: quality/accepted-detail-camera-anchor-v1.jpg
+  sha256: 2bc1e651563a935114e33917fef8fb2346eb1c1a8af0e9a4c577641ed49cd291
   role: generic_wilton_detail_camera_and_construction_anchor
   controls: [focal_relationship, low_raking_view_direction, foreground_corner_placement, edge_recession, upper_frame_continuous_rug_plane, near_bundle_scale, arched_bundle_cross_section, full_bundle_midsection, tapered_bundle_shoulders, visible_inter_bundle_gap, exposed_fine_cross_yarn]
   does_not_control: [current_motifs, current_colours, current_layout, manufacturing_specification]
@@ -91,23 +91,25 @@ colour_policy:
 
 render_defaults:
   backend: reference_grounded_image_generation
-  backend_strategy: reference_grounded_visual_preview
-  topology_mode: approximate
-  pattern_control: reference_image_input
+  backend_strategy: unified_reference_grounded_generation
+  topology_mode: strict
+  pattern_control: source_guided
   surface_build_mode: yarn_geometry_or_weave_synthesis
   structure_proof_required: false
-  exact_proof_renderer: scripts/render_wilton_calibrated.py
-  exact_proof_renderer_role: structure_proof_only
+  diagnostic_proof_renderer: scripts/render_wilton_calibrated.py
+  diagnostic_proof_renderer_role: structure_proof_only
   final_visual_requires: [declared_real_camera_anchor_attached, declared_real_construction_anchor_attached]
   material_reference_budget: 2
-  sequence: detail_gate_then_overview
-  detail_reference_packet: [design_source, sample_01_detail_a, unit_micro_anchor_v1]
+  sequence: detail_check_then_overview
+  detail_reference_packet: [design_source, detail_camera_anchor, unit_micro_anchor_v1]
   overview_reference_packet: [design_source, sample_03_overall, unit_micro_anchor_v1]
   detail_corner: lower_left
   detail_orientation: upright_design_source
   detail_context: [corner_junction, two_bound_edges, nearby_motif, inner_field]
   edge_finish: wrapped_bound_edge_with_inner_lock_line
   detail_view: selected_corner_close_oblique_with_two_bound_edges
+  save_generation_record: true
+  generation_record_fields: [final_prompts, effective_parameters, source_sha256, ordered_reference_attachments, output_paths, evaluation_record]
   detail_camera: raking_oblique_foreground_corner_with_visible_plane_recession
   detail_camera_geometry_control: declared_real_camera_anchor
   overview_view: flat_laid_near_overhead_mild_perspective

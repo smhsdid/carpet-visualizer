@@ -1,6 +1,6 @@
 interface:
   display_name: "Carpet Visualizer"
-  short_description: "Render exact Wilton flatweave visual samples"
-  default_prompt: "Use $carpet-visualizer to render my artwork as a reference-grounded Wilton flatweave visual sample: attach the complete design with the declared real detail-camera anchor, accepted quality anchor, and multi-unit micro construction anchor; review detail framing, original spacing, and upper-frame continuity before creating a near-overhead flat-laid product overview."
+  short_description: "Render pattern-preserving Wilton flatweave visual samples"
+  default_prompt: "Use $carpet-visualizer to render my artwork as a pattern-preserving Wilton flatweave visual sample: attach the complete design with the declared detail-camera anchor and multi-unit micro construction anchor; generate the fixed lower-left detail, run the lightweight check, automatically create the near-overhead flat-laid product overview, and save the final prompts and effective parameters in the render record."
 policy:
   allow_implicit_invocation: true

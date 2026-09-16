@@ -8,11 +8,26 @@ composited as a visible artwork plate.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import math
 import random
 from pathlib import Path
 
-from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter, ImageOps
+from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter
+
+
+DETAIL_PROMPT = """Use the complete current design as the sole pattern and colour authority. Render the fixed lower-left corner as a low-relief Wilton flatweave surface built from product-directional multi-filament yarn bundles, open longitudinal channels, exposed fine cross yarn, irregular short-and-long bundle lengths, staggered ends, a rounded wrapped binding, and a slim inner locking line. Use the camera reference only for close-oblique framing and recession. Keep the upper frame as continuous rug surface. Do not import motifs or colours from references, and do not use a flat artwork plate with a texture overlay."""
+OVERVIEW_PROMPT = """Use the complete current design as the sole pattern and colour authority. Render the complete rug as one low-relief Wilton flatweave surface with the same product-directional yarn lanes, open channels, exposed fine cross yarn, irregular staggered bundle ends, wrapped binding, and inner locking line used in the detail. Use construction references only for physical surface and finish. Show a flat-laid near-overhead product-record view on a neutral dark textile ground with all four corners visible. Do not import motifs or colours from references, and do not use a flat artwork plate with a texture overlay."""
+DEFAULT_MICRO_REFERENCE = Path(__file__).resolve().parents[1] / "assets" / "material-library" / "wilton-flatweave-01" / "derived" / "wilton-unit-micro-anchor-v1.jpg"
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def clamp(v: float, lo: int = 0, hi: int = 255) -> int:
@@ -92,55 +107,25 @@ def draw_floor(size: tuple[int, int], seed: int) -> Image.Image:
     return base.filter(ImageFilter.GaussianBlur(0.35))
 
 
-def build_reference_texture(reference: Image.Image, size: tuple[int, int], detail: bool) -> Image.Image:
+def build_reference_texture(reference: Image.Image, size: tuple[int, int], detail: bool, secondary: Image.Image | None = None) -> Image.Image:
     """Extract only neutral fibre-scale luminance from a task reference.
 
     Large colour blocks and motifs are removed before the luminance is used;
     current design colours still come only from the source-coordinate map.
     """
-    gray = reference.convert("L")
-    width, height = gray.size
-    crop = gray.crop((round(width * 0.16), round(height * 0.08), round(width * 0.94), round(height * 0.92)))
-    scaled = crop.resize(size, Image.Resampling.BICUBIC)
+    def scaled_luminance(image: Image.Image) -> Image.Image:
+        gray = image.convert("L")
+        width, height = gray.size
+        crop = gray.crop((round(width * 0.16), round(height * 0.08), round(width * 0.94), round(height * 0.92)))
+        return crop.resize(size, Image.Resampling.BICUBIC)
+
+    scaled = scaled_luminance(reference)
+    if secondary is not None:
+        scaled = Image.blend(scaled, scaled_luminance(secondary), 0.50)
     radius = 19 if detail else 15
     low = scaled.filter(ImageFilter.GaussianBlur(radius))
     high = ImageChops.subtract(scaled, low, scale=1.0, offset=128)
     return ImageEnhance.Contrast(high).enhance(2.25 if detail else 1.95)
-
-
-def build_reference_surface(
-    reference: Image.Image,
-    colour_map: Image.Image,
-    size: tuple[int, int],
-    detail: bool,
-) -> Image.Image:
-    """Rebuild the visible surface from real fibre luminance and source colours.
-
-    The supplied photo is used as a construction sample, not as a visible
-    artwork plate: its luminance supplies the irregular fibre, gap and glint
-    field, while every design colour still comes from the source-coordinate
-    map. The final yarn geometry is composited over this base at low opacity.
-    """
-    width, height = reference.size
-    crop = reference.crop(
-        (round(width * 0.16), round(height * 0.08), round(width * 0.94), round(height * 0.92))
-    )
-    surface = ImageOps.fit(
-        crop.convert("RGB"),
-        size,
-        method=Image.Resampling.LANCZOS,
-        centering=(0.52, 0.52),
-    )
-    surface = ImageEnhance.Sharpness(surface).enhance(1.18 if detail else 1.08)
-    luminance = ImageOps.autocontrast(surface.convert("L"), cutoff=1)
-    luminance = ImageEnhance.Contrast(luminance).enhance(1.20 if detail else 1.08)
-    # Keep deep inter-thread gaps visible without turning the design muddy.
-    factor = luminance.point(lambda value: clamp(0.70 * 255 + value * 0.46))
-    channels = [ImageChops.multiply(channel, factor) for channel in colour_map.split()]
-    coloured = Image.merge("RGB", channels)
-    # A very small amount of the reference's warm/cool fibre balance keeps the
-    # result photographic while the source map remains the colour authority.
-    return Image.blend(coloured, surface, 0.10 if detail else 0.07)
 
 
 def yarn_plane(
@@ -150,6 +135,7 @@ def yarn_plane(
     detail: bool,
     edge_mode: str,
     construction_reference: Image.Image | None = None,
+    micro_reference: Image.Image | None = None,
 ) -> Image.Image:
     rng = random.Random(seed)
     width, height = size
@@ -158,15 +144,17 @@ def yarn_plane(
     colour_map = source.resize(size, Image.Resampling.NEAREST)
     neutral = (116, 98, 82)
     if construction_reference is not None:
-        texture = build_reference_texture(construction_reference, size, detail)
+        texture = build_reference_texture(construction_reference, size, detail, micro_reference)
         factor = texture.point(lambda value: clamp(0.82 * 255 + (value - 128) * 0.68))
         channels = [ImageChops.multiply(channel, factor) for channel in colour_map.split()]
         base = Image.merge("RGB", channels)
         base = ImageEnhance.Contrast(base).enhance(1.05)
-        reference_surface = build_reference_surface(construction_reference, colour_map, size, detail)
+        # Only neutral high-frequency fibre luminance may come from the
+        # construction reference. Never blend its RGB surface into the
+        # current design because patterned reference pixels can leak motifs
+        # or colours into the result.
     else:
         base = Image.new("RGB", size, neutral)
-        reference_surface = None
     base_draw = ImageDraw.Draw(base, "RGBA")
 
     # Task photos show wider short bundles crossing a finer thread system.
@@ -193,32 +181,33 @@ def yarn_plane(
     row = 0
     for y in range(-bundle_h, height + bundle_h, pitch_y):
         row += 1
-        row_offset = (pitch_x * 0.48) if row % 2 else 0
+        row_offset = (pitch_x * 0.48 if row % 2 else 0) + rng.uniform(-pitch_x * 0.18, pitch_x * 0.18)
         for x in range(-bundle_w, width + bundle_w, pitch_x):
             cx = x + row_offset + rng.uniform(-1.1, 1.1)
             cy = y + rng.uniform(-1.2, 1.2)
             colour = sample_colour(colour_map, cx, cy)
             colour = mix(colour, (235, 224, 202), 0.08)
+            unit_height = bundle_h * rng.choice((0.68, 1.0, 1.34))
             shadow = (max(0, colour[0] - 38), max(0, colour[1] - 34), max(0, colour[2] - 30), 115)
             shape = [
                 (cx - bundle_w * 0.50, cy + rng.uniform(-0.5, 0.5)),
-                (cx - bundle_w * 0.26, cy - bundle_h * 0.43 + rng.uniform(-0.4, 0.4)),
-                (cx + bundle_w * 0.28, cy - bundle_h * 0.38 + rng.uniform(-0.4, 0.4)),
+                (cx - bundle_w * 0.26, cy - unit_height * 0.43 + rng.uniform(-0.4, 0.4)),
+                (cx + bundle_w * 0.28, cy - unit_height * 0.38 + rng.uniform(-0.4, 0.4)),
                 (cx + bundle_w * 0.50, cy + rng.uniform(-0.5, 0.5)),
-                (cx + bundle_w * 0.27, cy + bundle_h * 0.42 + rng.uniform(-0.4, 0.4)),
-                (cx - bundle_w * 0.28, cy + bundle_h * 0.38 + rng.uniform(-0.4, 0.4)),
+                (cx + bundle_w * 0.27, cy + unit_height * 0.42 + rng.uniform(-0.4, 0.4)),
+                (cx - bundle_w * 0.28, cy + unit_height * 0.38 + rng.uniform(-0.4, 0.4)),
             ]
             shadow_shape = [(x + 1.1, y + 1.3) for x, y in shape]
             bundle_draw.polygon(shadow_shape, fill=(*shadow[:3], 92))
             body = (*colour, 125)
             bundle_draw.polygon(shape, fill=body)
             # Short multi-filament strokes cross a finer opposing thread system.
-            for filament in range(5):
-                offset = (filament - 2) * 0.9 + rng.uniform(-0.35, 0.35)
+            for filament in range(7):
+                offset = (filament - 3) * 0.72 + rng.uniform(-0.35, 0.35)
                 points = []
                 for step in range(6):
                     xx = cx - bundle_w * 0.40 + step * bundle_w * 0.16
-                    yy = cy + offset + math.sin(step * 1.45 + filament) * 0.45
+                    yy = cy + offset * unit_height / bundle_h + math.sin(step * 1.45 + filament) * 0.45
                     points.append((xx, yy))
                 if filament in (1, 2):
                     stroke = (*mix(colour, (255, 248, 230), 0.48), 116)
@@ -229,19 +218,14 @@ def yarn_plane(
                 bundle_draw.line(points, fill=stroke, width=width_px)
             highlight = (*mix(colour, (255, 250, 238), 0.72), 82)
             bundle_draw.line(
-                [(cx - bundle_w * 0.36, cy - bundle_h * 0.18),
-                 (cx - bundle_w * 0.10, cy + bundle_h * 0.10),
-                 (cx + bundle_w * 0.18, cy - bundle_h * 0.08),
-                 (cx + bundle_w * 0.36, cy + bundle_h * 0.12)],
+                [(cx - bundle_w * 0.36, cy - unit_height * 0.18),
+                  (cx - bundle_w * 0.10, cy + unit_height * 0.10),
+                  (cx + bundle_w * 0.18, cy - unit_height * 0.08),
+                  (cx + bundle_w * 0.36, cy + unit_height * 0.12)],
                 fill=highlight,
                 width=1,
             )
     base = Image.alpha_composite(base.convert("RGBA"), bundle_layer)
-
-    if reference_surface is not None:
-        # Real fibre luminance dominates; the low-opacity deterministic yarn
-        # geometry keeps the surface explicitly yarn-built and pattern-aware.
-        base = Image.blend(reference_surface, base.convert("RGB"), 0.30).convert("RGBA")
 
     # A restrained, repeated row glint makes the structure remain readable at overview scale.
     glint = Image.new("RGBA", size, (0, 0, 0, 0))
@@ -314,10 +298,10 @@ def warp_plane(plane: Image.Image, canvas_size: tuple[int, int], destination: li
     return warped, mask
 
 
-def make_overview(source: Image.Image, construction_reference: Image.Image, out: Path) -> None:
+def make_overview(source: Image.Image, construction_reference: Image.Image, micro_reference: Image.Image, out: Path) -> None:
     canvas_size = (1500, 1900)
     floor = draw_floor(canvas_size, 7101)
-    plane = yarn_plane(source, (1120, 1795), 7102, detail=False, edge_mode="all", construction_reference=construction_reference)
+    plane = yarn_plane(source, (1120, 1795), 7102, detail=False, edge_mode="all", construction_reference=construction_reference, micro_reference=micro_reference)
     # Camera pitch creates near/far scale change. The rug stays level in the
     # scene: top and bottom edges remain horizontal rather than being rotated.
     destination = [(255, 150), (1245, 150), (1330, 1748), (170, 1748)]
@@ -332,12 +316,14 @@ def make_overview(source: Image.Image, construction_reference: Image.Image, out:
     result.save(out, format="PNG", optimize=True)
 
 
-def make_detail(source: Image.Image, construction_reference: Image.Image, out: Path) -> None:
-    crop = source.crop((0, round(source.height * 0.58), round(source.width * 0.58), source.height))
+def make_detail(source: Image.Image, construction_reference: Image.Image, micro_reference: Image.Image, out: Path) -> None:
+    # Include extra rug plane above the fixed lower-left corner and place the
+    # crop boundary outside the canvas so it cannot read as a false far edge.
+    crop = source.crop((0, round(source.height * 0.42), round(source.width * 0.58), source.height))
     canvas_size = (1500, 1200)
     floor = draw_floor(canvas_size, 7201)
-    plane = yarn_plane(crop, (1300, 970), 7202, detail=True, edge_mode="corner", construction_reference=construction_reference)
-    destination = [(160, 100), (1335, 100), (1470, 1135), (70, 1135)]
+    plane = yarn_plane(crop, (1300, 1100), 7202, detail=True, edge_mode="corner", construction_reference=construction_reference, micro_reference=micro_reference)
+    destination = [(160, -120), (1335, -120), (1470, 1135), (70, 1135)]
     warped, mask = warp_plane(plane, canvas_size, destination)
     shadow = ImageChops.offset(mask.filter(ImageFilter.GaussianBlur(18)), 12, 20)
     shadow = ImageChops.multiply(shadow, Image.new("L", canvas_size, 115))
@@ -354,17 +340,95 @@ def main() -> None:
     parser.add_argument("overview", type=Path)
     parser.add_argument("detail", type=Path)
     parser.add_argument("--construction-reference", type=Path, required=True)
+    parser.add_argument("--micro-construction-reference", type=Path, default=DEFAULT_MICRO_REFERENCE)
     args = parser.parse_args()
+    detail_path = args.detail.resolve()
+    overview_path = args.overview.resolve()
+    source_path = args.source.resolve()
+    construction_path = args.construction_reference.resolve()
+    micro_path = args.micro_construction_reference.resolve()
+    record_path = detail_path.parent / "render_lock.json"
+    parameters = {
+        "detail_seed": 7202,
+        "overview_seed": 7102,
+        "detail_canvas": [1500, 1200],
+        "overview_canvas": [1500, 1900],
+        "detail_corner": "lower_left",
+        "detail_crop_top_fraction": 0.42,
+        "surface_build_mode": "yarn_geometry_or_weave_synthesis",
+        "bundle_filaments": 7,
+        "bundle_length_classes": [0.68, 1.0, 1.34],
+        "pattern_sampling": "source_coordinate_nearest",
+    }
+    attachments = [
+        {"path": str(source_path), "role": "design_source_pattern_and_colour_authority", "sha256": sha256(source_path)},
+        {"path": str(construction_path), "role": "generic_camera_and_construction_anchor", "sha256": sha256(construction_path)},
+        {"path": str(micro_path), "role": "generic_micro_construction_anchor", "sha256": sha256(micro_path)},
+    ]
+    asset_root = Path(__file__).resolve().parents[1] / "assets"
+    reference_strength = "library_grounded" if construction_path.is_relative_to(asset_root) and micro_path.is_relative_to(asset_root) else "task_reference_grounded"
+    record = {
+        "render_backend": "local_reference_grounded_renderer",
+        "backend_strategy": "unified_reference_grounded_generation",
+        "topology_mode": "strict",
+        "pattern_control": "source_guided",
+        "surface_build_mode": "yarn_geometry_or_weave_synthesis",
+        "reference_strength": reference_strength,
+        "detail_corner": "lower_left",
+        "source": str(source_path),
+        "source_sha256": sha256(source_path),
+        "reference_attachments": attachments,
+        "final_prompts": {"detail": DETAIL_PROMPT, "overview": OVERVIEW_PROMPT},
+        "generation_parameters": parameters,
+        "output_paths": {"material_detail": str(detail_path), "product_overview": str(overview_path)},
+        "evaluation_record": {"run_status": "running", "detail_check": "pending"},
+    }
+    detail_path.parent.mkdir(parents=True, exist_ok=True)
+    overview_path.parent.mkdir(parents=True, exist_ok=True)
+    record_path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     with Image.open(args.source) as loaded:
         source = loaded.convert("RGB")
     with Image.open(args.construction_reference) as loaded:
         construction_reference = loaded.convert("RGB")
-    args.overview.parent.mkdir(parents=True, exist_ok=True)
-    args.detail.parent.mkdir(parents=True, exist_ok=True)
-    make_detail(source, construction_reference, args.detail)
-    make_overview(source, construction_reference, args.overview)
-    print(f"overview={args.overview.resolve()}")
-    print(f"detail={args.detail.resolve()}")
+    with Image.open(args.micro_construction_reference) as loaded:
+        micro_reference = loaded.convert("RGB")
+    make_detail(source, construction_reference, micro_reference, detail_path)
+    detail_check = {
+        "output_exists": detail_path.is_file(),
+        "output_readable": False,
+        "fixed_detail_corner": "lower_left",
+        "visual_review": "recorded_by_agent_after_generation",
+    }
+    try:
+        with Image.open(detail_path) as generated_detail:
+            generated_detail.verify()
+        detail_check["output_readable"] = True
+    except Exception as exc:  # pragma: no cover - defensive runtime record
+        detail_check["error"] = str(exc)
+    if not detail_check["output_readable"]:
+        record["evaluation_record"] = {
+            "run_status": "rejected",
+            "detail_check": detail_check,
+            "overview_exists": False,
+        }
+        record_path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"detail={detail_path}")
+        print(f"render_lock={record_path.resolve()}")
+        return
+    make_overview(source, construction_reference, micro_reference, overview_path)
+    record["output_hashes"] = {
+        "material_detail": sha256(detail_path),
+        "product_overview": sha256(overview_path),
+    }
+    record["evaluation_record"] = {
+        "run_status": "generated" if detail_check["output_readable"] and overview_path.is_file() else "rejected",
+        "detail_check": detail_check,
+        "overview_exists": overview_path.is_file(),
+    }
+    record_path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"overview={overview_path}")
+    print(f"detail={detail_path}")
+    print(f"render_lock={record_path.resolve()}")
 
 
 if __name__ == "__main__":

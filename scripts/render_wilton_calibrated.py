@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create an exact source-coordinate structure proof for Wilton flatweave.
+"""Create diagnostic source-coordinate structure evidence for Wilton flatweave.
 
 This helper is deliberately proof-only. Its synthetic yarn primitives are not
 real-reference-grounded enough to be delivered as a material detail or product
@@ -24,12 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CALIBRATION = (
     ROOT / "assets" / "material-library" / "wilton-flatweave-01" / "paired-mappings.json"
 )
-DETAIL_BOXES = {
-    "upper_left": (0.0, 0.0, 0.58, 0.42),
-    "upper_right": (0.42, 0.0, 1.0, 0.42),
-    "lower_left": (0.0, 0.58, 0.58, 1.0),
-    "lower_right": (0.42, 0.58, 1.0, 1.0),
-}
+DETAIL_BOX = (0.0, 0.58, 0.58, 1.0)
 
 
 def sha256(path: Path) -> str:
@@ -256,19 +251,17 @@ def make_overview(source: Image.Image, parameters: dict[str, object]) -> Image.I
     return background
 
 
-def crop_for_corner(source: Image.Image, corner: str) -> Image.Image:
-    left, top, right, bottom = DETAIL_BOXES[corner]
+def crop_for_corner(source: Image.Image) -> Image.Image:
+    left, top, right, bottom = DETAIL_BOX
     return source.crop(
         (round(source.width * left), round(source.height * top), round(source.width * right), round(source.height * bottom))
     )
 
 
-def make_detail(source: Image.Image, corner: str, parameters: dict[str, object]) -> Image.Image:
+def make_detail(source: Image.Image, parameters: dict[str, object]) -> Image.Image:
     canvas_size = (1500, 1200)
-    crop = crop_for_corner(source, corner)
-    vertical_side = "left" if corner.endswith("left") else "right"
-    horizontal_side = "top" if corner.startswith("upper") else "bottom"
-    surface = synthesize_surface(crop, (1320, 965), parameters, True, (vertical_side, horizontal_side), 9301)
+    crop = crop_for_corner(source)
+    surface = synthesize_surface(crop, (1320, 965), parameters, True, ("left", "bottom"), 9301)
     background = draw_backdrop(canvas_size, 9302)
     destination = [(130, 78), (1355, 124), (1450, 1130), (64, 1092)]
     warped, mask = warp_plane(surface, canvas_size, destination)
@@ -294,13 +287,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("design_source", type=Path)
     parser.add_argument("out_dir", type=Path)
-    parser.add_argument("--corner", choices=DETAIL_BOXES, default="lower_left")
     parser.add_argument("--calibration", type=Path, default=DEFAULT_CALIBRATION)
-    parser.add_argument(
-        "--accept-detail-review",
-        action="store_true",
-        help="deprecated compatibility flag; proof-only mode never generates a detail or overview",
-    )
     args = parser.parse_args()
 
     source_path = args.design_source.resolve()
@@ -312,7 +299,7 @@ def main() -> int:
 
     pair_check = run_checked([sys.executable, str(ROOT / "scripts" / "validate_paired_mappings.py"), "--manifest", str(calibration_path)])
     controls_dir = out_dir / "controls"
-    run_checked([sys.executable, str(ROOT / "scripts" / "prepare_design_controls.py"), str(source_path), str(controls_dir), "--corner", args.corner])
+    run_checked([sys.executable, str(ROOT / "scripts" / "prepare_design_controls.py"), str(source_path), str(controls_dir)])
 
     with Image.open(source_path) as loaded:
         source = loaded.convert("RGB")
@@ -320,12 +307,13 @@ def main() -> int:
     source.save(proof_path, format="PNG")
     topology = run_checked([sys.executable, str(ROOT / "scripts" / "validate_topology.py"), str(source_path), str(proof_path), "--aligned"])
 
+    detail_corner = "lower_left"
     lock = {
         "render_backend": "local_deterministic_structure_proof",
-        "backend_strategy": "structure_proof_only",
-        "topology_mode": "exact",
+        "backend_strategy": "diagnostic_structure_proof",
+        "topology_mode": "strict",
         "pattern_control": "deterministic",
-        "surface_build_mode": "unavailable_for_final_visual",
+        "surface_build_mode": "unavailable",
         "reference_strength": "none",
         "material_id": calibration["material_id"],
         "calibration_manifest": str(calibration_path),
@@ -333,14 +321,14 @@ def main() -> int:
         "paired_mapping_check": pair_check,
         "source": str(source_path),
         "source_sha256": sha256(source_path),
-        "detail_corner": args.corner,
+        "detail_corner": detail_corner,
         "structure_proof": str(proof_path),
         "topology_verification": topology,
         "material_detail": None,
         "detail_review": "not_applicable_proof_only",
         "product_overview": None,
         "delivery_status": "structure_proof_only",
-        "warning": "Use the reference-grounded image route with the design and one declared real macro detail for user-facing visuals.",
+        "warning": "Use the unified image-generation route with the complete design, declared camera anchor, and declared micro construction anchor for user-facing visuals.",
         "colour_authority": "design_source",
     }
     lock_path = out_dir / "render_lock.json"

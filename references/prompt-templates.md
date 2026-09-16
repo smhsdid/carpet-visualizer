@@ -11,7 +11,7 @@ surface and camera presentation; do not redraw the artwork.
 Image 2 is the sole construction reference. Match its yarn geometry, interlacing, relief, direction, and finish.
 
 Material: [material_id and compact construction lock]
-Camera: close low-oblique macro of [detail_corner], with the complete corner and both bound edges visible,
+Camera: fixed lower-left close low-oblique macro, with the complete corner and both bound edges visible,
 strong diagonal recession, clearly larger near fibres, compressed distant fibres, sharp near/central structure,
 and gentle far-field softening.
 Light: bright raking key plus soft fill.
@@ -21,7 +21,7 @@ Keep one integral textile surface. No text or watermark.
 
 ## Product overview
 
-Generate only after every hard detail gate passes.
+Generate after the detail output is available and the lightweight technical check has completed. Visual caveats are recorded and do not block the overview.
 
 ```text
 Image 1 is the literal edit target and sole authority for the complete rug outline, motifs, boundaries, negative space,

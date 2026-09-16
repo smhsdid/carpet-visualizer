@@ -19,7 +19,7 @@ The packaged library lets a later conversation generate from artwork alone. Each
 
 `wilton-flatweave-01` is the default design-only material. Read its [manifest](../assets/material-library/wilton-flatweave-01/manifest.yaml) and follow [the Wilton flatweave branch](wilton-flatweave-branch.md).
 
-For this material, an exact run requires a structure-proof path before any material generation. The current design retains exclusive pattern and colour authority. One declared real construction reference has high priority for the observed yarn-bundle system, fine interlacing, relief, edge, and close-oblique camera or product-scale presentation, but must never contribute its motif or colours. Multi-reference input does not provide structure control; if the backend cannot emit an aligned proof, record `pattern_control: unavailable`, fail the pattern gate, and return `external_execution_required`.
+For this material, the unified run always targets strict pattern preservation. The current design retains exclusive pattern and colour authority. The declared real construction references have high priority for the observed yarn-bundle system, fine interlacing, relief, edge, and close-oblique camera or product-scale presentation, but must never contribute their motifs or colours. Deterministic controls and structure evidence are diagnostic aids; they are not prerequisites for generating the visual pair.
 
 ## Adding a paired mapping example
 

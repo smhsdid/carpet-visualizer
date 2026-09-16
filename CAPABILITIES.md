@@ -1,21 +1,21 @@
 # Rendering capabilities
 
-Choose the strongest available rendering path and record only capabilities that the current runtime exposes.
+Choose the strongest image capability exposed by the current runtime, but keep one user-facing generation flow. The artwork remains the pattern and colour authority; references provide construction and presentation evidence only.
 
 ## Capability profile
 
 | Capability | Role in this skill | Fallback |
 | --- | --- | --- |
-| Image inspection | Classify reference roles and inspect generated outputs | State that visual verification is pending |
+| Image inspection | Classify references and run the lightweight output check | Record that visual inspection is pending |
 | Image generation | Produce the material detail and product overview | Return an external-execution prompt packet |
-| Reference-image input | Supply visual context | Never treat it as topology control; prompts cannot compensate |
-| Image editing | Preserve current topology only when the backend exposes a real structure-preserving edit path and can emit an aligned proof | Treat as unsupported for exact mode |
-| Multiple reference images | Separate artwork, construction, style, and paired-example roles | Use only the highest-value evidence and disclose omitted inputs |
-| Mask or region control | Supply exact structure controls or a scoped repair mask | Exact mode fails when these controls are absent |
-| Seed or replay support | Improve repeatability of a targeted retry | Preserve the full render lock and prompt instead |
-| Region and edge conditioning | Supply the structure branch's exact region and boundary controls | Exact mode fails when these controls are absent |
-| Independent material conditioning | Reconstruct visible coloured yarn units, weave, scale, relief, and finish without importing reference motifs | A luminance-only or generic texture overlay fails the material gate; use neutral construction references within the preview reference budget |
-| Output condition extraction | Produce an aligned `structure_proof` and measurable region/boundary evidence | Exact mode fails closed when proof evidence is absent |
+| Reference-image input | Supply camera, construction, and finish context | Use the highest-value declared references and record omissions |
+| Image editing | Preserve current topology when the backend exposes useful structure-preserving controls | Use the unified reference-grounded generation flow |
+| Multiple reference images | Separate artwork, construction, style, and paired-example roles | Use the highest-value evidence and disclose omitted inputs |
+| Mask or region control | Improve pattern preservation or scope a repair | Continue with source-guided generation and record the limitation |
+| Seed or replay support | Improve repeatability | Save all available parameters and prompts |
+| Region and edge conditioning | Improve outline, boundary, and spacing preservation | Keep the complete current design attached |
+| Independent material conditioning | Reconstruct visible coloured yarn units, weave, scale, relief, and finish without importing reference motifs | Use neutral construction references; a flat overlay fails the material check |
+| Output condition extraction | Support lightweight inspection and evidence capture | Record manual inspection status |
 
 ## Backend record
 
@@ -23,18 +23,24 @@ Add this compact block to every render lock:
 
 ```yaml
 render_backend: "<runtime or provider name>"
-backend_strategy: reference_grounded_visual|structure_proof_only|controllable_local
+backend_strategy: unified_reference_grounded_generation|diagnostic_structure_proof|external_execution
 backend_capabilities_used: [image_generation, reference_image_input]
-reference_budget: 2 # accepted quality anchor plus one real multi-unit construction anchor
-topology_mode: exact|approximate
-pattern_control: deterministic|structure_branch|unavailable
+reference_budget: 2 # camera/construction anchor plus one multi-unit construction anchor
+topology_mode: strict # internal run label: preserve the source pattern as strictly as possible
+pattern_control: source_guided|structure_branch|unavailable
 surface_build_mode: yarn_geometry_or_weave_synthesis|overlay|unavailable
 structure_proof: <path-or-null>
-topology_verification: automated_aligned|anchor_register|unavailable
+topology_verification: diagnostic_only|unavailable
 independent_controls: {}
 consistency_contract: visual_consistency
+final_prompts:
+  detail: <path-or-inline-text>
+  overview: <path-or-inline-text>
+generation_parameters: {}
 ```
 
-`reference_grounded_visual` means semantic generation with the complete current design, a recorded real detail-camera anchor, a recorded accepted quality anchor, and one recorded real multi-unit micro construction anchor. It has no independent structure controls. The complete design remains the only source of pattern and spacing; the camera anchor supplies focal relationship and framing only. It is a user-facing `topology_mode: approximate` visual route, never an exact claim. `structure_proof_only` means a deterministic source-coordinate proof with no material-detail or overview deliverable. In exact mode without an independent material branch, record `pattern_control: unavailable`, fail the pattern gate, and return `external_execution_required`. Regardless of topology mode, a Wilton flatweave output whose `surface_build_mode` is `overlay` fails the material gate because the source artwork remains a flat visible plate.
+`unified_reference_grounded_generation` means the complete current design is attached first, followed by the declared construction references. It is always used for the user-facing detail and overview. The fixed lower-left detail is generated first; a lightweight check is recorded; the overview is then generated automatically. Reference input supports pattern preservation but is not itself a mathematical guarantee.
 
-Use `external_execution_required` when image generation is unavailable or when exact topology control is unavailable. This status means the prompt packet is complete but no compliant visual output has been produced in the current environment.
+The deterministic helper may create source-coordinate controls or a diagnostic structure proof, but it is not a final textile renderer and its result is not a user-facing image. If image generation is unavailable, return `external_execution_required` with the completed prompts, effective parameters, ordered attachments, and run record.
+
+Regardless of backend, a Wilton flatweave output whose `surface_build_mode` is `overlay` fails the material check because the source artwork remains a flat visible plate.

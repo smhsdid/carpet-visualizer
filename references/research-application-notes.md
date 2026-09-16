@@ -2,7 +2,7 @@
 
 ## Evidence basis
 
-This user-confirmed Wilton flatweave profile is calibrated from the supplied real sample sets. Across all three sets the visible invariants are:
+This library-calibrated Wilton flatweave profile is calibrated from the supplied real sample sets. Across all three sets the visible invariants are:
 
 - a thin, orderly textile surface with low but perceptible relief;
 - short, substantial multi-filament bundles repeating in stable rows;
@@ -14,7 +14,7 @@ The photos do not establish fibre composition, yarn count, density, loom setting
 
 ## Rendering consequences
 
-Use the uploaded current design only as the exact geometry and colour map. Rebuild the visible surface with the observed row cadence, short bundle scale, fine interlacing, shallow gaps, and restrained filament highlights. Maintain the same construction through every colour region, and keep the row direction in upright product coordinates rather than turning it to follow motif contours.
+Use the uploaded current design only as the strict geometry and colour map. Rebuild the visible surface with the observed row cadence, short bundle scale, fine interlacing, shallow gaps, and restrained filament highlights. Maintain the same construction through every colour region, and keep the row direction in upright product coordinates rather than turning it to follow motif contours.
 
 Do not render smooth colour fill, a generic texture overlay, a dense bead grid, chunky basket weave, rope, deep plush pile, or a separately raised pattern. Preserve the wrapped binding and inner locking line through all corners.
 

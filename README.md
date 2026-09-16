@@ -2,26 +2,31 @@
 
 一个将地毯设计稿转换为实物效果图的通用 agent skill，内置 Codex 适配层。
 
-当前版本面向设计评审和肌理筛选，输出：
+当前版本面向设计评审和肌理筛选，固定输出：
 
-- 肌理细节图（material detail）
-- 完整产品图（product overview）
+- 肌理细节图（`material_detail`）
+- 完整产品图（`product_overview`）
 
-skill 会将当前设计稿作为图案与颜色的唯一权威来源，将真实肌理参考用于纱线、织法、尺度、起伏、光照反应和边缘效果。图案默认采用 `topology_mode: exact`：先建立确定性的区域/边缘控制和源坐标 `structure_proof`，再做肌理渲染；没有结构控制或校验凭证时直接 fail-closed，不把“看起来相似”当成通过。生成流程会按后端能力选择本地可控策略或输出 `external_execution_required`，并把结构、肌理与局部修复分开记录。
+skill 统一采用严格保留图案关系的生成目标：当前设计稿是图案与颜色的唯一权威来源，真实肌理参考只用于纱线、织法、尺度、起伏、光照反应和边缘效果。无论画稿复杂度如何，都使用同一套生成流程：先生成固定左下角细节图，做一轮轻量检查，再自动生成全貌图。
+
+预览分支和用户确认环节不再作为流程条件。图像生成能力不可用时，输出完整的外部执行包；生成后的视觉偏差写入检查记录，不把“看起来差不多”描述为制造确认。
+
+每次运行都保存实际提交给生图后端的最终提示词、有效参数、参考图顺序与哈希、源图哈希、输出路径和检查结果。
 
 ## 当前状态
 
-开发中。当前内置默认肌理为用户确认、并由任务实拍校准的威尔顿平织 `wilton-flatweave-01`。档案只描述照片可见的纱束、细交织线、低起伏和包边，不额外宣称纤维、密度或织机设置。预览式语义生图只能在用户明确接受 `approximate` 时使用；生成结果仅用于视觉样品，不替代实物打样或生产确认。
+开发中。当前内置默认肌理为用户确认、并由任务实拍校准的威尔顿平织 `wilton-flatweave-01`。档案只描述照片可见的纱束、细交织线、低起伏和包边，不额外宣称纤维、密度或织机设置。生成结果仅用于视觉样品，不替代实物打样或生产确认。
 
 ## 目录
 
 - `SKILL.md`：skill 主说明
-- `CAPABILITIES.md`：图像生成与编辑后端的能力约定和降级方式
+- `CAPABILITIES.md`：图像生成能力与统一执行方式
 - `agents/openai.yaml`：Codex skill 元数据
 - `adapters/`：Codex 和其他智能体的运行适配说明
-- `references/`：肌理档案、威尔顿平织生成分支、图案拓扑锁、提示词模板、质量标准和研究笔记
-- `scripts/prepare_design_controls.py`：生成确定性图案控制包
-- `scripts/validate_topology.py`：校验源坐标结构证明的区域与边界
+- `references/`：肌理档案、威尔顿平织生成分支、图案保真规则、提示词模板、质量标准和研究笔记
+- `scripts/prepare_design_controls.py`：生成确定性图案控制包，固定左下角
+- `scripts/validate_topology.py`：校验源坐标结构证据
+- `scripts/validate_paired_mappings.py`：校验配对映射素材
 - `assets/material-library/`：可复用的真实肌理参考及中性派生图
 
 ## 研究笔记
@@ -51,9 +56,9 @@ skill 会将当前设计稿作为图案与颜色的唯一权威来源，将真�
 
 建议使用下面这句启动：
 
-> 阅读此仓库的 `SKILL.md` 与 `adapters/generic-agent.md`，使用 Carpet Visualizer 处理我提供的地毯设计稿。先确认可用的图像能力；若当前环境不能生成图片，请输出完整的外部执行包，而不要声称已经生成。
+> 阅读此仓库的 `SKILL.md` 与 `adapters/generic-agent.md`，使用 Carpet Visualizer 处理我提供的地毯设计稿。固定生成左下角肌理细节图，完成轻量检查后自动生成全貌图；如果当前环境不能生成图片，请输出完整的外部执行包，不要声称已经生成。
 
-`agents/openai.yaml` 和 `adapters/codex.md` 只为 Codex 服务；肌理规则、提示词模板和质量标准以根目录 `SKILL.md` 与 `references/` 为唯一来源。
+`agents/openai.yaml` 只为 Codex 服务；肌理规则、提示词模板和质量标准以根目录 `SKILL.md` 与 `references/` 为唯一来源。
 
 ## 许可与素材
 

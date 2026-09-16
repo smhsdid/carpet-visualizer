@@ -33,7 +33,7 @@ Normalise every directional observation into upright finished-product coordinate
 
 When only a design is uploaded, use bundled `wilton-flatweave-01` and follow [the Wilton flatweave branch](wilton-flatweave-branch.md).
 
-This is a user-confirmed Wilton flatweave visual profile. The supplied physical samples show a thin, low-relief surface formed from substantial multi-filament bundles in product-directional lanes. Open shadowed channels between lanes expose the finer interlacing; neighbouring lanes stagger their bundle ends, with visibly short and longer tapered units rather than one repeated length. The rounded bundle crowns rise only slightly above those fine threads, giving shallow shadows and restrained filament highlights without plush pile.
+This is a library-calibrated Wilton flatweave visual profile. The supplied physical samples show a thin, low-relief surface formed from substantial multi-filament bundles in product-directional lanes. Open shadowed channels between lanes expose the finer interlacing; neighbouring lanes stagger their bundle ends, with visibly short and longer tapered units rather than one repeated length. The rounded bundle crowns rise only slightly above those fine threads, giving shallow shadows and restrained filament highlights without plush pile.
 
 The design is yarn-built rather than applied. Pattern, ground, and boundary share one bundle size, row cadence, fine-thread system, relief, and finish. A boundary changes colour at bundle scale within the same surface; it does not turn into a smooth painted edge, motif-following cord, or separate raised layer.
 
