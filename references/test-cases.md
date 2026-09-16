@@ -6,13 +6,13 @@ Run the smallest case exercising the changed behaviour.
 
 Input: one legible upright artwork.
 
-Expected: `structured-woven-surface-01` is selected; exact mode prepares controls and proof; detail uses the crop first and one declared real reference second; overview waits for all detail gates.
+Expected: `wilton-flatweave-01` is selected; exact mode prepares controls and proof; detail uses the crop first and one declared real reference second; overview waits for all detail gates.
 
 ## Case 2: reference inventory
 
 Input: bundled manifest.
 
-Expected: all ten real source images resolve; its detail and overview references resolve; no AI artwork appears in `audit_references`; no fibre, loom, or named-process claim exists.
+Expected: all ten real source images resolve; its detail and overview references resolve; no AI artwork appears in `audit_references`; the Wilton flatweave classification is explicitly user-confirmed; no fibre, density, loom setting, or pile-specification claim exists.
 
 ## Case 3: surface identity
 

@@ -6,7 +6,7 @@ Select a strategy from observed runtime capabilities. [Read the topology lock](t
 
 Preview-only image generation has references but no independent source-coordinate structure controls. It is valid only when the user explicitly accepts `topology_mode: approximate`.
 
-For `structured-woven-surface-01`, attach current artwork first and exactly one manifest-declared real construction image second. The second image controls only the aligned short-bundle rows, fine interlacing visibility, compact relief, bound edge, and camera. Do not attach other patterned samples or a prior generated image. Record `reference_limited: true` when multi-reference input is unavailable.
+For `wilton-flatweave-01`, attach current artwork first and exactly one manifest-declared real construction image second. The second image controls only the aligned short-bundle rows, fine interlacing visibility, compact relief, bound edge, and camera. Do not attach other patterned samples or a prior generated image. Record `reference_limited: true` when multi-reference input is unavailable.
 
 In exact mode, record `pattern_control: unavailable`, `pattern_gate: fail`, `anchor_status: rejected`, and `failure_tags: [pattern_drift]`; return `external_execution_required` before generating the overview.
 

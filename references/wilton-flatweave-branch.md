@@ -1,6 +1,6 @@
-# Structured woven surface branch
+# Wilton flatweave branch
 
-Use this branch when the selected manifest sets `render_branch: structured_woven_surface`. It is grounded in the supplied three physical sample sets. It deliberately describes only what the images support; it does not identify the fibre, loom, or trade construction.
+Use this branch when the selected manifest sets `render_branch: wilton_flatweave`. The user confirms the Wilton flatweave classification. The profile is grounded in the supplied three physical sample sets and deliberately does not infer fibre, density, loom setting, or other manufacturing details.
 
 ## Evidence and authority
 

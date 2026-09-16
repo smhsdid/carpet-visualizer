@@ -17,7 +17,7 @@ The packaged library lets a later conversation generate from artwork alone. Each
 
 ## Current library
 
-`structured-woven-surface-01` is the default design-only material. Read its [manifest](../assets/material-library/structured-woven-surface-01/manifest.yaml) and follow [the structured woven surface branch](structured-woven-surface-branch.md).
+`wilton-flatweave-01` is the default design-only material. Read its [manifest](../assets/material-library/wilton-flatweave-01/manifest.yaml) and follow [the Wilton flatweave branch](wilton-flatweave-branch.md).
 
 For this material, an exact run requires a structure-proof path before any material generation. The current design retains exclusive pattern and colour authority. One declared real construction reference has high priority for the observed yarn-bundle system, fine interlacing, relief, edge, and close-oblique camera or product-scale presentation, but must never contribute its motif or colours. Multi-reference input does not provide structure control; if the backend cannot emit an aligned proof, record `pattern_control: unavailable`, fail the pattern gate, and return `external_execution_required`.
 

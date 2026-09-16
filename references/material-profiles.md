@@ -29,11 +29,11 @@ Normalise every directional observation into upright finished-product coordinate
 - Default status without photos: `profile_only`, `provisional`.
 - Failure signatures: plush pile, fur, oversized threads, basket-like blocks, printed smoothness.
 
-## `structured-woven-surface`
+## `wilton-flatweave`
 
-When only a design is uploaded, use bundled `structured-woven-surface-01` and follow [the structured woven surface branch](structured-woven-surface-branch.md).
+When only a design is uploaded, use bundled `wilton-flatweave-01` and follow [the Wilton flatweave branch](wilton-flatweave-branch.md).
 
-This is a task-reference-grounded visual profile, not a named manufacturing claim. The supplied physical samples show a thin, low-relief surface formed from short substantial multi-filament bundles arranged in stable product-directional rows. Finer interlacing threads remain visible between and across the rows. The rounded bundle crowns rise only slightly above those fine threads, giving shallow shadows and restrained filament highlights without plush pile.
+This is a user-confirmed Wilton flatweave visual profile. The supplied physical samples show a thin, low-relief surface formed from short substantial multi-filament bundles arranged in stable product-directional rows. Finer interlacing threads remain visible between and across the rows. The rounded bundle crowns rise only slightly above those fine threads, giving shallow shadows and restrained filament highlights without plush pile.
 
 The design is yarn-built rather than applied. Pattern, ground, and boundary share one bundle size, row cadence, fine-thread system, relief, and finish. A boundary changes colour at bundle scale within the same surface; it does not turn into a smooth painted edge, motif-following cord, or separate raised layer.
 

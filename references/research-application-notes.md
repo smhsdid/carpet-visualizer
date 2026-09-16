@@ -1,8 +1,8 @@
-# Structured woven surface: reference application notes
+# Wilton flatweave: reference application notes
 
 ## Evidence basis
 
-This profile is based on the supplied real sample sets, not an assumed trade construction. Across all three sets the visible invariants are:
+This user-confirmed Wilton flatweave profile is calibrated from the supplied real sample sets. Across all three sets the visible invariants are:
 
 - a thin, orderly textile surface with low but perceptible relief;
 - short, substantial multi-filament bundles repeating in stable rows;
@@ -10,7 +10,7 @@ This profile is based on the supplied real sample sets, not an assumed trade con
 - colours changing through the same bundle-and-thread system in the ground and motifs;
 - a rounded wrapped perimeter binding with a narrow inner locking line.
 
-The photos do not establish fibre composition, yarn count, density, loom, pile specification, or a named manufacturing process. Do not introduce those claims into prompts, manifests, or delivery text.
+The photos do not establish fibre composition, yarn count, density, loom setting, or pile specification. Do not introduce those claims into prompts, manifests, or delivery text.
 
 ## Rendering consequences
 

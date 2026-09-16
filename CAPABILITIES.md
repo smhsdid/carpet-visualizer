@@ -35,6 +35,6 @@ independent_controls: {}
 consistency_contract: visual_consistency
 ```
 
-`preview_only` means semantic generation with references and no independent structure controls. It may be used for `topology_mode: approximate` only when the user explicitly accepts approximation. In exact mode it records `pattern_control: unavailable`, fails the pattern gate, and returns `external_execution_required`; prompt wording does not change this decision. Regardless of topology mode, a structured-woven-surface output whose `surface_build_mode` is `overlay` fails the material gate because the source artwork remains a flat visible plate.
+`preview_only` means semantic generation with references and no independent structure controls. It may be used for `topology_mode: approximate` only when the user explicitly accepts approximation. In exact mode it records `pattern_control: unavailable`, fails the pattern gate, and returns `external_execution_required`; prompt wording does not change this decision. Regardless of topology mode, a Wilton flatweave output whose `surface_build_mode` is `overlay` fails the material gate because the source artwork remains a flat visible plate.
 
 Use `external_execution_required` when image generation is unavailable or when exact topology control is unavailable. This status means the prompt packet is complete but no compliant visual output has been produced in the current environment.

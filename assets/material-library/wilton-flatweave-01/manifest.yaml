@@ -1,10 +1,10 @@
-material_id: structured-woven-surface-01
-display_name: "Structured Woven Surface 01"
-construction: structured-woven-surface
+material_id: wilton-flatweave-01
+display_name: "Wilton Flatweave 01"
+construction: wilton-flatweave
 default_for_design_only: true
-status: task_reference_grounded_visual_profile
+status: task_reference_grounded_user_confirmed_visual_profile
 reference_strength_default: task_reference_grounded
-render_branch: structured_woven_surface
+render_branch: wilton_flatweave
 
 generation_references:
   detail: construction/sample-02-detail-a.jpg
