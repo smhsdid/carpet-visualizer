@@ -24,30 +24,26 @@ Normalise every directional observation into upright finished-product coordinate
 ## `flatwoven`
 
 - Surface: low-profile, matte warp-and-weft interlacing with restrained yarn irregularity and very low relief.
-- Boundary: colour regions read as part of one woven plane; fine design lines remain recognisable.
+- Boundary: colour regions read as part of one woven plane; fine design lines remain fixed in the structure map.
 - Scale: individual yarns are visible in the detail but compress into a coherent textile at overview distance.
 - Default status without photos: `profile_only`, `provisional`.
 - Failure signatures: plush pile, fur, oversized threads, basket-like blocks, printed smoothness.
 
-## `jacquard`
+## `structured-woven-surface`
 
-When only a design is uploaded, use bundled `jacquard-01`. Open its manifest and follow its declared rendering branch. Use original construction photographs for audit or closer human inspection only.
+When only a design is uploaded, use bundled `structured-woven-surface-01` and follow [the structured woven surface branch](structured-woven-surface-branch.md).
 
-When the manifest declares `render_branch: standard_reference_jacquard`, follow [the standard-reference branch](jacquard-standard-reference-branch.md). Its two declared standard texture references are the complete construction packet, and its presentation keywords replace the durable detail target. For an unbranched jacquard entry, use the available construction references and read [the durable jacquard detail target](jacquard-detail-target.md).
+This is a task-reference-grounded visual profile, not a named manufacturing claim. The supplied physical samples show a thin, low-relief surface formed from short substantial multi-filament bundles arranged in stable product-directional rows. Finer interlacing threads remain visible between and across the rows. The rounded bundle crowns rise only slightly above those fine threads, giving shallow shadows and restrained filament highlights without plush pile.
 
-For any calibrated pack, use each scale separately:
+The design is yarn-built rather than applied. Pattern, ground, and boundary share one bundle size, row cadence, fine-thread system, relief, and finish. A boundary changes colour at bundle scale within the same surface; it does not turn into a smooth painted edge, motif-following cord, or separate raised layer.
 
-- `macro_detail`: yarn shape, twist, fuzz, interlacing, and local transition.
-- `product_scale_crop`: row density, spacing, and ground-to-pattern hierarchy.
-- `overall_product`: product thickness, binding, and approximate texture scale only.
+Surface-build invariant: the source artwork is a hidden colour-region map while the visible image is reconstructed from the shared yarn system. A flat source-colour plate with a luminance, normal, emboss, displacement, noise, or generic texture layer is an overlay and must be rejected.
 
-Keep one integral woven system. For `jacquard-01`, the rug body is thin while each raised float forms a laid bundle of continuous aligned filaments. The visible filaments run side by side from one tie-down to the other, fanning wider at mid-span and reconverging at both ties to form an elongated lozenge crown with uninterrupted lengthwise striations and satin highlights. Related larger and smaller crowns sit in adjacent chains offset by about half a repeat. Lower horizontal yarns and their micro-shadows remain readable as recessed tracks through fields, motifs, narrow lines, and colour boundaries; fine vertical ground or anchoring threads sit deeper still. Each bundle bends over the horizontal yarns, compresses at its tapered ties, and returns into the ground, creating compact relief. At overview distance this resolves into fine vertical texture with a subtle horizontal woven cadence. Artwork lines remain colour transitions inside this same weave. Every yarn follows its local design-source colour. The standard texture assets are stored upright. Fibre composition and manufacturing settings are unknown.
+At macro scale, individual short bundles and the fine threads between them remain legible. At product scale, the construction compresses only through the declared camera transform while the supplied pattern remains fixed. Fibre, density, loom, and manufacturing process remain unspecified.
 
-If an exact paired mapping example is later present, use it to estimate how boundaries soften, thin regions survive, and texture reads across scales. Never copy its historical motif or palette into the current design.
+The manifest declares one real construction reference per generation stage. Attach the current design first and the declared reference second; the design remains the sole pattern and colour authority. Do not attach the whole set of patterned samples to one generation request. If only one reference is supported, mark the run `reference_limited` rather than claiming the construction or camera was matched.
 
-Use `task_reference_grounded` for usable task-specific real photos, `library_grounded` for bundled real assets, and `profile_only` without real evidence.
-
-Failure signatures: printed surface, uniform tufted loop-pile carpet with independent upright loops, long open loops, oversized tubular stitches, crochet, loose chunky knit, freestanding rope braids, basket weave, square bumps, pixel blocks, brick cells, appliqué, piping, flat plain weave without the compact three-yarn hierarchy, a fixed white or pale binder grid independent of artwork colours, or colour copied from reference products.
+Failure signatures: smooth printed colour, a source-RGB texture overlay, deep cut pile, tall open loops, inflated relief, applied motif layer, embroidery, piping, motif-following cord, chunky knit, crochet, braid, basket blocks, fur, shag, uniform oval-bead grids, or geometry copied from a reference product.
 
 ## `loop-pile`
 

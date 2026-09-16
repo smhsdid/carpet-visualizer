@@ -17,9 +17,9 @@ The packaged library lets a later conversation generate from artwork alone. Each
 
 ## Current library
 
-`jacquard-01` is the default design-only material. Read its [manifest](../assets/material-library/jacquard-01/manifest.yaml) and follow the declared rendering branch. For `standard_reference_jacquard`, inspect only its two standard texture assets and read the [standard-reference branch](jacquard-standard-reference-branch.md). Read the [durable jacquard detail target](jacquard-detail-target.md) only when no branch replaces it.
+`structured-woven-surface-01` is the default design-only material. Read its [manifest](../assets/material-library/structured-woven-surface-01/manifest.yaml) and follow [the structured woven surface branch](structured-woven-surface-branch.md).
 
-The two standard texture assets are the generation packet for `jacquard-01`. The original construction photographs remain available for audit and manual inspection only. Standard assets control construction, never the current artwork or final colours.
+For this material, an exact run requires a structure-proof path before any material generation. The current design retains exclusive pattern and colour authority. One declared real construction reference has high priority for the observed yarn-bundle system, fine interlacing, relief, edge, and close-oblique camera or product-scale presentation, but must never contribute its motif or colours. Multi-reference input does not provide structure control; if the backend cannot emit an aligned proof, record `pattern_control: unavailable`, fail the pattern gate, and return `external_execution_required`.
 
 ## Adding a paired mapping example
 

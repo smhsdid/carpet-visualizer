@@ -1,92 +1,44 @@
-# Lightweight quality rubric
+# Quality rubric
 
-Run this gate once. It identifies caveats; it does not authorize automatic regeneration.
+Run preflight, structure-proof, material-detail, and overview gates. Exact mode fails closed when evidence is missing.
 
-## Preflight
+## Preflight and proof
 
-The run is ready when:
-
-- the current design source is legible enough to identify outline and major regions;
-- a requested material or valid design-only default is resolved;
-- every real or generated reference has one declared role;
-- bundled manifest paths exist and selected generation inputs were inspected;
-- colour authority is unambiguous;
-- a paired example is used only when its exact three-file relationship is established;
-- missing real evidence is represented as `profile_only`, not silently invented.
-
-Ask only for a missing design or for material choice when no valid default exists. If artwork is low-resolution, photographed, skewed, or ambiguous, continue when main topology is readable and disclose the limitation.
+- Record source hash, deterministic controls, anchor register, reference roles, material manifest, and `surface_build_mode`.
+- For exact mode, validate an aligned `structure_proof` before material, light, or camera rendering. A prompt or a perspective image is never proof.
+- Inspect all declared construction references; state only image-supported observations.
 
 ## Output inspection
 
-Classify each category as `pass`, `caveat`, or `fail`.
-
-| Category | Pass condition | Material failure |
+| Category | Pass condition | Fail condition |
 | --- | --- | --- |
-| Pattern topology | Current outline, motif count, principal boundaries, adjacency, symmetry and negative space remain recognisable | Large redraw, missing or merged motif, crossed line, invented region |
-| Construction | Selected weave or pile family is recognisable at the appropriate scale; each raised jacquard crown is a laid bundle whose visible filaments remain side by side from one tie-down to the other as the bundle bends over, compresses against, and returns between the finer yarn systems | Generic plastic, print for weave, pile for flatweave, block or tile artifacts, identical inflated units, braided or herringbone internal crown texture, or relief disconnected from interlacing |
-| Construction orientation | In upright rug coordinates, coarse raised yarns run vertically, fine cross yarns run horizontally, and fine recessed ground or anchoring yarns run vertically after reference rotation or folding is normalised | Raw reference axes are copied; a yarn system is missing; coarse raised yarns run horizontally; cross and ground yarns are conflated |
-| Yarn exposure hierarchy | Related larger and smaller vertical crowns dominate without closing the weave; horizontal fine yarns and their recessed tracks stay continuously readable in plain, patterned and boundary regions | One uniform vertical crown size; vertical crowns close the surface; horizontal yarns disappear in motif or boundary regions; horizontal tracks appear only in the plain field |
-| Pattern-ground parity | Equal-scale pattern and plain-field areas share one yarn family, coarse-bundle calibre, fine-yarn spacing, three-system interlacing logic, directional rhythm and finish; supported variation in yarn exposure, coverage and relief remains integrated | Smooth printed motif; enlarged rope-like units; long open loops; separately applied embroidery or cord; unrelated pile family; raised elements disconnected from the cross and ground yarn systems |
-| Detail localisation | Detail shows the selected upright-design corner, its complete binding junction, both adjacent edges, and recognisable nearby border artwork | Wrong corner, mirror or rotation, missing corner junction, cropped binding, or unlocatable motif |
-| Detail texture view | An attractive professional three-quarter macro view from about 25–35 degrees above the rug plane uses a diagonal leading edge, fills about 96–98% of the frame, keeps the complete corner and both bound edges visible, and retains sharp near/central interlacing with gentle far-field falloff | Flat straight-down view, extreme near-zero grazing view, weak depth, no leading edge, missing corner or binding, excessive background, uniform yarn scale, or useful interlacing obscured by blur |
-| Cross-scale consistency | Detail and overview share yarn hierarchy, relief, boundary behaviour, edge and light | Different constructions or products |
-| Colour authority | Coarse raised, fine cross and fine ground/anchoring yarns all follow the mapped card or local current-design region, with only tone-on-tone variation from light and depth | A fixed pale or white binder grid appears independently of the artwork, or material/historical-reference colours leak into output |
-| Reference isolation | Historical examples contribute mapping only; style contributes photography only | Old motifs appear, scene changes material, or quality anchor overrides real evidence |
-| Product finish | Edge is continuous and proportionate; corners are finished | Raw edge, discontinuous binding, malformed corner |
-| Overview framing | Standing-observer downward sample shot of a rug lying flat on the floor with a restrained near-overhead angle; the rug is square to the frame with long axis vertical, short edges horizontal, at most 0–2 degrees residual rotation, mild near-to-far perspective, all four corners and the bound outline remain visible, and the rug fills about 92–96% of the frame | Visible diagonal camera roll, dramatic foreshortening, extreme keystone or wide-angle distortion, cropped binding/corners, excessive background, dramatic rotation, or a camera angle that hides the pattern topology |
-| Presentation tone | Bright high-key commercial exposure, luminous whites or light neutrals, clear colours and crisp medium-high contrast retain both highlights and weave shadows | Grey veil, muddy desaturation, underexposure, flat subdued grading, clipped highlights or crushed shadows |
-| Relief and lustre | Raking light separates raised crowns from recessed channels with visible micro-shadow; yarns retain controlled lengthwise soft-satin highlights without plastic glare or a global pale binder grid | Flat printed appearance, inflated beads, independent cords, washed-out light regions, plastic glare, or no visible raised/recessed separation |
-| Scene discipline | Rug dominates a clean commercial catalogue photograph | Unrequested props, text, logos, watermark, dramatic CGI treatment |
+| Pattern topology | Validator passes and every anchor is exact | Any unknown or changed anchor |
+| Surface build | Visible yarn geometry is rebuilt from regions | RGB artwork plus texture overlay |
+| Bundle system | Short substantial bundles form stable product-directional rows, with fine interlacing visible | Bead grid, rope, basket weave, deep pile, smooth fill |
+| Pattern-ground parity | All colour areas share row cadence, bundle scale, fine threads, low relief, and finish | Painted area, applied motif, or different material family |
+| Yarn scale | Macro bundles remain individually legible and substantial | Micro-grid or oversized cords |
+| Edge finish | Rounded wrapped binding and slim inner lock line are continuous | Raw edge, loose fringe, missing lock line, malformed corner |
+| Detail camera | Complete selected corner and both edges; clear close-oblique recession | Front-on view, blur-only depth, missing edge or corner |
+| Reference isolation | Current artwork owns all geometry and colours | Motif or palette leaks from construction reference |
+| Overview framing | Complete bound rug on a pale floor, all corners visible | Cropped or strongly distorted rug |
 
-Record the result in this shape:
+`topology`, `surface_build`, `bundle_system`, `pattern_ground_parity`, `edge_finish`, and `detail_camera` are hard detail gates. Any failure stops overview generation.
 
 ```yaml
 evaluation_record:
+  run_status: generated|external_execution_required|rejected
+  topology_mode: exact|approximate
+  pattern_control: deterministic|structure_branch|unavailable
+  surface_build_mode: yarn_geometry_or_weave_synthesis|overlay|unavailable
   topology: pass|caveat|fail
   material: pass|caveat|fail
+  bundle_system: pass|caveat|fail
   construction_orientation: pass|caveat|fail
-  yarn_exposure_hierarchy: pass|caveat|fail
+  yarn_unit_scale: pass|caveat|fail
   pattern_ground_parity: pass|caveat|fail
   detail_localisation: pass|caveat|fail
   detail_texture_view: pass|caveat|fail
-  overview_framing: pass|caveat|fail
-  presentation_tone: pass|caveat|fail
-  relief_lustre: pass|caveat|fail
-  cross_scale_consistency: pass|caveat|fail
-  colour_authority: pass|caveat|fail
+  reference_match: pass|caveat|fail
   edge_finish: pass|caveat|fail
-  region_iou: null
-  boundary_f_score: null
-  colour_delta_e: null
   failure_tags: []
 ```
-
-Use only these failure tags: `pattern_drift`, `colour_leakage`, `material_substitution`, `construction_orientation_error`, `pattern_material_mismatch`, `detail_camera_error`, `synthetic_relief`, `yarn_balance_error`, `corner_mismatch`, `cross_scale_inconsistency`, `edge_error`, and `authority_leakage`. Numerical fields are optional diagnostic signals for controllable local workflows. Populate them only when the output was compared against derived design controls; they are not manufacturing tolerances.
-
-## Delivery decision
-
-- Detail-first gate: generate and inspect `material_detail` before `product_overview`. Only an accepted
-  `material_detail_anchor` may supply the overview's physical肌理; the current design source remains the sole
-  authority for every motif, boundary, region relationship and final colour in both outputs.
-- `pass`: deliver normally.
-- `caveat`: deliver both images and name the visible limitation.
-- `fail`: deliver only if useful for diagnosis, identify the failed category, and offer one targeted retry. Do not claim the failed image is representative.
-
-Separate-image outputs provide visual consistency, not literal pixel continuity. Material recognisability belongs primarily to the detail; topology and overall product read belong primarily to the overview.
-
-## Targeted retry language
-
-When the user requests a retry, repeat the unchanged render lock and alter only the failed category. Read [backend strategies](backend-strategies.md) for backend-specific repair actions:
-
-- Pattern drift: reinforce current topology and use the current design as edit target again.
-- Material drift: reinforce construction and remove conflicting references.
-- Construction orientation error: use the stored upright generation-input orientation directly and restate all three axes in upright design-source coordinates: coarse raised vertical, fine cross horizontal, fine ground/anchor vertical.
-- Pattern material mismatch: compare equal-scale pattern and field crops; require one shared three-yarn jacquard system while retaining supported variation in exposed bundles and local relief. If the preview backend alternates between printed motifs and unrelated applied or pile-like motifs across two single-variable trials, stop prompt iteration and use a controllable local workflow.
-- Detail camera error: move the lens nearly level with the near binding to 8–12 degrees above the rug plane; require a prominent binding side face, strong depth recession, near-to-far scale compression, and gentle far-field focus falloff while the near and central interlacing stays sharp.
-- Synthetic relief: retain the accepted topology and rebuild only the textile surface so laid continuous-filament bundles visibly bend over horizontal yarns, compress at ties, and return into the recessed ground with subtle non-repeating variation.
-- Yarn balance error: reduce coarse-crown packing, interleave larger and smaller vertical crowns, and restore continuous horizontal fine-yarn exposure through both plain and patterned regions.
-- Cross-scale drift: reuse the accepted detail anchor and reduce overview texture scale.
-- Colour drift: restate colour authority and use neutral construction inputs.
-- Authority leakage: omit the leaking paired, style, or quality reference.
-- Edge failure: keep artwork unchanged and edit only perimeter finish.
-- Corner mismatch: regenerate or crop only the detail from the declared corner in the upright design source and deterministic crop; retain both adjoining bound edges and recognisable border artwork.

@@ -1,0 +1,75 @@
+material_id: structured-woven-surface-01
+display_name: "Structured Woven Surface 01"
+construction: structured-woven-surface
+default_for_design_only: true
+status: task_reference_grounded_visual_profile
+reference_strength_default: task_reference_grounded
+render_branch: structured_woven_surface
+
+generation_references:
+  detail: construction/sample-02-detail-a.jpg
+  overview: construction/sample-03-overall.jpg
+  note: "Attach the current artwork first and exactly one declared real construction reference second. The artwork owns all current geometry and colours; the real reference controls only the observed yarn system, low relief, edge treatment, and camera."
+
+audit_references:
+  sample_01:
+    overall: construction/sample-01-overall.jpg
+    details: [construction/sample-01-detail-a.jpg, construction/sample-01-detail-b.jpg]
+    role: [construction_family, yarn_bundle_scale, edge_finish, pattern_ground_parity]
+  sample_02:
+    overall: construction/sample-02-overall.jpg
+    details: [construction/sample-02-detail-a.jpg, construction/sample-02-detail-b.jpg, construction/sample-02-detail-c.jpg]
+    role: [generation_detail_reference, construction_family, yarn_bundle_scale, edge_finish, pattern_ground_parity]
+  sample_03:
+    overall: construction/sample-03-overall.jpg
+    details: [construction/sample-03-detail-a.jpg, construction/sample-03-detail-b.jpg]
+    role: [generation_overview_reference, construction_family, yarn_bundle_scale, edge_finish, pattern_ground_parity]
+
+paired_examples: []
+scene_style_reference: null
+quality_anchor: null
+
+construction_lock:
+  surface_structure: "Low-relief, yarn-built structured weave. Regular short multi-filament bundles repeat in aligned rows; finer interlacing threads remain visible in the gaps and at the row changes."
+  pile_behavior: "The bundle crowns sit only slightly above the fine interlacing system. They are compact, flattened by use and lighting, and never read as deep pile, free-standing loops, or isolated cords."
+  pattern_formation: "Current artwork colours are carried by the same short bundle-and-fine-thread system in every region. Pattern edges are stepped colour transitions at the bundle scale, never printed fill, embroidery, or a raised applique."
+  pattern_ground_parity: "Ground, motif, and boundary retain the same bundle size, row cadence, fine-thread visibility, low relief, and restrained filament sheen."
+  organisation: "In upright product coordinates, the principal bundle rows follow the rug long axis. Fine interlacing threads cross and separate those rows; local colour changes must not rotate the construction with a motif."
+  relief: "Low but legible: compact rounded bundle crowns, shallow shadowed gaps, fine interlacing traces, and modest directional highlights on the yarn filaments."
+  scale_behavior: "At equal apparent area, preserve the substantial, individually legible short bundles and fine interlacing visible in the supplied macro photos. Do not collapse them into a uniform micro-bead grid or inflate them into rope."
+  edge_geometry: "Rounded, continuous, colour-matched wrapped binding; an inner narrow lockstitch-like line sits just inside the binding and follows the corner without interruption."
+  finish: "Clean commercial textile finish with slight filament irregularity, controlled sheen, and natural small shadows; no plastic gloss."
+  fibre: unspecified
+  manufacturing_process: unspecified
+
+anti_substitutions:
+  - smooth printed colour fill
+  - flat RGB artwork with a texture overlay
+  - deep cut pile, shag, fur, or tall open loops
+  - chunky basket weave, crochet, braid, or rope
+  - uniform oval-bead grid
+  - applied embroidery, piping, carved motif, or raised motif layer
+  - hard plastic gloss or oversized inflated cords
+
+colour_policy:
+  authority_order: [explicit_colour_card, design_source]
+  material_assets_have_colour_authority: false
+
+render_defaults:
+  backend: runtime_default
+  backend_strategy: preview_only
+  topology_mode: exact
+  pattern_control: required
+  surface_build_mode: yarn_geometry_or_weave_synthesis
+  structure_proof_required: true
+  material_reference_budget: 1
+  sequence: detail_gate_then_overview
+  detail_reference_packet: [design_detail_crop, sample_02_detail_a]
+  overview_reference_packet: [design_source, sample_03_overall]
+  detail_corner: lower_left
+  detail_orientation: upright_design_source
+  detail_context: [corner_junction, two_bound_edges, nearby_motif, inner_field]
+  edge_finish: wrapped_bound_edge_with_inner_lock_line
+  detail_view: close_oblique_commercial_macro
+  overview_view: standing_observer_restrained_near_overhead_sample_shot
+  photography_style: bright_crisp_commercial_product

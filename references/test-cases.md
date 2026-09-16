@@ -1,260 +1,33 @@
-# Behavioural test cases
+# Carpet visualizer test cases
 
-Use generated images and the quality rubric as evidence. A wording match is not a test result.
-
-## Test artwork
-
-Prefer one source design with a large region, narrow line, curved two-colour boundary, asymmetric element, and artwork near the perimeter. Reuse it across constructions.
+Run the smallest case exercising the changed behaviour.
 
 ## Case 1: design-only default
 
-Input: only the test artwork.
+Input: one legible upright artwork.
 
-Expected:
+Expected: `structured-woven-surface-01` is selected; exact mode prepares controls and proof; detail uses the crop first and one declared real reference second; overview waits for all detail gates.
 
-- `jacquard-01` is selected without asking a construction question;
-- its manifest and two standard texture references are inspected;
-- `reference_strength` is `library_grounded`;
-- the material detail is generated and inspected first, then the product overview is generated without an approval pause;
-- the accepted material detail is used as the overview's texture-only anchor, never as its motif or colour authority;
-- the unspecified detail corner defaults to `lower_left`;
-- the detail uses an attractive three-quarter macro view to reveal texture layers, while the overview is a near-overhead squared rug-sample photograph;
-- the complete rug fills about 92–96% of the overview frame without cropping its binding or corners;
-- both outputs use clean high-key exposure, clear colours and crisp medium-high contrast without a grey veil or muddy desaturation;
-- bundled reference colours and patterns do not leak.
+## Case 2: reference inventory
 
-## Case 2: flatwoven without material photos
+Input: bundled manifest.
 
-Input: test artwork and explicit `flatwoven`; no material reference or colour card.
+Expected: all ten real source images resolve; its detail and overview references resolve; no AI artwork appears in `audit_references`; no fibre, loom, or named-process claim exists.
 
-Expected:
+## Case 3: surface identity
 
-- `reference_strength` is `profile_only` and confidence is `provisional`;
-- detail reads as low-profile warp-and-weft rather than pile or print;
-- overview retains current topology.
+Input: equal-scale pattern and ground crops.
 
-## Case 3: task-reference jacquard
+Expected: both contain stable long-axis rows of short multi-filament bundles, finer interlacing threads, low crowns, shallow gaps, and the same restrained finish. Smooth fill, bead grid, basket weave, rope, deep pile, or an independently raised motif fails.
 
-Input: same artwork, `jacquard`, and task-specific photos with explicit roles.
+## Case 4: edge and orientation
 
-Expected:
+Input: a lower-left detail crop.
 
-- `reference_strength` is `task_reference_grounded`;
-- construction lock contains only role-supported observations;
-- reference-product colours and motifs do not leak;
-- both outputs show one woven construction at different scales.
+Expected: rounded wrapped binding, inner locking line, complete corner, both edges, and construction-wide row direction survive. Texture may not turn along the motif.
 
-## Case 4: partial reference pack
+## Case 5: exact topology and overlay regression
 
-Input: artwork, `jacquard`, and only a macro photo.
+Input: artwork, an aligned source proof, and an RGB-plus-texture detail.
 
-Expected:
-
-- macro controls yarn geometry and local interlacing;
-- missing density, thickness, and binding evidence is disclosed;
-- no manufacturing values are invented.
-
-## Case 5: exact paired mapping
-
-Input: current artwork plus one exact historical trio for the selected material.
-
-Expected:
-
-- mapping mode is `paired_mapping_grounded`;
-- historical trio influences boundary softening and cross-scale translation;
-- current design remains the only current-pattern authority;
-- historical motifs and colours do not appear.
-
-## Case 6: unpaired historical product
-
-Input: current artwork and a real product overview without its exact historical design.
-
-Expected: the photo is classified as construction-scale or scene-style evidence, never as a paired mapping example.
-
-## Case 7: topology and colour stress
-
-Input: artwork whose palette and motif differ strongly from all real references.
-
-Expected:
-
-- no principal motif is added, removed, merged, or split;
-- fibre-scale softness does not become broad redraw;
-- current colours remain unless an explicit mapped colour card overrides them.
-
-## Case 8: Codex invocation
-
-Input: “Use this carpet artwork to make a bright, clear product overview and texture detail.”
-
-Expected: the skill is selected implicitly, uses the design-only default, and returns two outputs without an approval pause.
-
-## Case 9: generic-agent fallback
-
-Input: the same artwork in an agent environment with repository access but no image-generation backend.
-
-Expected:
-
-- the agent reads the generic adapter and capability profile;
-- output is labelled `external_execution_required`;
-- the packet includes two final prompts, the render lock, ordered attachments, and the quality gate;
-- it does not imply that images were generated.
-
-## Case 10: preview reference budget
-
-Input: design artwork plus macro, product-scale, overall-edge, scene, and quality references.
-
-Expected:
-
-- strategy is `preview_only` when independent controls are unavailable;
-- the design source remains attached outside the supporting-reference budget;
-- at most three supporting references are selected by declared role;
-- non-square inputs preserve their useful evidence through padding or a role-specific crop;
-- omitted references and their roles are disclosed.
-
-## Case 11: controllable local isolation
-
-Input: the stress artwork and neutral material references in a backend with region, edge, image-reference, mask, and seed controls.
-
-Expected:
-
-- region and edge maps receive only current-design structure;
-- material references enter only the material branch;
-- independent control values and seed are recorded;
-- a perimeter defect is repaired with a perimeter mask rather than a full redraw;
-- one experimental comparison changes only one control value.
-
-## Case 12: material scale and substitution
-
-Input: the stress artwork with `jacquard-01`.
-
-Expected:
-
-- elongated lozenge or long-oval crowns repeat end-to-end in vertical chains; within each crown, visible aligned filaments stay side by side and run continuously from one tapered tie-down to the other, creating uninterrupted longitudinal striations and highlights;
-- in upright rug coordinates, coarse raised yarns run vertically, finer cross yarns run horizontally, and fine recessed ground or anchoring yarns also run vertically beneath the crowns;
-- adjacent crown chains are staggered by about half a repeat instead of forming a rigid aligned grid;
-- vertical crowns dominate without closing the surface while lower horizontal yarns and their shadowed recessed tracks remain continuous through plain, patterned and boundary regions;
-- all three yarn systems follow the local design-region colour, without a fixed pale or white binder grid;
-- clearly pronounced but compact local relief is visibly produced by over-under interlacing, compression at ties and return into the recessed ground while the overall rug body remains thin;
-- those bundles reduce in apparent size but remain tactile and woven in the overview;
-- equal-scale crops from a plain field and a patterned boundary share one yarn family, coarse-bundle calibre, fine-yarn spacing, three-system interlacing logic, directional rhythm and finish;
-- reference-supported variation in yarn exposure, coverage and relief distribution passes when every raised element remains integrated with the same cross and ground yarn systems;
-- a smooth printed motif, enlarged rope-like units, long open loops, or separately applied embroidered, corded or unrelated pile-like motif fails `pattern_ground_parity`;
-- the surface remains integral relief-rich jacquard rather than print, uniform tufted loop pile, fur, loose chunky knit, crochet, freestanding rope, basket weave, or blocks;
-- a failure is recorded under one standard failure tag and routes to one targeted repair.
-
-The bundled standard texture references are stored with upright pixels and no EXIF orientation dependency. Use their displayed axes directly without another rotation.
-
-If two preview-only single-variable trials alternate between printed and unrelated applied or pile-like pattern failures, expected behaviour is to stop prompt-only retries, record `pattern_material_mismatch`, and route to `controllable_local`.
-
-## Case 13: corner-localised detail
-
-Input: asymmetric upright artwork and `detail_corner: lower_left`.
-
-Expected:
-
-- the overview keeps the design upright without mirroring or rotation;
-- the detail shows the physical lower-left corner, including the complete corner junction and both adjoining bound edges;
-- adjacent border artwork and colour boundaries make the crop locatable in the overview;
-- construction remains readable despite the wider contextual framing;
-- a wrong, mirrored, rotated, or cropped-out corner is tagged `corner_mismatch`.
-
-## Case 14: default camera split
-
-Input: upright artwork with no corner or camera instruction.
-
-Expected:
-
-- the detail anchors to `lower_left` and uses a professional three-quarter macro view roughly 25–35 degrees above the rug plane;
-- the rug surface fills about 96–98% of the detail while the complete near corner junction and short segments of both bindings remain visible;
-- the diagonal leading edge, visible binding side face, depth recession, near-to-far scale compression and gentle focus falloff prove the camera is a professional oblique macro view;
-- grazing light makes yarn organisation, interlacing, pronounced local relief and boundary construction readable across the near and central focus area;
-- the overview uses a standing-observer downward view with a restrained near-overhead angle, mild top-to-bottom perspective and the rug squared to the frame, with at most 0–2 degrees residual rotation;
-- the rug remains upright, centred, fully visible and fills about 92–96% of the frame with narrow quiet floor margins.
-- the overview is generated only after the detail passes, and inherits its physical肌理 identity without inheriting or redrawing its local motif authority.
-
-## Case 15: bright commercial presentation
-
-Input: design-only artwork with no requested scene or mood.
-
-Expected:
-
-- both outputs use bright high-key commercial-product lighting and clean exposure;
-- whites or light neutrals remain luminous, colours remain clear, and tonal separation is medium-high contrast;
-- weave recesses remain visible without turning the whole image grey or underexposed;
-- fibre highlights retain detail without clipping or becoming hard plastic gloss.
-
-## Case 19: legacy self-contained jacquard detail target
-
-Input: design-only artwork with an unbranched jacquard configuration, no task-specific scene image.
-
-Expected:
-
-- the agent reads `references/jacquard-detail-target.md` before generating the detail;
-- the reference packet uses the current artwork and neutral construction inputs, with no implicit image carried from an earlier conversation turn;
-- the detail reproduces the three-quarter 25–35 degree camera, 96–98% surface coverage, diagonal leading edge, prominent near binding side face, strong recession, and gentle far-field focus falloff;
-- the visible surface retains two-scale vertical crowns, continuous horizontal fine-yarn exposure, recessed vertical ground threads, and compact interlaced relief;
-- diagonal or stepped artwork lines may show stronger local crown exposure but remain integrated into the same weave, with vertical crown axes and crossing horizontal fine yarns rather than a separate smooth contour tube;
-- the result remains bright and crisp without requiring a scene-style reference.
-
-## Case 16: stored upright orientation reference
-
-Input: upright artwork and the two bundled `jacquard-01` standard texture references, whose pixels are already stored in upright finished-rug orientation.
-
-Expected:
-
-- the stored upright standard-reference axes are used directly without an additional rotation;
-- the generated upright rug shows compact coarse raised yarns running vertically, fine cross yarns running horizontally, and fine recessed ground/anchoring yarns running vertically;
-- cross and ground yarn colours follow each local design region instead of becoming a global pale grid;
-- the same product-relative construction direction appears in the lower-left detail and standing-observer overview;
-- an output with horizontal raised floats is tagged `construction_orientation_error`.
-
-## Case 17: reject high-angle synthetic detail
-
-Input: a generated lower-left detail whose corner is locatable but whose rug plane reads nearly overhead and whose raised units are repeated identical capsules.
-
-Expected:
-
-- the image fails `detail_texture_view` with `detail_camera_error` because the near binding side face, depth recession and near-to-far scale compression are absent;
-- the image fails construction with `synthetic_relief` because raised units do not visibly bend over, compress against and return between the finer yarn systems;
-- it is not accepted as `material_detail_anchor` and cannot control the overview.
-
-## Case 18: preserve supporting horizontal yarns
-
-Input: a `jacquard-01` detail containing both a plain field and a patterned boundary.
-
-Expected:
-
-- larger and smaller vertical crowns are visibly interleaved within one yarn family;
-- vertical crowns dominate without closing the woven surface;
-- fine horizontal yarns remain continuously readable through the plain field, motif interior and colour boundary;
-- a result whose patterned area becomes nearly all coarse vertical crowns fails `yarn_exposure_hierarchy` with `yarn_balance_error`.
-
-## Case 20: standard-reference jacquard branch
-
-Input: test artwork with `jacquard-01` whose manifest declares `render_branch: standard_reference_jacquard`.
-
-Expected:
-
-- the manifest resolves exactly two standard texture references: one detail anchor and one overview anchor;
-- the selected standard images are the primary visible-texture authority, while the current design remains the only motif, region and final-colour authority;
-- the original construction photos, scene references and quality anchors are not attached unless the user explicitly adds them;
-- the branch does not apply the legacy fixed yarn-ratio recipe or durable legacy detail target;
-- the branch generates and validates `material_detail` before `product_overview`;
-- the detail uses the branch's three-quarter tactile macro keywords and the overview uses its complete-outline keywords;
-- the macro retains continuous side-by-side tie-to-tie filaments, elongated lozenge crowns, longitudinal sheen, half-repeat stagger, and recessed horizontal tracks;
-- the accepted detail is the overview's texture-only anchor, while the current design remains the sole authority for all overview motifs and colours;
-- the overview retains a subtle horizontal woven cadence without copying fixed bands or reference motifs;
-- the overview has only a quiet pale floor or porcelain-tile support plane with a restrained natural contact shadow;
-- detail and overview remain recognisably one surface family at their respective scales.
-
-## Case 21: detail-first texture authority
-
-Input: artwork with a legible selected corner and a construction whose macro detail is more informative than its product-scale reference.
-
-Expected:
-
-- the deterministic `design_detail_crop` is prepared before either output is generated;
-- `material_detail` is generated first and must preserve the crop's local motif, boundaries, adjacency and colours;
-- a passing detail becomes `material_detail_anchor` and controls only the overview's肌理, yarn hierarchy, relief, interlacing and finish;
-- `product_overview` is generated second from the current artwork plus the accepted detail anchor;
-- the overview never becomes the source for regenerating or refining the detail in the default workflow;
-- if the detail fails its local topology or construction gate, it is not used as the overview's texture anchor.
+Expected: source proof validates; RGB-plus-texture detail is `overlay`, fails the surface gate, and stops the overview. A preview-only exact backend returns `external_execution_required` rather than claiming a pass.
