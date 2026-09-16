@@ -20,4 +20,4 @@ Do not render smooth colour fill, a generic texture overlay, a dense bead grid, 
 
 ## Reference isolation
 
-The supplied AI artwork demonstrates pattern mapping only. Real photos establish visual construction. For an unmatched design, attach only the declared camera anchor and micro construction reference alongside the current artwork; treat other samples as inspection evidence. When the current design SHA-256 exactly matches a declared paired mapping, attach its paired overview and paired material detail instead. Current design geometry and colours remain exclusive to the first attachment.
+The supplied AI artwork demonstrates pattern mapping only. Real photos establish visual construction. Attach only the declared generic camera anchor and micro construction reference alongside the current artwork; treat paired photos of the current design as inspection evidence only and never as generation inputs. Current design geometry and colours remain exclusive to the first attachment.

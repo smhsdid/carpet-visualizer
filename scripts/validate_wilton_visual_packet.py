@@ -22,7 +22,7 @@ def manifest_value(name: str) -> str:
 
 
 def expect_packet(text: str, key: str) -> None:
-    expected = "[design_source, accepted_detail_camera_anchor_v1, unit_micro_anchor_v1]" if key == "detail_reference_packet" else "[design_source, unit_micro_anchor_v1]"
+    expected = "[design_source, sample_01_detail_a, unit_micro_anchor_v1]" if key == "detail_reference_packet" else "[design_source, sample_03_overall, unit_micro_anchor_v1]"
     matches = re.findall(rf"(?m)^\s*{re.escape(key)}:\s*(.+?)\s*$", text)
     if not matches:
         raise ValueError(f"missing manifest field: {key}")
@@ -46,7 +46,7 @@ def validate_manifest() -> None:
     if actual_hash != expected_hash:
         raise ValueError("quality-anchor SHA-256 does not match manifest")
     camera_match = re.search(
-        r"(?ms)^detail_camera_anchor:\s*\n\s+path:\s*(quality/accepted-detail-camera-anchor-v1\.jpg)\s*\n\s+sha256:\s*([a-f0-9]+)\s*$",
+        r"(?ms)^detail_camera_anchor:\s*\n\s+path:\s*(construction/sample-01-detail-a\.jpg)\s*\n\s+sha256:\s*([a-f0-9]+)\s*$",
         MANIFEST.read_text(encoding="utf-8"),
     )
     if not camera_match:
@@ -56,8 +56,8 @@ def validate_manifest() -> None:
         raise ValueError("detail-camera anchor SHA-256 does not match manifest")
     if manifest_value("material_reference_budget") != "2":
         raise ValueError("unmatched Wilton detail route requires camera + micro construction anchors")
-    if manifest_value("detail") != "construction/sample-02-detail-c.jpg":
-        raise ValueError("Wilton detail route must declare the paired material detail")
+    if manifest_value("detail") != "construction/sample-01-detail-a.jpg":
+        raise ValueError("Wilton detail route must declare the generic material detail")
     manifest_text = MANIFEST.read_text(encoding="utf-8")
     micro_anchor = ASSET_ROOT / "derived" / "wilton-unit-micro-anchor-v1.jpg"
     if not micro_anchor.is_file():
@@ -69,20 +69,8 @@ def validate_manifest() -> None:
             raise ValueError(f"missing Wilton texture control: {field}")
     expect_packet(MANIFEST.read_text(encoding="utf-8"), "detail_reference_packet")
     expect_packet(MANIFEST.read_text(encoding="utf-8"), "overview_reference_packet")
-    override_match = re.search(
-        r"(?ms)^paired_mapping_overrides:\s*\n\s+sample_02:\s*\n\s+source_sha256:\s*([a-f0-9]+).*?"
-        r"^\s+detail_reference_packet:\s*(\[[^\n]+\]).*?"
-        r"^\s+required_omissions:\s*(\[[^\n]+\])",
-        manifest_text,
-    )
-    if not override_match:
-        raise ValueError("missing sample-02 exact-paired override")
-    if override_match.group(1) != "8cf1cad996defe75a0061aa879ed21080d79ec936cbf51ddf06460a25f71c4a3":
-        raise ValueError("sample-02 override has an unexpected source hash")
-    if override_match.group(2) != "[design_source, paired_product_overview, paired_material_detail]":
-        raise ValueError("sample-02 override has an unexpected detail packet")
-    if override_match.group(3) != "[accepted_quality_anchor, unit_micro_anchor]":
-        raise ValueError("sample-02 override must omit conflicting generic anchors")
+    if "paired_mapping_overrides:" in manifest_text:
+        raise ValueError("paired mappings must not change the generation packet")
     quality_controls = re.search(r"(?ms)^quality_anchor:.*?^\s+controls:\s*(\[[^\n]+\])", manifest_text)
     if not quality_controls or quality_controls.group(1) != "[exposure, white_balance, product_photography]":
         raise ValueError("quality anchor must not control yarn geometry")
@@ -91,7 +79,7 @@ def validate_manifest() -> None:
 def validate_lock(lock_path: Path) -> None:
     lock = json.loads(lock_path.read_text(encoding="utf-8"))
     roles = [attachment.get("role", "") for attachment in lock.get("reference_attachments", [])]
-    expected = ["design_source_pattern_and_colour_authority", "detail_camera_only", "accepted_quality_anchor", "construction_only"]
+    expected = ["design_source_pattern_and_colour_authority", "generic_detail_camera_and_construction_anchor", "generic_micro_construction_anchor"]
     if roles != expected:
         raise ValueError(f"final-quality lock requires ordered roles {expected}, got {roles}")
     if lock.get("detail_camera_control") != "declared_real_camera_anchor":
@@ -101,15 +89,14 @@ def validate_lock(lock_path: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--lock", type=Path)
-    parser.add_argument("--design", type=Path, help="report whether an exact-paired packet applies")
+    parser.add_argument("--design", type=Path, help="assert that a source uses the generic packet")
     args = parser.parse_args()
     validate_manifest()
     if args.lock:
         validate_lock(args.lock)
-    route = "unmatched_default"
+    route = "generic_no_paired_attachment"
     if args.design:
-        source_hash = hashlib.sha256(args.design.read_bytes()).hexdigest()
-        route = "sample_02_exact_paired" if source_hash == "8cf1cad996defe75a0061aa879ed21080d79ec936cbf51ddf06460a25f71c4a3" else route
+        hashlib.sha256(args.design.read_bytes()).hexdigest()
     print(json.dumps({"status": "pass", "manifest": str(MANIFEST), "lock_checked": bool(args.lock), "route": route}))
 
 

@@ -44,11 +44,11 @@ Input: `scripts/render_wilton_calibrated.py` with an artwork and a temporary out
 
 Expected: it writes only `structure_proof.png`, controls, and a proof-only render lock. The lock has `reference_strength: none`, `material_detail: null`, and `product_overview: null`. A user-facing unmatched Wilton visual instead requires a recorded design reference, real camera anchor, and the declared multi-unit micro construction anchor.
 
-## Case 8: exact paired-mapping packet regression
+## Case 8: paired-reference leakage regression
 
-Input: `wilton-flatweave-01/manifest.yaml`, the sample-02 design, and a generated render lock.
+Input: `wilton-flatweave-01/manifest.yaml` and the sample-02 design.
 
-Expected: a SHA-256 match selects the sample-02 override. The detail packet orders complete current design, paired product overview, then paired material detail; it omits both generic quality and micro anchors. A generated output with a smooth capsule grid, missing cross yarn, flat camera, or inflated binding fails the exact-pair detail gate.
+Expected: a SHA-256 match does not change the generic packet. The detail packet orders complete current design, sample-01 generic camera-and-construction anchor, then generic micro construction anchor. The sample-02 overview and material detail are forbidden generation inputs.
 
 ## Case 9: camera-anchor framing and spacing regression
 

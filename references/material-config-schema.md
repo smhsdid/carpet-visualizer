@@ -14,7 +14,7 @@ render_branch: wilton_flatweave
 generation_references:
   detail: derived/wilton-unit-micro-anchor-v1.jpg
   overview: derived/wilton-unit-micro-anchor-v1.jpg
-  note: "A detail with an exact paired-design match attaches current design, paired overview, and paired material detail. An unmatched detail attaches current design, real camera anchor, and micro construction anchor."
+  note: "A detail attaches current design, a generic camera-and-construction anchor from another paired design, and a generic micro construction anchor. A matching pair is calibration evidence only and cannot be attached."
 
 derived_construction_anchors:
   unit_micro_anchor: {path: derived/wilton-unit-micro-anchor-v1.jpg, sha256: <sha256>, role: exact_local_yarn_unit_geometry_and_spacing}
@@ -55,7 +55,7 @@ render_defaults:
   topology_mode: approximate
   exact_proof_renderer: scripts/render_wilton_calibrated.py
   exact_proof_renderer_role: structure_proof_only
-  final_visual_requires: [declared_real_camera_or_exact_paired_mapping_attached, declared_real_construction_anchor_attached]
+  final_visual_requires: [declared_real_camera_anchor_attached, declared_real_construction_anchor_attached]
   surface_build_mode: yarn_geometry_or_weave_synthesis
   material_reference_budget: 2
   sequence: detail_gate_then_overview
@@ -65,4 +65,4 @@ render_defaults:
   edge_finish: wrapped_bound_edge_with_inner_lock_line
 ```
 
-Every manifest path must resolve. An exact paired mapping takes priority when its source SHA-256 matches the current design. Otherwise the patterned real photo remains the sole construction reference; the accepted quality anchor is optional visual-finish evidence only. Neither controls the current design.
+Every manifest path must resolve. A paired mapping whose source SHA-256 matches the current design is forbidden as a generation attachment. The patterned real photo from a different paired design remains the construction reference; the accepted quality anchor is optional visual-finish evidence only. Neither controls the current design.

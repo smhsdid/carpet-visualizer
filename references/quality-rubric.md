@@ -23,7 +23,7 @@ Run preflight, structure-proof, material-detail, and overview gates. Exact mode 
 | Reference isolation | Current artwork owns all geometry and colours | Motif or palette leaks from construction reference |
 | Overview framing | Complete bound rug on the declared neutral dark textile ground, all corners visible | Cropped, strongly distorted, or furnished presentation |
 
-`topology`, `surface_build`, `bundle_system`, `pattern_ground_parity`, `edge_finish`, and `detail_camera` are hard detail gates. For an exact paired mapping, compare a 100% crop of the generated plain field, pattern boundary, and wrapped edge against its paired macro before accepting. Use `uniform_bead_grid`, `cross_yarn_missing`, `reference_geometry_mismatch`, `camera_flattening`, or `binding_overinflated` as failure tags. Any failure stops overview generation.
+`topology`, `surface_build`, `bundle_system`, `pattern_ground_parity`, `edge_finish`, and `detail_camera` are hard detail gates. Use `uniform_bead_grid`, `cross_yarn_missing`, `reference_geometry_mismatch`, `camera_flattening`, or `binding_overinflated` as failure tags. Any failure stops overview generation.
 
 ```yaml
 evaluation_record:

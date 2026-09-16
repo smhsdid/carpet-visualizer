@@ -17,11 +17,7 @@ For the reference-grounded visual route, use these roles:
 
 Neither secondary reference has authority over current motifs, region placement, colours, outline, or symmetry. A generated detail that borrows its pattern or palette fails with `authority_leakage` or `colour_leakage`.
 
-## Exact paired-mapping route
-
-Before selecting the normal preview packet, compare the current design SHA-256 with `paired-mappings.json`. When it exactly matches a declared paired design, use the manifest's matching override. Attach the complete current design first, the paired physical product overview second, and the paired physical material detail third. The paired photos may guide product camera, binding proportion, yarn-unit morphology, row cadence, cross-yarn visibility, and finish because they document this exact design. The current design remains the only source-coordinate pattern and colour authority.
-
-Do not attach the generic accepted-quality anchor or generic micro anchor to an exact paired packet: any reference with a different unit scale, bead geometry, or camera relationship is a construction conflict, not an additional quality signal. For unmatched designs, attach the complete current design first, the real camera anchor second, and the micro construction anchor third. The optional quality anchor may control only exposure, white balance, and general product-photo finish.
+Paired mappings are calibration evidence only. Never attach the overview or detail from a pair whose design SHA-256 matches the current source: that would leak the target physical product into a supposedly generative run. Use generic anchors from other paired designs instead.
 
 ## Surface contract
 
@@ -43,13 +39,6 @@ Keep the rounded colour-matched wrapped binding and its slim inner locking line 
 Keep the structure target unchanged. The only allowed changes are the declared camera transform and this yarn-built surface. No text or watermark.
 ```
 
-## Exact paired-mapping detail prompt
-
-```text
-Image 1 is the complete current design and the literal source-coordinate target. Images 2 and 3 document a verified physical production of this exact same design: Image 2 is the complete paired product and Image 3 is its paired material detail. Copy Image 1's geometry and colours; Images 2 and 3 control only the physical rendering, camera, binding, and fibre-scale weave.
-
-Render the lower-left corner as the same close oblique product view as the paired physical sample. The left and bottom wrapped edges, the narrow inner lock line, the dense border, the corner junction, and the adjacent diamond field must remain correctly registered to Image 1. Match Image 3 literally at fibre scale: loose multi-filament short yarn bundles with visibly split, slightly fuzzy ends; variable-width and variable-length units; a fine pale cross yarn exposed in the gaps between every few bundles; irregular stagger across neighbouring long-axis lanes; shallow soft shadows rather than a clean bead lattice. The bundle field must be compact and dense, with no smooth capsule grid, continuous vertical ribs, plastic sheen, rope-like binding, embroidery, or texture overlay. Use the paired product's low raking camera, with the near bound corner forward and natural focus falloff across the continuous rug plane. No text or watermark.
-```
 
 ## Overview prompt
 
@@ -79,7 +68,7 @@ Any hard-gate failure stops the overview. A run missing real construction eviden
 
 ## Reference-grounded visual route
 
-This is the default route for a user-facing visual sample when no exact paired mapping exists. Use the complete current design first, the manifest-declared real detail camera anchor second, and the multi-unit micro construction anchor third. Use the accepted quality anchor only after verifying that its unit geometry and camera do not conflict; it may control only exposure, white balance, and general product-photo finish. The paired mapping sets and grammar tile remain calibration and audit evidence unless the current source exactly matches a declared paired design.
+This is the default route for a user-facing visual sample. Use the complete current design first, the manifest-declared generic detail camera-and-construction anchor second, and the multi-unit micro construction anchor third. Use the accepted quality anchor only after verifying that its unit geometry and camera do not conflict; it may control only exposure, white balance, and general product-photo finish. Paired mapping sets and grammar tiles remain calibration and audit evidence only.
 
 Record this as `topology_mode: approximate` and record all three attachment paths and roles. A visually strong detail may unlock a product overview only after the user accepts it; it must never be relabelled as exact merely because it follows the design approximately.
 

@@ -7,9 +7,9 @@ reference_strength_default: task_reference_grounded
 render_branch: wilton_flatweave
 
 generation_references:
-  detail: construction/sample-02-detail-c.jpg
-  overview: construction/sample-02-overall.jpg
-  note: "When the source hash exactly matches a declared paired design, use its matching product overview and material detail after the complete design. Do not add a generic quality or micro anchor to that packet. For an unmatched design, use the complete design, real camera anchor, and micro construction anchor; the quality anchor is optional lighting evidence only."
+  detail: construction/sample-01-detail-a.jpg
+  overview: construction/sample-03-overall.jpg
+  note: "Use the complete current design, a generic real camera-and-construction anchor from a different paired design, and the generic micro construction anchor. Paired mappings are calibration evidence only and must never be attached when their design hash matches the current source."
 
 derived_construction_anchors:
   unit_micro_anchor:
@@ -31,7 +31,7 @@ audit_references:
   sample_02:
     overall: construction/sample-02-overall.jpg
     details: [construction/sample-02-detail-a.jpg, construction/sample-02-detail-b.jpg, construction/sample-02-detail-c.jpg]
-    role: [generation_detail_reference, construction_family, yarn_bundle_scale, edge_finish, pattern_ground_parity]
+    role: [calibration_only, construction_family, yarn_bundle_scale, edge_finish, pattern_ground_parity]
   sample_03:
     overall: construction/sample-03-overall.jpg
     details: [construction/sample-03-detail-a.jpg, construction/sample-03-detail-b.jpg]
@@ -40,7 +40,7 @@ audit_references:
 paired_examples:
   manifest: paired-mappings.json
   count: 3
-  use: calibration_and_leave_one_out_review
+  use: calibration_only_never_runtime_attachment
 scene_style_reference: null
 quality_anchor:
   path: quality/accepted-detail-anchor-v1.png
@@ -50,21 +50,11 @@ quality_anchor:
   controls: [exposure, white_balance, product_photography]
   does_not_control: [current_motifs, current_colours, current_layout, yarn_geometry, bundle_scale, bundle_length, cross_yarn_visibility, edge_geometry, camera_geometry, manufacturing_specification]
 detail_camera_anchor:
-  path: quality/accepted-detail-camera-anchor-v1.jpg
-  sha256: 2bc1e651563a935114e33917fef8fb2346eb1c1a8af0e9a4c577641ed49cd291
-  role: accepted_lower_left_detail_camera
+  path: construction/sample-01-detail-a.jpg
+  sha256: 829d7f76d773cc0bd6f2970088fd1a6200c35251e178b36f350e7b8868bee43e
+  role: generic_wilton_detail_camera_and_construction_anchor
   controls: [focal_relationship, low_raking_view_direction, foreground_corner_placement, edge_recession, upper_frame_continuous_rug_plane, near_bundle_scale, arched_bundle_cross_section, full_bundle_midsection, tapered_bundle_shoulders, visible_inter_bundle_gap, exposed_fine_cross_yarn]
   does_not_control: [current_motifs, current_colours, current_layout, manufacturing_specification]
-
-paired_mapping_overrides:
-  sample_02:
-    source_sha256: 8cf1cad996defe75a0061aa879ed21080d79ec936cbf51ddf06460a25f71c4a3
-    product_overview: construction/sample-02-overall.jpg
-    material_detail: construction/sample-02-detail-c.jpg
-    detail_reference_packet: [design_source, paired_product_overview, paired_material_detail]
-    overview_reference_packet: [design_source, paired_product_overview, paired_material_detail]
-    required_omissions: [accepted_quality_anchor, unit_micro_anchor]
-    note: "The paired design, overview, and detail are an exact historical mapping. They may teach current product camera, edge proportion, and weave appearance only because the current source hash matches the paired design exactly. The current design remains the source-coordinate authority."
 
 construction_lock:
   surface_structure: "Low-relief, yarn-built structured weave. Substantial multi-filament bundles occupy product-directional lanes; exposed fine interlacing and shadowed longitudinal channels remain visibly open between lanes."
@@ -108,11 +98,11 @@ render_defaults:
   structure_proof_required: false
   exact_proof_renderer: scripts/render_wilton_calibrated.py
   exact_proof_renderer_role: structure_proof_only
-  final_visual_requires: [declared_real_camera_or_exact_paired_mapping_attached, declared_real_construction_anchor_attached]
+  final_visual_requires: [declared_real_camera_anchor_attached, declared_real_construction_anchor_attached]
   material_reference_budget: 2
   sequence: detail_gate_then_overview
-  detail_reference_packet: [design_source, accepted_detail_camera_anchor_v1, unit_micro_anchor_v1]
-  overview_reference_packet: [design_source, unit_micro_anchor_v1]
+  detail_reference_packet: [design_source, sample_01_detail_a, unit_micro_anchor_v1]
+  overview_reference_packet: [design_source, sample_03_overall, unit_micro_anchor_v1]
   detail_corner: lower_left
   detail_orientation: upright_design_source
   detail_context: [corner_junction, two_bound_edges, nearby_motif, inner_field]
