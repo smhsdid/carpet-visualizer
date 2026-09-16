@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "material_id": "wilton-flatweave-01",
+  "purpose": "Verified design-to-product mappings used to calibrate and audit one Wilton flatweave visual profile.",
+  "colour_authority": "design_source",
+  "pairs": [
+    {
+      "id": "sample-01",
+      "design": {
+        "path": "paired-mappings/sample-01/design.png",
+        "sha256": "1a0a92d701193cefe6302ca27a71c5301b90fd8262871273b5d21dbbabed4ca9"
+      },
+      "overview": {
+        "path": "construction/sample-01-overall.jpg",
+        "sha256": "65db13d5e5c7e94c5a4a8c085af7bceea50ed1ae5fd5c8ae69a22ab96e6b40d9"
+      },
+      "detail": {
+        "path": "construction/sample-01-detail-a.jpg",
+        "sha256": "829d7f76d773cc0bd6f2970088fd1a6200c35251e178b36f350e7b8868bee43e"
+      }
+    },
+    {
+      "id": "sample-02",
+      "design": {
+        "path": "paired-mappings/sample-02/design.png",
+        "sha256": "8cf1cad996defe75a0061aa879ed21080d79ec936cbf51ddf06460a25f71c4a3"
+      },
+      "overview": {
+        "path": "construction/sample-02-overall.jpg",
+        "sha256": "2e3e60c49f397f3787fa8b19a535f514fa07bb055dd9b6a377dcc550b6b0fbe8"
+      },
+      "detail": {
+        "path": "construction/sample-02-detail-c.jpg",
+        "sha256": "b7f5e9ca99e0be91a3d4809e4ee68dc49a3a291f904e1f536698ff4b418193f1"
+      }
+    },
+    {
+      "id": "sample-03",
+      "design": {
+        "path": "paired-mappings/sample-03/design.png",
+        "sha256": "2a4ae09162f5dab644fb79588899b88d6c26a967d1301c85b63d26ab9f816d25"
+      },
+      "overview": {
+        "path": "construction/sample-03-overall.jpg",
+        "sha256": "4b4964dc597c7c7d49b3f09d5967df723b3684c6889ca9f227a414fb1a3b5ae4"
+      },
+      "detail": {
+        "path": "construction/sample-03-detail-a.jpg",
+        "sha256": "20a2e938990cb7ccab56ce9100806e923ee0317c3bfaffb3dd9bf37d7eaf7aa7"
+      }
+    }
+  ],
+  "calibrated_visual_parameters": {
+    "profile": "observed-low-relief-wilton-flatweave-v1",
+    "bundle_axis": "upright_product_long_axis",
+    "bundle_pitch_detail_px": [15, 20],
+    "bundle_size_detail_px": [12, 16],
+    "bundle_pitch_overview_px": [10, 14],
+    "bundle_size_overview_px": [8, 11],
+    "fine_cross_thread_spacing_detail_px": 5,
+    "fine_cross_thread_spacing_overview_px": 4,
+    "filaments_per_bundle": 7,
+    "binding_width_ratio": 0.018,
+    "binding_lock_line_ratio": 0.22,
+    "overview_camera": "flat_laid_near_overhead_mild_perspective",
+    "detail_camera": "selected_corner_close_oblique_with_two_bound_edges"
+  }
+}

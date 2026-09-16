@@ -7,9 +7,21 @@ reference_strength_default: task_reference_grounded
 render_branch: wilton_flatweave
 
 generation_references:
-  detail: construction/sample-02-detail-a.jpg
-  overview: construction/sample-03-overall.jpg
-  note: "Attach the current artwork first and exactly one declared real construction reference second. The artwork owns all current geometry and colours; the real reference controls only the observed yarn system, low relief, edge treatment, and camera."
+  detail: construction/sample-02-detail-c.jpg
+  overview: construction/sample-02-overall.jpg
+  note: "When the source hash exactly matches a declared paired design, use its matching product overview and material detail after the complete design. Do not add a generic quality or micro anchor to that packet. For an unmatched design, use the complete design, real camera anchor, and micro construction anchor; the quality anchor is optional lighting evidence only."
+
+derived_construction_anchors:
+  unit_micro_anchor:
+    path: derived/wilton-unit-micro-anchor-v1.jpg
+    sha256: 939bc3f2303c31c6380aa0017532951f5eddde4fb373d57d5e51b75048807b56
+    role: exact_local_yarn_unit_geometry_and_spacing
+    controls: [bundle_midsection_fullness, tapered_bundle_ends, multi_filament_definition, unit_width, unit_length, exposed_cross_yarn, inter_unit_gap]
+    does_not_control: [current_motifs, current_colours, current_layout, product_camera, manufacturing_specification]
+  grammar_tile:
+    path: derived/wilton-open-channel-grammar-tile-v1.png
+    source: construction/sample-03-detail-b.jpg
+    role: audit_only_for_lane_stagger_and_open_channels
 
 audit_references:
   sample_01:
@@ -25,18 +37,48 @@ audit_references:
     details: [construction/sample-03-detail-a.jpg, construction/sample-03-detail-b.jpg]
     role: [generation_overview_reference, construction_family, yarn_bundle_scale, edge_finish, pattern_ground_parity]
 
-paired_examples: []
+paired_examples:
+  manifest: paired-mappings.json
+  count: 3
+  use: calibration_and_leave_one_out_review
 scene_style_reference: null
-quality_anchor: null
+quality_anchor:
+  path: quality/accepted-detail-anchor-v1.png
+  sha256: 59a3e05dfcc3d1fa686e1d3861b2c6b3080df51db6db48f35772d487cc956e8a
+  role: accepted_wilton_detail_polish
+  applies_to: [detail, overview]
+  controls: [exposure, white_balance, product_photography]
+  does_not_control: [current_motifs, current_colours, current_layout, yarn_geometry, bundle_scale, bundle_length, cross_yarn_visibility, edge_geometry, camera_geometry, manufacturing_specification]
+detail_camera_anchor:
+  path: quality/accepted-detail-camera-anchor-v1.jpg
+  sha256: 2bc1e651563a935114e33917fef8fb2346eb1c1a8af0e9a4c577641ed49cd291
+  role: accepted_lower_left_detail_camera
+  controls: [focal_relationship, low_raking_view_direction, foreground_corner_placement, edge_recession, upper_frame_continuous_rug_plane, near_bundle_scale, arched_bundle_cross_section, full_bundle_midsection, tapered_bundle_shoulders, visible_inter_bundle_gap, exposed_fine_cross_yarn]
+  does_not_control: [current_motifs, current_colours, current_layout, manufacturing_specification]
+
+paired_mapping_overrides:
+  sample_02:
+    source_sha256: 8cf1cad996defe75a0061aa879ed21080d79ec936cbf51ddf06460a25f71c4a3
+    product_overview: construction/sample-02-overall.jpg
+    material_detail: construction/sample-02-detail-c.jpg
+    detail_reference_packet: [design_source, paired_product_overview, paired_material_detail]
+    overview_reference_packet: [design_source, paired_product_overview, paired_material_detail]
+    required_omissions: [accepted_quality_anchor, unit_micro_anchor]
+    note: "The paired design, overview, and detail are an exact historical mapping. They may teach current product camera, edge proportion, and weave appearance only because the current source hash matches the paired design exactly. The current design remains the source-coordinate authority."
 
 construction_lock:
-  surface_structure: "Low-relief, yarn-built structured weave. Regular short multi-filament bundles repeat in aligned rows; finer interlacing threads remain visible in the gaps and at the row changes."
-  pile_behavior: "The bundle crowns sit only slightly above the fine interlacing system. They are compact, flattened by use and lighting, and never read as deep pile, free-standing loops, or isolated cords."
+  surface_structure: "Low-relief, yarn-built structured weave. Substantial multi-filament bundles occupy product-directional lanes; exposed fine interlacing and shadowed longitudinal channels remain visibly open between lanes."
+  pile_behavior: "The bundle crowns sit only slightly above the fine interlacing system, but each near-detail unit has a clearly rounded, arched cross-section: a full, wider raised middle falls away into visibly narrower side shoulders. Shallow side shadows make this crown profile legible from the required raking camera. They are compact and never read as deep pile, free-standing loops, or isolated cords."
   pattern_formation: "Current artwork colours are carried by the same short bundle-and-fine-thread system in every region. Pattern edges are stepped colour transitions at the bundle scale, never printed fill, embroidery, or a raised applique."
   pattern_ground_parity: "Ground, motif, and boundary retain the same bundle size, row cadence, fine-thread visibility, low relief, and restrained filament sheen."
-  organisation: "In upright product coordinates, the principal bundle rows follow the rug long axis. Fine interlacing threads cross and separate those rows; local colour changes must not rotate the construction with a motif."
-  relief: "Low but legible: compact rounded bundle crowns, shallow shadowed gaps, fine interlacing traces, and modest directional highlights on the yarn filaments."
-  scale_behavior: "At equal apparent area, preserve the substantial, individually legible short bundles and fine interlacing visible in the supplied macro photos. Do not collapse them into a uniform micro-bead grid or inflate them into rope."
+  organisation: "In upright product coordinates, principal bundle lanes follow the rug long axis. Adjacent lanes are visibly staggered rather than placed on one shared crosswise grid; fine interlacing threads bridge the offsets and remain exposed in the longitudinal channels. Local colour changes must not rotate the construction with a motif."
+  bundle_length_variation: "Within every colour region, each small visible area contains both clearly short and clearly longer tapered bundles. Every lane is visibly segmented into separate units rather than a continuous rib; offset their endpoints across adjacent product-directional lanes."
+  two_length_classes: "The short and longer bundle classes must both be plainly readable in the near-detail plane. Their alternation is irregular, never a fixed repeating sequence."
+  longitudinal_channels: "Keep a clearly readable shadowed gap between adjacent product-directional bundle lanes, proportioned to the declared real camera anchor rather than reduced to a hairline seam. The gap exposes finer cross yarns and remains visually distinct between the arched bundle shoulders."
+  relief: "Low but visibly dimensional: compact arched bundle crowns with full raised middles, visibly narrowed side shoulders, shallow side shadows in the open channels, fine interlacing traces, and modest directional highlights on the yarn filaments."
+  scale_behavior: "At equal apparent area, preserve the coarse, individually legible short-and-long bundles, open lane channels, and fine interlacing visible in the supplied macro photos and declared camera anchor. In a raking detail camera, the closest bundles are visibly larger and more dimensional than receding bundles. Do not collapse them into a uniform micro-bead grid or inflate them into rope."
+  camera_geometry: "Match the declared real lower-left camera anchor: a low raking look toward the farther rug plane, with the near corner in foreground, the left bound edge receding upward, and the upper frame continuing through carpet surface. Use the anchor's focal relationship rather than a numerical perspective approximation."
+  camera_space_registration: "Use the complete current design as the sole geometry source. Preserve its original outline-to-binding, binding-to-inner-lock-line, and perimeter-to-pattern spacing while applying the camera anchor's framing; never re-space a cropped or extended artwork fragment."
   edge_geometry: "Rounded, continuous, colour-matched wrapped binding; an inner narrow lockstitch-like line sits just inside the binding and follows the corner without interruption."
   finish: "Clean commercial textile finish with slight filament irregularity, controlled sheen, and natural small shadows; no plastic gloss."
   fibre: unspecified
@@ -48,6 +90,8 @@ anti_substitutions:
   - deep cut pile, shag, fur, or tall open loops
   - chunky basket weave, crochet, braid, or rope
   - uniform oval-bead grid
+  - closed equal-pitch lattice with no exposed longitudinal channels
+  - equal-length bundle rows whose ends align across adjacent lanes
   - applied embroidery, piping, carved motif, or raised motif layer
   - hard plastic gloss or oversized inflated cords
 
@@ -56,20 +100,25 @@ colour_policy:
   material_assets_have_colour_authority: false
 
 render_defaults:
-  backend: runtime_default
-  backend_strategy: preview_only
-  topology_mode: exact
-  pattern_control: required
+  backend: reference_grounded_image_generation
+  backend_strategy: reference_grounded_visual_preview
+  topology_mode: approximate
+  pattern_control: reference_image_input
   surface_build_mode: yarn_geometry_or_weave_synthesis
-  structure_proof_required: true
-  material_reference_budget: 1
+  structure_proof_required: false
+  exact_proof_renderer: scripts/render_wilton_calibrated.py
+  exact_proof_renderer_role: structure_proof_only
+  final_visual_requires: [declared_real_camera_or_exact_paired_mapping_attached, declared_real_construction_anchor_attached]
+  material_reference_budget: 2
   sequence: detail_gate_then_overview
-  detail_reference_packet: [design_detail_crop, sample_02_detail_a]
-  overview_reference_packet: [design_source, sample_03_overall]
+  detail_reference_packet: [design_source, accepted_detail_camera_anchor_v1, unit_micro_anchor_v1]
+  overview_reference_packet: [design_source, unit_micro_anchor_v1]
   detail_corner: lower_left
   detail_orientation: upright_design_source
   detail_context: [corner_junction, two_bound_edges, nearby_motif, inner_field]
   edge_finish: wrapped_bound_edge_with_inner_lock_line
-  detail_view: close_oblique_commercial_macro
-  overview_view: standing_observer_restrained_near_overhead_sample_shot
-  photography_style: bright_crisp_commercial_product
+  detail_view: selected_corner_close_oblique_with_two_bound_edges
+  detail_camera: raking_oblique_foreground_corner_with_visible_plane_recession
+  detail_camera_geometry_control: declared_real_camera_anchor
+  overview_view: flat_laid_near_overhead_mild_perspective
+  photography_style: flat_laid_product_record

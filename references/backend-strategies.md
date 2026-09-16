@@ -2,25 +2,23 @@
 
 Select a strategy from observed runtime capabilities. [Read the topology lock](topology-lock.md) first.
 
-## Preview-only generation or editing
+## Reference-grounded visual route
 
-Preview-only image generation has references but no independent source-coordinate structure controls. It is valid only when the user explicitly accepts `topology_mode: approximate`.
+Reference-grounded image generation has references but no independent source-coordinate structure controls. It is the default route for a user-facing Wilton visual sample and records `topology_mode: approximate`. It may never claim exact topology.
 
-For `wilton-flatweave-01`, attach current artwork first and exactly one manifest-declared real construction image second. The second image controls only the aligned short-bundle rows, fine interlacing visibility, compact relief, bound edge, and camera. Do not attach other patterned samples or a prior generated image. Record `reference_limited: true` when multi-reference input is unavailable.
+For `wilton-flatweave-01` details, first compare the design hash with its paired mappings. For an exact match, attach the current design, matching paired product overview, and matching paired material detail, in that order; omit generic anchors that disagree at yarn scale or camera. Otherwise attach the complete current design first, the real detail camera-and-relief anchor second, and the multi-unit micro construction anchor third. The design alone controls outline, binding, inner lock line, motifs, colours, and every spacing relationship. The camera anchor controls focal relationship and framing; the micro anchor controls local yarn geometry. A quality anchor is optional finish evidence only and may not control geometry. Record all actual attachments and omissions.
 
 In exact mode, record `pattern_control: unavailable`, `pattern_gate: fail`, `anchor_status: rejected`, and `failure_tags: [pattern_drift]`; return `external_execution_required` before generating the overview.
 
-## Controllable local workflow
+## Exact-proof route
 
-Use deterministic `region_map` and `edge_map` inputs for the structure branch. Produce an aligned `structure_proof` from those controls only and run:
+Use deterministic `region_map` and `edge_map` inputs only to produce an aligned `structure_proof`, then run:
 
 ```text
 python scripts/validate_topology.py <design_source> <structure_proof> --aligned
 ```
 
-Only after it passes, send one real construction image to an independent material branch. The branch reconstructs aligned short multi-filament bundle rows, visible fine interlacing threads, shallow gaps, low crowns, and restrained filament highlights. It must not leave the source RGB image visible and add a texture effect; record that path as `surface_build_mode: overlay` and reject it.
-
-Generate detail first. Compare equal-scale plain-field and patterned-boundary crops at 100%, then generate overview only after every hard gate passes.
+`scripts/render_wilton_calibrated.py` is proof-only: it must not emit or be presented as a material detail or product overview. A final exact textile render requires an independent material branch that both consumes a declared real construction reference and exposes structure controls; otherwise return `external_execution_required`.
 
 ## Repair routing
 
@@ -32,5 +30,7 @@ Generate detail first. Compare equal-scale plain-field and patterned-boundary cr
 | `yarn_scale_error` | Change bundle scale only; preserve pattern and camera. |
 | `synthetic_relief` | Replace overlay or inflated cords with low compact bundles and shallow gaps. |
 | `detail_camera_error` | Restore close oblique corner recession and both bound edges. |
+| `detail_frame_cutoff` | Rebuild the continuous-plane 30-degree control; keep the far plane beyond the upper frame. |
+| `camera_pattern_registration_mismatch` | Rebuild from the complete design plus declared camera anchor; preserve every original perimeter-to-pattern spacing. |
 | `edge_error` | Repair only the wrapped binding and inner lock line. |
 | `authority_leakage` | Remove the leaking construction or style image. |

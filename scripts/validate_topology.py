@@ -90,7 +90,11 @@ def main() -> int:
     with Image.open(args.proof) as loaded_proof:
         proof = loaded_proof.convert("RGB")
 
-    source_labels, palette = _source_palette(source)
+    _, palette = _source_palette(source)
+    # Quantizers may assign a source pixel to a palette entry that is not its
+    # nearest RGB entry. Label both sides through the same nearest-palette
+    # operation so an identical source-coordinate proof is an exact pass.
+    source_labels = _labels_for_output(source, palette)
     proof_labels = _labels_for_output(proof, palette)
     source_grid = _resize_labels(source_labels)
     proof_grid = _resize_labels(proof_labels)

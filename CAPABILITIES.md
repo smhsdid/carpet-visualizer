@@ -23,9 +23,9 @@ Add this compact block to every render lock:
 
 ```yaml
 render_backend: "<runtime or provider name>"
-backend_strategy: preview_only|controllable_local
+backend_strategy: reference_grounded_visual|structure_proof_only|controllable_local
 backend_capabilities_used: [image_generation, reference_image_input]
-reference_budget: 1 # one construction reference per stage in preview-only mode
+reference_budget: 2 # accepted quality anchor plus one real multi-unit construction anchor
 topology_mode: exact|approximate
 pattern_control: deterministic|structure_branch|unavailable
 surface_build_mode: yarn_geometry_or_weave_synthesis|overlay|unavailable
@@ -35,6 +35,6 @@ independent_controls: {}
 consistency_contract: visual_consistency
 ```
 
-`preview_only` means semantic generation with references and no independent structure controls. It may be used for `topology_mode: approximate` only when the user explicitly accepts approximation. In exact mode it records `pattern_control: unavailable`, fails the pattern gate, and returns `external_execution_required`; prompt wording does not change this decision. Regardless of topology mode, a Wilton flatweave output whose `surface_build_mode` is `overlay` fails the material gate because the source artwork remains a flat visible plate.
+`reference_grounded_visual` means semantic generation with the complete current design, a recorded real detail-camera anchor, a recorded accepted quality anchor, and one recorded real multi-unit micro construction anchor. It has no independent structure controls. The complete design remains the only source of pattern and spacing; the camera anchor supplies focal relationship and framing only. It is a user-facing `topology_mode: approximate` visual route, never an exact claim. `structure_proof_only` means a deterministic source-coordinate proof with no material-detail or overview deliverable. In exact mode without an independent material branch, record `pattern_control: unavailable`, fail the pattern gate, and return `external_execution_required`. Regardless of topology mode, a Wilton flatweave output whose `surface_build_mode` is `overlay` fails the material gate because the source artwork remains a flat visible plate.
 
 Use `external_execution_required` when image generation is unavailable or when exact topology control is unavailable. This status means the prompt packet is complete but no compliant visual output has been produced in the current environment.

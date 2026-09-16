@@ -14,15 +14,16 @@ Run preflight, structure-proof, material-detail, and overview gates. Exact mode 
 | --- | --- | --- |
 | Pattern topology | Validator passes and every anchor is exact | Any unknown or changed anchor |
 | Surface build | Visible yarn geometry is rebuilt from regions | RGB artwork plus texture overlay |
-| Bundle system | Short substantial bundles form stable product-directional rows, with fine interlacing visible | Bead grid, rope, basket weave, deep pile, smooth fill |
+| Bundle system | Match the declared real macro's unit width, length variation, filament breakup, cross-yarn visibility, and lane staggering | Smooth capsule or bead grid, continuous ribbing, absent cross yarn, closed equal-pitch lattice, rope, basket weave, deep pile, smooth fill |
 | Pattern-ground parity | All colour areas share row cadence, bundle scale, fine threads, low relief, and finish | Painted area, applied motif, or different material family |
-| Yarn scale | Macro bundles remain individually legible and substantial | Micro-grid or oversized cords |
+| Yarn scale and relief | Near bundles match the declared real macro's apparent size, fuzzy multi-filament breakup, compact low crown, and shallow side shadows | Micro-grid, flattened texture, uniform tubular capsules, plastic sheen, or oversized cords |
 | Edge finish | Rounded wrapped binding and slim inner lock line are continuous | Raw edge, loose fringe, missing lock line, malformed corner |
-| Detail camera | Complete selected corner and both edges; clear close-oblique recession | Front-on view, blur-only depth, missing edge or corner |
+| Detail camera | Match the declared real camera anchor: complete selected corner and both edges, near foreground corner, upward-receding bound edge, visible near/far yarn-scale change, and uninterrupted carpet at the upper frame | Missing edge or corner, altered perimeter-to-pattern spacing, false horizontal far-edge cut, or camera relationship unlike the declared anchor |
+| Pattern-perimeter registration | Outline, wrapped binding, inner lock line, and interior artwork retain the full design's original relative positions and spacing | Pattern, binding, or outline is independently offset, doubled, or re-spaced |
 | Reference isolation | Current artwork owns all geometry and colours | Motif or palette leaks from construction reference |
-| Overview framing | Complete bound rug on a pale floor, all corners visible | Cropped or strongly distorted rug |
+| Overview framing | Complete bound rug on the declared neutral dark textile ground, all corners visible | Cropped, strongly distorted, or furnished presentation |
 
-`topology`, `surface_build`, `bundle_system`, `pattern_ground_parity`, `edge_finish`, and `detail_camera` are hard detail gates. Any failure stops overview generation.
+`topology`, `surface_build`, `bundle_system`, `pattern_ground_parity`, `edge_finish`, and `detail_camera` are hard detail gates. For an exact paired mapping, compare a 100% crop of the generated plain field, pattern boundary, and wrapped edge against its paired macro before accepting. Use `uniform_bead_grid`, `cross_yarn_missing`, `reference_geometry_mismatch`, `camera_flattening`, or `binding_overinflated` as failure tags. Any failure stops overview generation.
 
 ```yaml
 evaluation_record:
@@ -33,11 +34,14 @@ evaluation_record:
   topology: pass|caveat|fail
   material: pass|caveat|fail
   bundle_system: pass|caveat|fail
+  lane_spacing_and_stagger: pass|caveat|fail
   construction_orientation: pass|caveat|fail
   yarn_unit_scale: pass|caveat|fail
+  relief_and_raking_camera: pass|caveat|fail
   pattern_ground_parity: pass|caveat|fail
   detail_localisation: pass|caveat|fail
   detail_texture_view: pass|caveat|fail
+  camera_space_registration: pass|caveat|fail
   reference_match: pass|caveat|fail
   edge_finish: pass|caveat|fail
   failure_tags: []

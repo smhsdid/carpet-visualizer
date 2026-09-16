@@ -6,7 +6,7 @@ Run the smallest case exercising the changed behaviour.
 
 Input: one legible upright artwork.
 
-Expected: `wilton-flatweave-01` is selected; exact mode prepares controls and proof; detail uses the crop first and one declared real reference second; overview waits for all detail gates.
+Expected: `wilton-flatweave-01` is selected; exact mode prepares controls and proof; an unmatched detail uses complete current design first, declared real detail-camera anchor second, and multi-unit micro construction anchor third; overview waits for all detail gates.
 
 ## Case 2: reference inventory
 
@@ -18,16 +18,40 @@ Expected: all ten real source images resolve; its detail and overview references
 
 Input: equal-scale pattern and ground crops.
 
-Expected: both contain stable long-axis rows of short multi-filament bundles, finer interlacing threads, low crowns, shallow gaps, and the same restrained finish. Smooth fill, bead grid, basket weave, rope, deep pile, or an independently raised motif fails.
+Expected: both contain product-directional lanes of visibly short and longer multi-filament bundles, offset ends across adjacent lanes, open shadowed longitudinal channels exposing finer interlacing, low crowns, shallow gaps, and the same restrained finish. Smooth fill, bead grid, closed equal-pitch lattice, basket weave, rope, deep pile, or an independently raised motif fails.
 
 ## Case 4: edge and orientation
 
 Input: a lower-left detail crop.
 
-Expected: rounded wrapped binding, inner locking line, complete corner, both edges, and construction-wide row direction survive. Texture may not turn along the motif.
+Expected: rounded wrapped binding, inner locking line, complete foreground corner, both edges, roughly 30-degree raking plane recession, visibly larger near bundles, and construction-wide row direction survive. The perspective control keeps outline, binding, lock line, and interior artwork registered on one continuous plane; the upper frame remains carpet surface rather than a false far edge. Texture may not turn along the motif.
 
 ## Case 5: exact topology and overlay regression
 
 Input: artwork, an aligned source proof, and an RGB-plus-texture detail.
 
 Expected: source proof validates; RGB-plus-texture detail is `overlay`, fails the surface gate, and stops the overview. A preview-only exact backend returns `external_execution_required` rather than claiming a pass.
+
+## Case 6: paired mapping calibration
+
+Input: `wilton-flatweave-01/paired-mappings.json`.
+
+Expected: each of the three pairs has an existing `design`, `overview`, and `detail` whose SHA-256 matches its manifest record. Excluding one pair reports the remaining two as the calibration set. The current design remains the sole authority for a new render's pattern and colours.
+
+## Case 7: proof renderer cannot deliver final texture
+
+Input: `scripts/render_wilton_calibrated.py` with an artwork and a temporary output directory.
+
+Expected: it writes only `structure_proof.png`, controls, and a proof-only render lock. The lock has `reference_strength: none`, `material_detail: null`, and `product_overview: null`. A user-facing unmatched Wilton visual instead requires a recorded design reference, real camera anchor, and the declared multi-unit micro construction anchor.
+
+## Case 8: exact paired-mapping packet regression
+
+Input: `wilton-flatweave-01/manifest.yaml`, the sample-02 design, and a generated render lock.
+
+Expected: a SHA-256 match selects the sample-02 override. The detail packet orders complete current design, paired product overview, then paired material detail; it omits both generic quality and micro anchors. A generated output with a smooth capsule grid, missing cross yarn, flat camera, or inflated binding fails the exact-pair detail gate.
+
+## Case 9: camera-anchor framing and spacing regression
+
+Input: a complete design source and the declared lower-left detail camera anchor.
+
+Expected: the complete source remains the only geometry authority while the real anchor sets low-raking corner framing. The upper frame continues through rug surface, the left bound edge recedes as in the anchor, and outline-to-pattern spacing remains unchanged. A generated detail with expanded perimeter gap, pattern drift, or a false top edge fails `camera_pattern_registration_mismatch` and stops overview generation.

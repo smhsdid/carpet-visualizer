@@ -33,7 +33,7 @@ Normalise every directional observation into upright finished-product coordinate
 
 When only a design is uploaded, use bundled `wilton-flatweave-01` and follow [the Wilton flatweave branch](wilton-flatweave-branch.md).
 
-This is a user-confirmed Wilton flatweave visual profile. The supplied physical samples show a thin, low-relief surface formed from short substantial multi-filament bundles arranged in stable product-directional rows. Finer interlacing threads remain visible between and across the rows. The rounded bundle crowns rise only slightly above those fine threads, giving shallow shadows and restrained filament highlights without plush pile.
+This is a user-confirmed Wilton flatweave visual profile. The supplied physical samples show a thin, low-relief surface formed from substantial multi-filament bundles in product-directional lanes. Open shadowed channels between lanes expose the finer interlacing; neighbouring lanes stagger their bundle ends, with visibly short and longer tapered units rather than one repeated length. The rounded bundle crowns rise only slightly above those fine threads, giving shallow shadows and restrained filament highlights without plush pile.
 
 The design is yarn-built rather than applied. Pattern, ground, and boundary share one bundle size, row cadence, fine-thread system, relief, and finish. A boundary changes colour at bundle scale within the same surface; it does not turn into a smooth painted edge, motif-following cord, or separate raised layer.
 
@@ -41,9 +41,9 @@ Surface-build invariant: the source artwork is a hidden colour-region map while 
 
 At macro scale, individual short bundles and the fine threads between them remain legible. At product scale, the construction compresses only through the declared camera transform while the supplied pattern remains fixed. Fibre, density, loom, and manufacturing process remain unspecified.
 
-The manifest declares one real construction reference per generation stage. Attach the current design first and the declared reference second; the design remains the sole pattern and colour authority. Do not attach the whole set of patterned samples to one generation request. If only one reference is supported, mark the run `reference_limited` rather than claiming the construction or camera was matched.
+The manifest declares a real detail-camera anchor, optional quality anchor, and real construction reference. For an unmatched raking detail, attach the complete design first, camera anchor second, and real construction reference third; the design remains the sole pattern and colour authority. An exact paired-design match instead uses its paired product overview and paired material detail. The quality anchor teaches only exposure and general product-photo finish and must not influence yarn geometry. Do not attach conflicting patterned samples to one generation request.
 
-Failure signatures: smooth printed colour, a source-RGB texture overlay, deep cut pile, tall open loops, inflated relief, applied motif layer, embroidery, piping, motif-following cord, chunky knit, crochet, braid, basket blocks, fur, shag, uniform oval-bead grids, or geometry copied from a reference product.
+Failure signatures: smooth printed colour, a source-RGB texture overlay, deep cut pile, tall open loops, inflated relief, applied motif layer, embroidery, piping, motif-following cord, chunky knit, crochet, braid, basket blocks, fur, shag, uniform oval-bead grids, closed equal-pitch lattices, equal-length aligned rows, or geometry copied from a reference product.
 
 ## `loop-pile`
 
