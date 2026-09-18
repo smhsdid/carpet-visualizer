@@ -1,1 +1,14 @@
+# Generated images, per-run packets, and local scratch data stay outside version control.
 output/
+outputs/
+generated/
+tmp/
+
+# Python runtime caches.
+__pycache__/
+*.py[cod]
+
+# Common local test and tool caches.
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

@@ -21,7 +21,8 @@ Run preflight, structure-proof, material-detail, and overview gates. Exact mode 
 | Detail camera | Match the declared real camera anchor: complete selected corner and both edges, near foreground corner, upward-receding bound edge, visible near/far yarn-scale change, and uninterrupted carpet at the upper frame | Missing edge or corner, altered perimeter-to-pattern spacing, false horizontal far-edge cut, or camera relationship unlike the declared anchor |
 | Pattern-perimeter registration | Outline, wrapped binding, inner lock line, and interior artwork retain the full design's original relative positions and spacing | Pattern, binding, or outline is independently offset, doubled, or re-spaced |
 | Reference isolation | Current artwork owns all geometry and colours | Motif or palette leaks from construction reference |
-| Overview framing | Complete bound rug on the declared neutral dark textile ground, all corners visible | Cropped, strongly distorted, or furnished presentation |
+| Overview framing | Complete bound rug on the declared neutral warm-gray matte ground, all corners visible, with restrained human-camera perspective | Cropped, strongly distorted, orthographic/scan-like, or furnished presentation |
+| Human-shot overview camera | Near short edge is visibly larger and wider, far edge recedes smaller, and long side edges converge subtly while all four corners remain visible | Pure 90-degree orthographic view, perfectly parallel edges, or perspective so strong that outline/pattern spacing becomes unreadable |
 
 `topology`, `surface_build`, `bundle_system`, `pattern_ground_parity`, `edge_finish`, and `detail_camera` are hard detail gates. Use `uniform_bead_grid`, `cross_yarn_missing`, `reference_geometry_mismatch`, `camera_flattening`, or `binding_overinflated` as failure tags. Any failure stops overview generation.
 

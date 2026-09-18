@@ -27,6 +27,12 @@ In upright product coordinates, principal bundle lanes follow the rug long axis.
 
 The edge has a rounded, continuous colour-matched wrapped binding. Preserve the slim locking line just inside it and carry both treatments cleanly through the corner. The required detail camera rakes across the plane: the selected near corner and binding are foreground, the surface visibly recedes away from them, and closest bundles appear coarser and more raised than distant bundles. This shallow relief comes from side shadows and directional filament highlights, not tall pile. Do not replace the edge with a loose fringe, a raw cut edge, or an oversized rolled cord.
 
+## Persistent camera and tip rule
+
+For every Wilton output, treat the vertical spindle unit and the human-shot camera as construction defaults, not optional prompt decoration. The long unit has a full raised crown, tapering shoulders, and a tail that narrows into the fine warp/weft layer. Fine crossing threads cover and hold the tail, so its visible point is an occlusion endpoint and a small dark opening remains between adjacent units. The point must be supported by this high-low layering and filament shadow, not by a drawn outline or a clipped geometric shape.
+
+For the product overview, use a real-camera-like mild oblique downward perspective. Aim from the near short edge so the near binding and nearest units are slightly larger, the far short edge is smaller and receding, and the long side edges converge subtly. All four corners stay in frame. This is a complete flat-laid product photograph with human perspective, not an orthographic scan.
+
 ## Detail prompt
 
 ```text
@@ -47,7 +53,7 @@ Image 1 is the literal source-coordinate structure target for the full artwork. 
 
 Render one complete structured woven rug rebuilt from Image 1's source-coordinate regions. Across every colour region, preserve the same product-directional bundle lanes, open longitudinal channels, cross-yarn interlacing, staggered ends, short-and-long tapered unit variation, low compact relief, and restrained filament highlights. Keep current pattern edges as yarn-colour transitions inside this same surface. Preserve the rounded continuous colour-matched wrapped binding and slim inner locking line around all four corners. Do not display a flat artwork plate with a texture overlay.
 
-Show the complete rug flat on a neutral dark textile ground in a product-record photograph, restrained near-overhead perspective with mild near-to-far scale change, all four bound corners visible, narrow margins, and a small natural contact shadow. No furnishings, text, or watermark.
+Show the complete rug flat on a simplified neutral warm-gray matte textile ground in a clean product photograph. Use a mild human-shot oblique downward view: the near short edge is visibly larger and wider, the far short edge recedes smaller, and the long side edges converge subtly toward the far end. Keep all four bound corners visible, with narrow margins and a small natural contact shadow. No furnishings, text, or watermark.
 ```
 
 ## Acceptance gate

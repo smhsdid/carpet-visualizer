@@ -29,8 +29,9 @@ symmetry, and colours. Copy its structure through the declared camera transform 
 Image 2 is the sole product-scale construction reference. Match its density, direction, relief, finish, and edge.
 
 Material: [material_id and compact product-scale construction lock]
-Camera: complete upright rug, flat and square to frame, restrained standing-observer near-overhead view,
-mild near-to-far perspective, all four bound corners visible, 92–96% frame coverage, quiet pale floor margin.
+Camera: complete upright rug photographed like a person with a real camera from a mild oblique downward view,
+near short edge slightly larger and wider, far short edge receding smaller, subtle long-edge convergence,
+all four bound corners visible, 92–96% frame coverage, quiet neutral margin.
 Light: bright clean product light with a small contact shadow.
 
 Keep one integral textile surface. No text or watermark.

@@ -7,15 +7,16 @@
 - 肌理细节图（material detail）
 - 完整产品图（product overview）
 
-skill 会将当前设计稿作为图案与颜色的唯一权威来源，将真实肌理参考用于纱线、织法、尺度、起伏、光照反应和边缘效果。图案默认采用 `topology_mode: exact`：先建立确定性的区域/边缘控制和源坐标 `structure_proof`，再做肌理渲染；没有结构控制或校验凭证时直接 fail-closed，不把“看起来相似”当成通过。生成流程会按后端能力选择本地可控策略或输出 `external_execution_required`，并把结构、肌理与局部修复分开记录。
+skill 会将当前设计稿作为图案与颜色的唯一权威来源，将真实肌理参考用于纱线、织法、尺度、起伏、光照反应和边缘效果。参考式语义生图默认记录为 `topology_mode: approximate`；只有具备独立结构控制和对齐证明时才使用 `exact`。生成流程会按后端能力选择本地可控策略或输出 `external_execution_required`，并把结构、肌理与局部修复分开记录。
 
 ## 当前状态
 
-开发中。当前内置默认肌理为用户确认、并由任务实拍校准的威尔顿平织 `wilton-flatweave-01`。档案只描述照片可见的纱束、细交织线、低起伏和包边，不额外宣称纤维、密度或织机设置。预览式语义生图只能在用户明确接受 `approximate` 时使用；生成结果仅用于视觉样品，不替代实物打样或生产确认。
+开发中。当前内置默认肌理为用户确认、并由任务实拍校准的威尔顿平织 `wilton-flatweave-01`。默认方向包括纵向梭形/椭圆纱束、尖端尾部穿入经纬线下方形成自然暗隙、统一低起伏织面，以及带近大远小收敛的真实人拍全貌视角。档案只描述照片可见的纱束、细交织线、低起伏和包边，不额外宣称纤维、密度或织机设置。生成结果仅用于视觉样品，不替代实物打样或生产确认。
 
 ## 目录
 
 - `SKILL.md`：skill 主说明
+- `AGENTS.md`：本仓库的技能开发约定、长期反馈规则和产物卫生规则
 - `CAPABILITIES.md`：图像生成与编辑后端的能力约定和降级方式
 - `agents/openai.yaml`：Codex skill 元数据
 - `adapters/`：Codex 和其他智能体的运行适配说明
@@ -23,6 +24,10 @@ skill 会将当前设计稿作为图案与颜色的唯一权威来源，将真�
 - `scripts/prepare_design_controls.py`：生成确定性图案控制包
 - `scripts/validate_topology.py`：校验源坐标结构证明的区域与边界
 - `assets/material-library/`：可复用的真实肌理参考及中性派生图
+
+## 产物卫生
+
+仓库只保存可复用的技能源码、引用、脚本、资产、适配器和 agent 元数据。生成图片、每次运行的 JSON/Markdown 记录、临时控制图和 Python 缓存放在仓库外的 Codex 数据/临时目录；`output/`、`outputs/`、`generated/`、`tmp/` 以及 `__pycache__/` 已加入忽略规则。历史运行产物如需保留，应放入仓库外的归档目录。
 
 ## 研究笔记
 
@@ -47,7 +52,7 @@ skill 会将当前设计稿作为图案与颜色的唯一权威来源，将真�
 
 ## 在其他编程智能体中使用
 
-不同智能体没有统一的 skill 安装标准，但本仓库的核心流程不依赖 Codex 工具名。将整个仓库提供给目标智能体，或将 `SKILL.md` 作为该平台的指令入口，并要求它读取 [`adapters/generic-agent.md`](adapters/generic-agent.md)。
+不同智能体没有统一的 skill 安装标准，但本仓库的核心流程不依赖 Codex 工具名。将整个仓库提供给目标智能体，或将 `SKILL.md` 与 `AGENTS.md` 作为该平台的指令入口，并要求它读取 [`adapters/generic-agent.md`](adapters/generic-agent.md)。
 
 建议使用下面这句启动：
 
